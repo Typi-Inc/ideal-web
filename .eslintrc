@@ -1,0 +1,10 @@
+{
+  "env": {
+    "browser": true
+  },
+  "extends": "airbnb",
+  "rules": {
+    "object-curly-spacing": [1, "always"],
+    "comma-dangle": [2, "never"],
+  }
+}
