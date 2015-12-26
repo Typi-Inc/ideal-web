@@ -18,7 +18,7 @@ const common = {
       {
         test: /\.css$/,
         loaders: ['style', 'css'],
-        include: SOURCE_PATH
+        //include: SOURCE_PATH
       },
       {
         test: /\.js?$/,

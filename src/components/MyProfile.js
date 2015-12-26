@@ -11,9 +11,19 @@ const styles = {
 };
 
 class MyProfile extends React.Component {
+
+  componentDidMount() {
+    window.componentHandler.upgradeDom();
+  }
+
+  componentDidUpdate() {
+    window.componentHandler.upgradeDom();
+  }
+
   render() {
     return (
       <div>
+
         <div style = {{
                         display: 'flex',
                         flexDirection: 'column',
@@ -32,14 +42,6 @@ class MyProfile extends React.Component {
               </div>
               <div style = {{ color: '#a99999' }}>
                 @kennethcole
-              </div>
-              <div>
-                <span>
-                  
-                </span>
-                <span>
-
-                </span>
               </div>
             </div>
           </div>

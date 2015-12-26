@@ -11,7 +11,9 @@ const styles = {
 };
 
 class Settings extends React.Component {
+
   render() {
+
     return (
       <div key = 'settings' >
         <div style = {styles.card}>
@@ -35,6 +37,14 @@ class Settings extends React.Component {
           </form>
         </div>
         <div style = {styles.card}>
+          <div  style = {{
+                  fontWeight: '500',
+                  fontSize: '20px',
+                  textAlign: 'center',
+                  paddingBottom: '10px',
+                  borderBottom: '1px solid rgba(0,0,0,.12)' }}>
+            Your tags
+          </div>
           <div style = {{ display : 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div style = {{ width: '70%'}}>
               <form action="#">
@@ -89,9 +99,9 @@ class Settings extends React.Component {
         <div style = {{
               display: 'flex',
               justifyContent: 'space-around',
-              width: '100%',
               background: '#f6f6f6',
-              paddingBottom: '10px'
+              paddingBottom: '10px',
+              margin : '0 10px'
                      }}>
           <div style = {{width: '40%'}}>
             <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"

@@ -2,11 +2,13 @@ import React from 'react';
 import Radium from 'radium';
 import Link from './Link';
 
+
+
+
 class Home extends React.Component {
   componentDidMount() {
     window.componentHandler.upgradeDom();
   }
-
   componentDidUpdate() {
     window.componentHandler.upgradeDom();
   }

@@ -94,6 +94,8 @@ class Deal extends React.Component {
         deal = dealsListItem[i];
       }
     }
+
+
     const styles = {
       card: {
         display: 'flex',
@@ -466,6 +468,33 @@ class Deal extends React.Component {
           </div>
 
           <div style = {{
+                          margin: '10px',
+                          padding: '10px',
+                          background: '#fff',
+                          '@media (min-width: 740px)': { display: 'none' }
+                       }}>
+            <div style = {[styles.title, {width: '100%'}]}>
+              Popular tags
+            </div>
+            <div style={{display:'flex', padding: '10px', justifyContent: 'space-between', alignItems: 'center'}}>
+              <div style={{width: '100%', fontSize: '10px', color: '#a99999'}}>
+                <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
+                        style={styles.tagBorder}>{deal.tagOne}
+                </button>
+                <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
+                        style={styles.tagBorder}>{deal.tagTwo}
+                </button>
+                <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
+                        style={styles.tagBorder}>{deal.tagThree}
+                </button>
+                <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
+                        style={styles.tagBorder}>{deal.tagFour}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div style = {{
                         display: 'none',
                         '@media (min-width: 740px)': {
                                                         display: 'flex',
@@ -515,8 +544,40 @@ class Deal extends React.Component {
               Other deals You might like
             </div>
           </div>
-        </div>
 
+          <div style = {{
+                          display: 'none',
+                          margin: '10px 0',
+                          padding: '10px',
+                          background: '#fff',
+                          '@media (min-width: 740px)': {
+                                                          display: 'flex',
+                                                          margin: '10px 10px 10px 0',
+                                                          flexDirection: 'column'
+                                                       }
+                       }}>
+            <div style = {[styles.title, {width: '100%'}]}>
+              Popular tags
+            </div>
+            <div style={{display:'flex', padding: '10px', justifyContent: 'space-between', alignItems: 'center'}}>
+              <div style={{width: '100%', fontSize: '10px', color: '#a99999'}}>
+                <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
+                        style={styles.tagBorder}>{deal.tagOne}
+                </button>
+                <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
+                        style={styles.tagBorder}>{deal.tagTwo}
+                </button>
+                <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
+                        style={styles.tagBorder}>{deal.tagThree}
+                </button>
+                <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
+                        style={styles.tagBorder}>{deal.tagFour}
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     )
   }
