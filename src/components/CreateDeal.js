@@ -108,7 +108,7 @@ class CreateDeal extends React.Component {
               display: 'flex',
               justifyContent: 'space-around',
               width: '100%',
-              background: '#f6f6f6',
+              background: '#dedede',
               paddingBottom: '10px'
                      }}>
           <div style = {{width: '40%'}}>

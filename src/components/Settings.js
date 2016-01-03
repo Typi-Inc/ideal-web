@@ -99,7 +99,7 @@ class Settings extends React.Component {
         <div style = {{
               display: 'flex',
               justifyContent: 'space-around',
-              background: '#f6f6f6',
+              background: '#dedede',
               paddingBottom: '10px',
               margin : '0 10px'
                      }}>
