@@ -3,6 +3,17 @@ import Radium from 'radium';
 import Link from './Link';
 
 class Deal extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      comments: [
+        {
+          author: 'Almas',
+          text: 'Hello my bitch'
+        }
+      ]
+    }
+  }
   componentDidMount() {
     window.componentHandler.upgradeDom();
   }
@@ -11,6 +22,21 @@ class Deal extends React.Component {
     window.componentHandler.upgradeDom();
   }
 
+  postComment() {
+    const comment = this.comment.value;
+    if(comment!=='') {
+      this.setState({
+        comments: this.state.comments.concat([{author: 'Isken', text: comment}])
+      });
+      this.comment.value = '';
+    }
+  }
+  onCommentKeyPress(e) {
+    if (e.keyCode == 13 && this.comment.value!=='') {
+      this.postComment();
+      this.comment.value = '';
+    }
+  }
 
   render() {
     const dealsListItem = [
@@ -118,7 +144,7 @@ class Deal extends React.Component {
         },
         '@media (min-width: 900px)': {
           height: '250px'
-        },
+        }
       },
       mainOptionsCard: {
         display: 'flex',
@@ -379,12 +405,18 @@ class Deal extends React.Component {
                 <div>
                   <form action="#" style = {{padding : '0 10px'}}>
                     <div className="mdl-textfield mdl-js-textfield" style = {{ width: '100%'}}>
-                      <textarea className="mdl-textfield__input" type="text" rows= "3" id="smsAd" ></textarea>
+                      <textarea ref={el => this.comment = el}
+                                className="mdl-textfield__input"
+                                type="text"
+                                rows= "3"
+                                onKeyDown={this.onCommentKeyPress.bind(this)}
+                                id="smsAd" ></textarea>
                       <label className="mdl-textfield__label" htmlFor="smsAd">What do you think of this ad?...</label>
                     </div>
                   </form>
                   <div style = {{display: 'flex', justifyContent: 'flex-end', alignItems: 'center', padding: '0 10px'}}>
                     <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
+                            onClick={this.postComment.bind(this)}
                             style= {{
                           width: '28px',
                           height: '28px',
@@ -454,6 +486,30 @@ class Deal extends React.Component {
                 </div>
               </div>
             </div>
+            {this.state.comments.map(comment => (
+              <div style={{
+                              display: 'flex',
+                              paddingTop: '10px',
+                              borderTop: '1px solid rgba(0,0,0,0.12)'
+                         }}>
+                <div>
+                  <img src='http://www.spacefacts.de/bios/portraits_hi/cosmonauts/kotov_oleg.jpg'
+                       style={{height: '50px'}}/>
+                </div>
+                <div style={{display : 'flex', flexDirection: 'column', marginLeft: '20px'}}>
+                  <div style={{fontWeight: '600'}}>
+                    {comment.author}
+                  </div>
+                  <div style={{fontSize: '16px'}}>
+                    {comment.text}
+                  </div>
+                  <div style={{color: '#a99999'}}>
+                    Today
+                  </div>
+                </div>
+              </div>
+
+            ))}
           </div>
 
           <div style = {{
@@ -507,7 +563,13 @@ class Deal extends React.Component {
                         }}>
             <form action="#" style = {{padding : '0 10px'}}>
               <div className="mdl-textfield mdl-js-textfield" style = {{width: '100%'}}>
-                <textarea className="mdl-textfield__input" type="text" rows= "3" id="smsAd" ></textarea>
+                <textarea ref={el => this.comment = el}
+                          className="mdl-textfield__input"
+                          type="text"
+                          rows= "3"
+                          id="smsAd"
+                          onKeyDown={this.onCommentKeyPress.bind(this)}>
+                </textarea>
                 <label className="mdl-textfield__label" htmlFor="smsAd">What do you think of this ad?...</label>
               </div>
             </form>
@@ -517,7 +579,7 @@ class Deal extends React.Component {
                             alignItems: 'center',
                             padding: '0 10px'
                           }}>
-              <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
+              <button onClick={this.postComment.bind(this)}className="mdl-button mdl-js-button mdl-js-ripple-effect"
                       style= {{
                           width: '28px',
                           height: '28px',

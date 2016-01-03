@@ -112,7 +112,7 @@ class AppBody extends React.Component {
   render() {
     return (
       <div>
-        <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header" style={{ background: '#f6f6f6' }}>
+        <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header" style={{ background: '#dedede' }}>
           <header className="mdl-layout__header mdl-layout__header--seamed"
                   style={{ background: '#0679A2' }}>
             <div className="mdl-layout__header-row"
@@ -122,13 +122,20 @@ class AppBody extends React.Component {
               <div className="mdl-layout-icon">
                 <Link to = '/'><i className="material-icons" style = {{color: 'white'}}>home</i></Link>
               </div>
+              <div style = {{ paddingLeft: '10px', '@media (min-width: 740px' : { display: 'none' } }}>
+                <button className="mdl-button mdl-js-button">
+                  <i className="material-icons" style={{color: 'white', paddingBottom: '5px'}} >search</i>
+                </button>
+              </div>
+              <div style = {{ display: 'none', '@media (min-width: 740px' : { display: 'block',  paddingLeft: '20px' } }}>
+                <Select multi
+                        simpleValue
+                        value={this.state.value}
+                        options={this.state.options}
+                        onChange={this.handleSelectChange.bind(this)}
 
-              <i className="material-icons" style={{color: 'white'}} >search</i>
-              <Select multi
-                      simpleValue
-                      value={this.state.value}
-                      options={this.state.options}
-                      onChange={this.handleSelectChange.bind(this)} />
+                  />
+              </div>
 
               <div className="mdl-layout-spacer"></div>
 
@@ -150,7 +157,7 @@ class AppBody extends React.Component {
                                 fontSize: '20px',
                                 fontWeight: '900',
                                 textAlign: 'center',
-                                margin: '0',
+                                margin: '0'
                              }}>
                     Find interesting deal, share with friends, earn money!
                   </h2>
@@ -206,12 +213,3 @@ class AppBody extends React.Component {
 
 export default Radium(AppBody);
 
-
-//const AppBody = ({children}) => <div>
-//  {children}
-//</div>
-//export default AppBody
-//<Link to={"/"}>Home</Link>
-//<Link to={"/other"}>Other</Link>
-//<Link to={"/settings"}>Settings</Link>
-//<Link to={"/asdasdasd"}>Not Foun

@@ -2,9 +2,6 @@ import React from 'react';
 import Radium from 'radium';
 import Link from './Link';
 
-
-
-
 class Home extends React.Component {
   componentDidMount() {
     window.componentHandler.upgradeDom();
@@ -99,6 +96,7 @@ class Home extends React.Component {
               margin: '5px 10px 5px 10px',
               width: '100%',
               background: '#fff'
+
             },
             dealImage: {
               backgroundSize: '100% 100%',
@@ -121,7 +119,8 @@ class Home extends React.Component {
               background: '#0679A2',
               height: '50px',
               color: '#fff',
-              alignItems: 'center'
+              alignItems: 'center',
+              fontWeight: '500'
             },
             tagBorder: {
               fontSize: '12px',
@@ -137,31 +136,46 @@ class Home extends React.Component {
               border: '1.5px solid #eee'
             }
           };
+
+          let pulseKeyframes = Radium.keyframes({
+            '0%':   {
+                     boxShadow: 'rgba(0, 0, 0, 0.2) 0px 0px 0px 0px',
+                     transform: 'translate(0, 0)'},
+            '100%': {
+                      boxShadow: 'rgba(0, 0, 0, 0.2) 0px 7px 12px 0px',
+                      transform: 'translate(0, 5px)'}
+          }, 'pulse');
           return (
             <div key = {index} style= {{width: '100%', '@media (min-width: 1020px)': { width: '480px', marginLeft: '10px' }}}>
               <div style={{ display: 'none' ,
                             '@media (min-width: 580px)': {
                                                            display: 'block',
-                                                           background: '#fff',
+                                                         background: '#fff',
                                                            margin: '10px 10px 0 10px',
                                                            width: '100%' }}}>
                 <div style={{
                           padding: '10px',
                           fontStyle: 'italic',
                           fontSize: '13px'
-                          }}>
+                           }}>
                   <span style={{color: '#a99999'}}>Published by </span>
                   <span>{dealItem.dealType}</span>
                 </div>
               </div>
 
-              <div style={styles.card}>
+              <div key = {index+5} style={[styles.card, {
+                            ':hover' : {
+                                animation: 'x 1.5s ease 0s 1',
+                                animationName: pulseKeyframes
+                                       }
+                                        }
+                         ]}>
                 <div style={{ width: '100%', '@media (min-width: 580px)': { display: 'none' }}}>
                   <div style={{
-                          padding: '10px',
-                          fontStyle: 'italic',
-                          fontSize: '13px'
-                          }}>
+                        padding: '10px',
+                        fontStyle: 'italic',
+                        fontSize: '13px'
+                        }}>
                     <span style={{color: '#a99999'}}>Published by </span>
                     <span>{dealItem.dealType}</span>
                   </div>
@@ -169,13 +183,13 @@ class Home extends React.Component {
 
                 <div style={{ width: '100%', '@media (min-width: 580px)': { width: '50%' } }}>
                   <Link className="mdl-navigation__link" to={'/deal/' + dealItem.id} >
-                    <div style={ styles.dealImage }>
+                    <div style={styles.dealImage}>
                       <div style={ styles.mainOptionsCard }>
-                        <div style={{ paddingLeft: '5px' }}>
-                      <span style={{ fontSize: '18px', fontWeight: '600' }}>
-                        {dealItem.dealSales}
-                      </span>
-                          <span style={{ fontSize: '14px', fontWeight: '600' }}>%</span>
+                        <div style={{ paddingLeft: '5px'}}>
+                        <span style={{ fontSize: '18px'}}>
+                          -{dealItem.dealSales}
+                        </span>
+                          <span style={{ fontSize: '14px' }}>%</span>
                         </div>
                       </div>
                     </div>
@@ -184,18 +198,18 @@ class Home extends React.Component {
 
                 <div style = {{ width: '100%', '@media (min-width: 580px)': { width:'50%' } }}>
                   <div style={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                            width: '100%'
-                          }}>
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'center',
+                          width: '100%'
+                        }}>
                     <div style={{padding: '10px'}}>
-                    <span>
-                      {dealItem.dealTitle}
-                    </span>
-                    <span style={{paddingLeft: '10px'}}>
-                      {dealItem.dealType}
-                    </span>
+                  <span>
+                    {dealItem.dealTitle}
+                  </span>
+                  <span style={{paddingLeft: '10px'}}>
+                    {dealItem.dealType}
+                  </span>
                     </div>
                   </div>
 
@@ -228,10 +242,7 @@ class Home extends React.Component {
                 </div>
 
               </div>
-
             </div>
-
-
           );
         })}
       </div>
@@ -240,30 +251,3 @@ class Home extends React.Component {
 }
 
 export default Radium(Home);
-
-//<div style={{ display: 'flex', flexWrap: 'wrap' }}>
-//  <div style={{ background: 'blue', height: '100px', width: '100%' }}></div>
-//  <div style={{
-//              background: 'yellow',
-//              height: '100px',
-//              width:'100%',
-//              '@media (min-width: 580px)': { width: '50%', height: '200px'}}}></div>
-//  <div style={{
-//                background: 'green',
-//                height: '100px',
-//                width:'100%',
-//                '@media (min-width: 580px)': { order: '2'}}}></div>
-//  <div style={{ display: 'flex', flexWrap: 'wrap', width:'100%', '@media (min-width: 580px)': { width: '50%', order: '1'} }}>
-//    <div style={{
-//                background: 'orange',
-//                height: '100px',
-//                width:'100%'}}></div>
-//    <div style={{
-//                background: 'pink',
-//                height: '100px',
-//                width:'100%'}}></div>
-//  </div>
-//</div>
-
-
-

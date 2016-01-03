@@ -1,6 +1,12 @@
 import React from 'react';
 import Radium from 'radium';
 import Link from './Link';
+import {
+  Motion,
+  spring,
+  StaggeredMotion,
+  TransitionMotion} from 'react-motion';
+
 
 const styles = {
   profileDeals : {
@@ -23,7 +29,6 @@ class MyProfile extends React.Component {
   render() {
     return (
       <div>
-
         <div style = {{
                         display: 'flex',
                         flexDirection: 'column',
