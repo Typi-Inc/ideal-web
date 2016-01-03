@@ -1,6 +1,7 @@
 import React from 'react';
 import Radium from 'radium';
 import Link from './Link';
+import '../public/hover.css';
 
 class Home extends React.Component {
   componentDidMount() {
@@ -137,14 +138,7 @@ class Home extends React.Component {
             }
           };
 
-          let pulseKeyframes = Radium.keyframes({
-            '0%':   {
-                     boxShadow: 'rgba(0, 0, 0, 0.2) 0px 0px 0px 0px',
-                     transform: 'translate(0, 0)'},
-            '100%': {
-                      boxShadow: 'rgba(0, 0, 0, 0.2) 0px 7px 12px 0px',
-                      transform: 'translate(0, 5px)'}
-          }, 'pulse');
+
           return (
             <div key = {index} style= {{width: '100%', '@media (min-width: 1020px)': { width: '480px', marginLeft: '10px' }}}>
               <div style={{ display: 'none' ,
@@ -163,13 +157,7 @@ class Home extends React.Component {
                 </div>
               </div>
 
-              <div key = {index+5} style={[styles.card, {
-                            ':hover' : {
-                                animation: 'x 1.5s ease 0s 1',
-                                animationName: pulseKeyframes
-                                       }
-                                        }
-                         ]}>
+              <div id = "hoverCard" key = {index+5} style={styles.card}>
                 <div style={{ width: '100%', '@media (min-width: 580px)': { display: 'none' }}}>
                   <div style={{
                         padding: '10px',

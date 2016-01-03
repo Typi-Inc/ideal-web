@@ -63,7 +63,7 @@ class CreateDeal extends React.Component {
                     style= {{
                         width: '28px',
                         height: '28px',
-                        background: '#54C085',
+                        background: '#0679A2',
                         minWidth: '28px',
                         padding: '0px',
                         margin: '0 5px'
@@ -95,7 +95,7 @@ class CreateDeal extends React.Component {
                     style= {{
                         width: '28px',
                         height: '28px',
-                        background: '#54C085',
+                        background: '#0679A2',
                         minWidth: '28px',
                         padding: '0px',
                         margin: '0 5px'

@@ -58,7 +58,7 @@ class Settings extends React.Component {
                     style= {{
                         width: '28px',
                         height: '28px',
-                        background: '#54C085',
+                        background: '#0679A2',
                         minWidth: '28px',
                         padding: '0px',
                         margin: '0 5px'
@@ -67,51 +67,16 @@ class Settings extends React.Component {
             </button>
           </div>
         </div>
-        <div style = {styles.card}>
-          <div  style = {{
-                  fontWeight: '500',
-                  fontSize: '20px',
-                  textAlign: 'center',
-                  paddingBottom: '10px',
-                  borderBottom: '1px solid rgba(0,0,0,.12)' }}>
-            Private Info
-          </div>
-          <div style = {{ display : 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
-            <div style = {{ width: '40%'}}>
-              <form action="#">
-                <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                  <input className="mdl-textfield__input" type="text" id="gender0"/>
-                  <label className="mdl-textfield__label" htmlFor="gender">Gender</label>
-                </div>
-              </form>
-            </div>
-            <div style = {{ width: '40%'}}>
-              <form action="#">
-                <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                  <input className="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="birthYear"/>
-                  <label className="mdl-textfield__label" htmlFor="birthYear">Year of birth</label>
-                  <span className="mdl-textfield__error">It's not a number!</span>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
         <div style = {{
               display: 'flex',
-              justifyContent: 'space-around',
+              justifyContent: 'flex-end',
               background: '#dedede',
               paddingBottom: '10px',
               margin : '0 10px'
                      }}>
-          <div style = {{width: '40%'}}>
+          <div style = {{width: '10%'}}>
             <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
                     style={{background: '#0679A2', width: '100%', color: 'white', borderRadius: '10px'}}>
-              Edit
-            </button>
-          </div>
-          <div style = {{width: '40%'}}>
-            <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-                    style={{background: '#54C085', width: '100%', color: 'white', borderRadius: '10px'}}>
               Save
             </button>
           </div>
@@ -123,3 +88,32 @@ class Settings extends React.Component {
 
 export default Radium(Settings);
 
+//<div style = {styles.card}>
+//  <div  style = {{
+//                  fontWeight: '500',
+//                  fontSize: '20px',
+//                  textAlign: 'center',
+//                  paddingBottom: '10px',
+//                  borderBottom: '1px solid rgba(0,0,0,.12)' }}>
+//    Private Info
+//  </div>
+//  <div style = {{ display : 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
+//    <div style = {{ width: '40%'}}>
+//      <form action="#">
+//        <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+//          <input className="mdl-textfield__input" type="text" id="gender0"/>
+//          <label className="mdl-textfield__label" htmlFor="gender">Gender</label>
+//        </div>
+//      </form>
+//    </div>
+//    <div style = {{ width: '40%'}}>
+//      <form action="#">
+//        <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+//          <input className="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="birthYear"/>
+//          <label className="mdl-textfield__label" htmlFor="birthYear">Year of birth</label>
+//          <span className="mdl-textfield__error">It's not a number!</span>
+//        </div>
+//      </form>
+//    </div>
+//  </div>
+//</div>
