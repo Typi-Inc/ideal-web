@@ -140,19 +140,22 @@ class Home extends React.Component {
 
 
           return (
-            <div key = {index} style= {{width: '100%', '@media (min-width: 1020px)': { width: '480px', marginLeft: '10px' }}}>
-              <div style={{ display: 'none' ,
-                            '@media (min-width: 580px)': {
-                                                           display: 'block',
-                                                         background: '#fff',
-                                                           margin: '10px 10px 0 10px',
-                                                           width: '100%' }}}>
+            <div key = {index} style= {{ width: '100%', '@media (min-width: 1020px)': { width: '480px', marginLeft: '10px' } }}>
+              <div style={{ display: 'none',
+                '@media (min-width: 580px)': {
+                  display: 'block',
+                  background: '#fff',
+                  margin: '10px 10px 0 10px',
+                  width: '100%' }
+              }}
+              >
                 <div style={{
-                          padding: '10px',
-                          fontStyle: 'italic',
-                          fontSize: '13px'
-                           }}>
-                  <span style={{color: '#a99999'}}>Published by </span>
+                  padding: '10px',
+                  fontStyle: 'italic',
+                  fontSize: '13px'
+                }}
+                >
+                  <span style={{ color: '#a99999' }}>Published by </span>
                   <span>{dealItem.dealType}</span>
                 </div>
               </div>

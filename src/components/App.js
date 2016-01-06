@@ -3,7 +3,7 @@ import Radium from 'radium';
 import {
   Router,
   Route,
-  IndexRoute,
+  IndexRoute
   } from 'react-router';
 import { createHistory } from 'history';
 import AppBody from './AppBody';
@@ -27,7 +27,7 @@ class App extends React.Component {
         <Route path="settings" component={Settings}/>
         <Route path="*" component={AppNotFound}/>
       </Route>
-    </Router>
+    </Router>;
   }
 }
-export default Radium(App)
+export default Radium(App);

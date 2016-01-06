@@ -2,6 +2,6 @@ import React from 'react';
 
 const AppNotFound = () => <div>
   AppNotFound
-</div>
+</div>;
 
-export default AppNotFound
+export default AppNotFound;
