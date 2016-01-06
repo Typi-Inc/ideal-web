@@ -133,12 +133,9 @@ class AppBody extends React.Component {
                         value={this.state.value}
                         options={this.state.options}
                         onChange={this.handleSelectChange.bind(this)}
-
                   />
               </div>
-
               <div className="mdl-layout-spacer"></div>
-
               <nav className="mdl-navigation mdl-layout--large-screen-only">
                 <Link className="mdl-navigation__link" to="/createDeal"
                       style = {{ color: '#fff', fontSize: '16px' }}>Create deal</Link>
@@ -177,13 +174,8 @@ class AppBody extends React.Component {
                         className="mdl-button mdl-js-button mdl-button--icon">
                   <i className="material-icons" style = {{ color : 'white' }}>more_horiz</i>
                 </button>
-                <ul className="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-                    htmlFor="3dot">
-                  <li className="mdl-menu__item">
-                    <Link to="/createDeal"
-                          style = {{ textDecoration: 'none',color: 'black' }}>Create deal
-                    </Link>
-                  </li>
+                <ul className = "mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                    htmlFor = "3dot">
                   <li className="mdl-menu__item">
                     <Link to="/myProfile"
                           style = {{ textDecoration: 'none',color: 'black' }}>My profile
@@ -199,10 +191,7 @@ class AppBody extends React.Component {
               </div>
             </div>
           </header>
-          <main className="mdl-layout__content"
-                style = {{
-                            '@media (min-width: 1050px)': { width: '1050px',margin:'0 auto'},
-                            '@media (min-width: 1550px)': { width: '1550px',margin:'0 auto'} }}>
+          <main className="mdl-layout__content">
             {this.props.children}
           </main>
         </div>

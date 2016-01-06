@@ -177,12 +177,12 @@ class Deal extends React.Component {
       }
     };
     return (
-      <div style = {{marginBottom: '10px', display: 'flex', flexWrap: 'wrap'}}>
-
+      <div style = {{display: 'flex', flexWrap: 'wrap',
+      '@media (min-width: 950px)': { width: '950px',margin:'0 auto'},
+      '@media (min-width: 1450px)': { width: '1450px',margin:'0 auto'}
+                   }}>
         <div style = {{width: '100%','@media (min-width: 740px)': { width: '40%'}}}>
-
           <div style={styles.card} key = {deal.id}>
-
             <Link className="mdl-navigation__link" to={'/deal/' + deal.id} >
               <div style={ styles.dealImage }>
                 <div style={ styles.mainOptionsCard }>

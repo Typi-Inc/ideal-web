@@ -15,7 +15,9 @@ class Settings extends React.Component {
   render() {
 
     return (
-      <div key = 'settings' >
+      <div key = 'settings' style = {{
+      '@media (min-width: 950px)': { width: '950px',margin:'0 auto'},
+      '@media (min-width: 1450px)': { width: '1450px',margin:'0 auto'} }}>
         <div style = {styles.card}>
           <div style = {{
                   display: 'flex',
@@ -63,7 +65,7 @@ class Settings extends React.Component {
                         padding: '0px',
                         margin: '0 5px'
                       }}>
-              <i className="material-icons" style = {{color:'white', paddingBottom: '8px'}} >add</i>
+              <i className="material-icons" style = {{color:'white', paddingBottom: '10px'}} >add</i>
             </button>
           </div>
         </div>
@@ -75,8 +77,8 @@ class Settings extends React.Component {
               margin : '0 10px'
                      }}>
           <div style = {{width: '10%'}}>
-            <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-                    style={{background: '#0679A2', width: '100%', color: 'white', borderRadius: '10px'}}>
+            <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
+                    style={{background: '#0679A2', width: '100%', color: 'white', borderRadius: '10px', boxShadow: '0'}}>
               Save
             </button>
           </div>

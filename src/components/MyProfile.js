@@ -28,13 +28,16 @@ class MyProfile extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style = {{
+      '@media (min-width: 950px)': { width: '950px',margin:'0 auto'},
+      '@media (min-width: 1450px)': { width: '1450px',margin:'0 auto'}  }}>
         <div style = {{
                         display: 'flex',
                         flexDirection: 'column',
                         padding: '10px',
                         borderBottom: '1px solid rgba(0,0,0,.12)',
-                        background: 'white'
+                        background: 'white',
+                        marginTop: '10px'
                         }}>
           <div style = {{ display: 'flex', paddingBottom: '10px', borderBottom: '1px solid rgba(0,0,0,.12)'}}>
             <div>

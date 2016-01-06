@@ -88,13 +88,13 @@ class Home extends React.Component {
     ];
 
     return (
-      <div style = {{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+      <div style = {{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', maxWidth: '1500px', margin: 'auto' }}>
         {dealsListItem.map((dealItem, index) => {
           const styles = {
             card: {
               display: 'flex',
               flexWrap: 'wrap',
-              margin: '5px 10px 5px 10px',
+              margin: '8px 10px 5px 10px',
               width: '100%',
               background: '#fff'
 
