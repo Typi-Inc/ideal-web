@@ -24,9 +24,9 @@ class CreateDeal extends React.Component {
           '@media (min-width: 1450px)': { width: '1450px', margin: '0 auto' }
         }}
       >
-        <div style = {{ display: 'flex', justifyContent: 'space-around'}}>
+        <div style = {{ display: 'flex', justifyContent: 'space-around' }}>
           <div style={{ width: '400px', background: '#fff', marginTop: '10px' }}>
-            <div style = {{ borderStyle: 'dotted'}}>
+            <div style = {{ borderStyle: 'dotted' }}>
               alert
             </div>
           </div>

@@ -160,14 +160,15 @@ class Home extends React.Component {
                 </div>
               </div>
 
-              <div id = "hoverCard" key = {index+5} style={styles.card}>
-                <div style={{ width: '100%', '@media (min-width: 580px)': { display: 'none' }}}>
+              <div id = "hoverCard" key = {index + 5} style={styles.card}>
+                <div style={{ width: '100%', '@media (min-width: 580px)': { display: 'none' } }}>
                   <div style={{
-                        padding: '10px',
-                        fontStyle: 'italic',
-                        fontSize: '13px'
-                        }}>
-                    <span style={{color: '#a99999'}}>Published by </span>
+                    padding: '10px',
+                    fontStyle: 'italic',
+                    fontSize: '13px'
+                  }}
+                  >
+                    <span style={{ color: '#a99999' }}>Published by </span>
                     <span>{dealItem.dealType}</span>
                   </div>
                 </div>
@@ -176,8 +177,8 @@ class Home extends React.Component {
                   <Link className="mdl-navigation__link" to={'/deal/' + dealItem.id} >
                     <div style={styles.dealImage}>
                       <div style={ styles.mainOptionsCard }>
-                        <div style={{ paddingLeft: '5px'}}>
-                        <span style={{ fontSize: '18px'}}>
+                        <div style={{ paddingLeft: '5px' }}>
+                        <span style={{ fontSize: '18px' }}>
                           -{dealItem.dealSales}
                         </span>
                           <span style={{ fontSize: '14px' }}>%</span>
@@ -187,46 +188,53 @@ class Home extends React.Component {
                   </Link>
                 </div>
 
-                <div style = {{ width: '100%', '@media (min-width: 580px)': { width:'50%' } }}>
+                <div style = {{ width: '100%', '@media (min-width: 580px)': { width: '50%' } }}>
                   <div style={{
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                          alignItems: 'center',
-                          width: '100%'
-                        }}>
-                    <div style={{padding: '10px'}}>
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    width: '100%'
+                  }}
+                  >
+                    <div style={{ padding: '10px' }}>
                   <span>
                     {dealItem.dealTitle}
                   </span>
-                  <span style={{paddingLeft: '10px'}}>
+                  <span style={{ paddingLeft: '10px' }}>
                     {dealItem.dealType}
                   </span>
                     </div>
                   </div>
 
-                  <div style={{padding: '0 10px 10px 10px'}}>
+                  <div style={{ padding: '0 10px 10px 10px' }}>
                     <i className="material-icons"
-                       style={{color:'green', fontSize: '14px', padding: '0 5px'}}>shopping_cart</i>
+                      style={{ color: 'green', fontSize: '14px', padding: '0 5px' }}
+                    >shopping_cart</i>
                     {dealItem.purchasesAmount}
-                    <i className="material-icons" style={{color:'red', fontSize: '14px', padding: '0 5px'}}>favorite</i>
+                    <i className="material-icons" style={{ color: 'red', fontSize: '14px', padding: '0 5px' }}>favorite</i>
                     {dealItem.likesAmount}
-                    <img src='/src/public/assets/hand132-5.png' style={{height: '14px', padding: '0 5px'}}/>
+                    <img src="/src/public/assets/hand132-5.png" style={{ height: '14px', padding: '0 5px' }}/>
                     {dealItem.likesAmount}
                   </div>
-
-
-                  <div style={{width: '95%', padding: '0 10px 10px 10px', fontSize: '10px', color: '#a99999'}}>
+                  <div style={{ width: '95%', padding: '0 10px 10px 10px', fontSize: '10px', color: '#a99999' }}>
                     <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
-                            style={styles.tagBorder}>{dealItem.tagOne}
+                      style={styles.tagBorder}
+                    >
+                      {dealItem.tagOne}
                     </button>
                     <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
-                            style={styles.tagBorder}>{dealItem.tagTwo}
+                      style={styles.tagBorder}
+                    >{dealItem.tagTwo}
                     </button>
                     <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
-                            style={styles.tagBorder}>{dealItem.tagThree}
+                      style={styles.tagBorder}
+                    >
+                      {dealItem.tagThree}
                     </button>
                     <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
-                            style={styles.tagBorder}>{dealItem.tagFour}
+                      style={styles.tagBorder}
+                    >
+                      {dealItem.tagFour}
                     </button>
                   </div>
 
@@ -237,7 +245,7 @@ class Home extends React.Component {
           );
         })}
       </div>
-    )
+    );
   }
 }
 

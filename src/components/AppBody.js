@@ -49,11 +49,11 @@ class AppBody extends React.Component {
     window.componentHandler.upgradeDom();
   }
   openModal() {
-    this.setState({modalIsOpen: true});
+    this.setState({ modalIsOpen: true });
   }
 
   closeModal() {
-    this.setState({modalIsOpen: false});
+    this.setState({ modalIsOpen: false });
   }
   handleSelectChange(value) {
     this.setState({ value });

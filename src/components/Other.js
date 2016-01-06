@@ -2,6 +2,6 @@ import React from 'react';
 
 const Other = () => <div>
   Other
-</div>
+</div>;
 
-export default Other
+export default Other;
