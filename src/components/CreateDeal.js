@@ -74,7 +74,8 @@ class CreateDeal extends React.Component {
         {
           tagName: ''
         }
-      ]
+      ],
+      isOpen: 'false'
     };
   }
 
@@ -83,12 +84,18 @@ class CreateDeal extends React.Component {
     const oldPrice = this.oldPrice.value;
     const newPrice = this.newPrice.value;
 
-    this.setState({
-      dealOptions: this.state.dealOptions.concat([{ dealTitleValue: dealTitleValue, oldPrice: oldPrice, newPrice: newPrice }])
-    });
-    this.oldPrice.value = '';
-    this.newPrice.value = '';
-    this.dealTitleValue.value = '';
+    if(dealTitleValue !=='' && oldPrice !== '' && newPrice !== '') {
+      this.setState({
+        dealOptions: this.state.dealOptions.concat([{ dealTitleValue: dealTitleValue, oldPrice: oldPrice, newPrice: newPrice }])
+      });
+      this.oldPrice.value = '';
+      this.newPrice.value = '';
+      this.dealTitleValue.value = '';
+    }
+  }
+
+  removeTag() {
+
   }
 
   postTag() {
@@ -182,6 +189,12 @@ class CreateDeal extends React.Component {
                 {this.state.tagNames.map(tagName => (
                   <div style={ styles.tagBorder }>
                     {tagName.tagName}
+                    <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
+                            onClick = {this.removeTag.bind(this)}
+                            style = {{ lineHeight: '20px', height: '20px', minWidth: '20px', padding: '0' }}
+                      >
+                      <i className="material-icons" style = {{ fontSize: '14px' }}>remove</i>
+                    </button>
                   </div>
                 ))}
               </div>
@@ -202,7 +215,8 @@ class CreateDeal extends React.Component {
                       background: '#0679A2',
                       minWidth: '28px',
                       padding: '0 5px',
-                      borderRadius: '3px'
+                      borderRadius: '3px',
+                      textTransform: 'none'
                                }}
                   >
                   <span style = {{ color: 'white' }} >Add</span>
@@ -269,9 +283,10 @@ class CreateDeal extends React.Component {
                         borderRadius: '3px',
                         boxShadow: '0',
                         fontSize: '18px',
+                        textTransform: 'none',
                         fontWeight: '500'
                         }}>
-                Add new
+                Add
               </button>
             </div>
           </div>
