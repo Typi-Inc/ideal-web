@@ -14,6 +14,9 @@ import AppNotFound from './AppNotFound';
 import Deal from './Deal';
 import CreateDeal from './CreateDeal';
 import MyProfile from './MyProfile';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+injectTapEventPlugin();
 
 class App extends React.Component {
   render() {

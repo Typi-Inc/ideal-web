@@ -616,7 +616,7 @@ class Deal extends React.Component {
               padding: '0 10px'
             }}
             >
-              <button onClick={this.postComment.bind(this)}className="mdl-button mdl-js-button mdl-js-ripple-effect"
+              <button onClick={this.postComment.bind(this)} className="mdl-button mdl-js-button mdl-js-ripple-effect"
                 style= {{
                   width: '28px',
                   height: '28px',
