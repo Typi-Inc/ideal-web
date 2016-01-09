@@ -8,7 +8,7 @@ import MenuItem from 'material-ui/lib/menus/menu-item';
 const styles = {
   titleStyle: {
     fontWeight: '500',
-    fontSize: '18px',
+    fontSize: '14px',
     color: '#777777',
     padding: '0 20px'
   },
@@ -33,7 +33,7 @@ const styles = {
     textAlign: 'center',
     padding: '10px 0',
     marginTop: '10px',
-    fontWeight: '600',
+    fontWeight: '500',
     fontSize: '20px',
     color: '#777777'
   },
@@ -70,11 +70,7 @@ class CreateDeal extends React.Component {
         newPrice: ''
         }
       ],
-      tagNames : [
-        {
-          tagName: ''
-        }
-      ],
+      tagNames : [],
       isOpen: 'false'
     };
   }
@@ -94,15 +90,17 @@ class CreateDeal extends React.Component {
     }
   }
 
-  removeTag() {
-
+  removeTag(tag) {
+    this.setState({
+      tagNames: this.state.tagNames.filter(t =>!(t===tag))
+    })
   }
 
   postTag() {
     const tagName = this.tagName.value;
     if(tagName !=='') {
     this.setState({
-      tagNames: this.state.tagNames.concat([{ tagName: tagName }])
+      tagNames: this.state.tagNames.concat([tagName])
     });
     this.tagName.value = '';
     }
@@ -142,6 +140,7 @@ class CreateDeal extends React.Component {
                         borderRadius: '3px',
                         height: '40px',
                         width: '250px',
+                        marginLeft: '17px',
                         paddingLeft: '10px'
                         }}/>
               </div>
@@ -151,7 +150,7 @@ class CreateDeal extends React.Component {
                   <input type="text" placeholder="100Tg"
                          style = {{
                           border: 'solid 1px #dcdcdc',
-                          width: '60px',
+                          width: '76px',
                           padding: '5px 0 5px 5px',
                           borderRadius: '3px' }}/>
                 </span>
@@ -160,7 +159,7 @@ class CreateDeal extends React.Component {
                   <input type="text" placeholder="10%"
                          style = {{
                            border: 'solid 1px #dcdcdc',
-                           width: '60px',
+                           width: '76px',
                            padding: '5px 0 5px 5px',
                            borderRadius: '3px' }}/>
                 </span>
@@ -182,17 +181,17 @@ class CreateDeal extends React.Component {
             </div>
 
             <div style = {{ background: '#fff', width: '360px', marginTop: '10px', padding: '10px 0' }}>
-              <div style = {[styles.titleStyle, {textAlign: 'center'}]}>
+              <div style = {[styles.titleStyle, {textAlign: 'center', fontSize: '16px'}]}>
                 Add tags that defines your Deal
               </div>
               <div style = {{ display: 'flex', flexWrap: 'wrap' }}>
                 {this.state.tagNames.map(tagName => (
                   <div style={ styles.tagBorder }>
-                    {tagName.tagName}
+                    {tagName}
                     <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
-                            onClick = {this.removeTag.bind(this)}
-                            style = {{ lineHeight: '20px', height: '20px', minWidth: '20px', padding: '0' }}
-                      >
+                      onClick = {this.removeTag.bind(this, tagName)}
+                      style = {{ lineHeight: '20px', height: '20px', minWidth: '20px', padding: '0' }}
+                    >
                       <i className="material-icons" style = {{ fontSize: '14px' }}>remove</i>
                     </button>
                   </div>
@@ -243,7 +242,7 @@ class CreateDeal extends React.Component {
             ))}
 
             <div style = {{ background: '#fff', padding: '10px', marginBottom: '10px' }}>
-              <div style = {{ color: '#777777', fontWeight: '500', fontSize: '18px' }}>
+              <div style = {{ color: '#777777', fontSize: '16px' }}>
                 Offer Title
               </div>
               <div>
@@ -262,15 +261,19 @@ class CreateDeal extends React.Component {
                     borderRadius: '3px'
                      }}/>
               </div>
-              <div style = {{ display: 'flex', justifyContent: 'flex-end' }}>
-                <span style = {{ color: '#777777', fontWeight: '500', fontSize: '18px', padding: '0 10px' }}>Old Price</span>
-                <input type="text"
-                       ref={el => this.oldPrice = el}
-                       style = {{ border: 'solid 1px #dcdcdc', width: '75px', borderRadius: '3px' }}/>
-                <span style = {{ color: '#777777', fontWeight: '500', fontSize: '18px', padding: '0 10px'  }}>New Price</span>
-                <input type="text"
-                       ref={el => this.newPrice = el}
-                       style = {{ border: 'solid 1px #dcdcdc', width: '75px', borderRadius: '3px' }}/>
+              <div style = {{ display: 'flex', justifyContent: 'space-between' }}>
+                <div>
+                  <span style = {{ color: '#777777', fontSize: '16px', padding: '0 10px' }}>Old Price</span>
+                  <input type="text"
+                         ref={el => this.oldPrice = el}
+                         style = {{ border: 'solid 1px #dcdcdc', width: '75px', height: '20px', borderRadius: '3px' }}/>
+                </div>
+                <div>
+                  <span style = {{ color: '#777777', fontSize: '16px', padding: '0 10px'  }}>New Price</span>
+                  <input type="text"
+                         ref={el => this.newPrice = el}
+                         style = {{ border: 'solid 1px #dcdcdc', width: '75px', height: '20px', borderRadius: '3px' }}/>
+                </div>
               </div>
             </div>
             <div>
