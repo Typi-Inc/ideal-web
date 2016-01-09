@@ -4,7 +4,9 @@ import Radium from 'radium';
 import Select from 'react-select';
 import '../public/react-select.css';
 import Modal from 'react-modal';
+import RouteTransition from './RouteTransition';
 import '../public/modal.css';
+import '../css/transition.css';
 
 const FLAVOURS = [
   { label: 'Chocolate', value: 'chocolate' },
@@ -212,7 +214,9 @@ class AppBody extends React.Component {
             </div>
           </header>
           <main className="mdl-layout__content">
-            {this.props.children}
+            <RouteTransition pathname={this.props.location.pathname}>
+              {this.props.children}
+            </RouteTransition>
           </main>
         </div>
       </div>
@@ -221,7 +225,8 @@ class AppBody extends React.Component {
 }
 
 AppBody.propTypes = {
-  children: React.PropTypes.element.isRequired
+  children: React.PropTypes.element.isRequired,
+  location: React.PropTypes.object
 };
 
 export default Radium(AppBody);

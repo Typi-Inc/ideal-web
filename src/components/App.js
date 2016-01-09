@@ -6,7 +6,7 @@ import {
   IndexRoute
   } from 'react-router';
 import { createHistory } from 'history';
-import AppBody from './AppBody';
+import AppBodyWrapper from './AppBodyWrapper';
 import Home from './Home';
 import Other from './Other';
 import Settings from './Settings';
@@ -18,7 +18,7 @@ import MyProfile from './MyProfile';
 class App extends React.Component {
   render() {
     return <Router history={createHistory()}>
-      <Route path="/" component={AppBody}>
+      <Route path="/" component={AppBodyWrapper}>
         <IndexRoute component={Home}/>
         <Route path="/deal/:dealId" component={Deal}/>
         <Route path="/createDeal" component={CreateDeal}/>
