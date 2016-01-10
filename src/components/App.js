@@ -6,7 +6,7 @@ import {
   IndexRoute
   } from 'react-router';
 import { createHistory } from 'history';
-import AppBody from './AppBody';
+import AppBodyWrapper from './AppBodyWrapper';
 import Home from './Home';
 import Other from './Other';
 import Settings from './Settings';
@@ -14,14 +14,16 @@ import AppNotFound from './AppNotFound';
 import Deal from './Deal';
 import CreateDeal from './CreateDeal';
 import MyProfile from './MyProfile';
-import injectTapEventPlugin from 'react-tap-event-plugin';
-
-injectTapEventPlugin();
 
 class App extends React.Component {
+  getChildContext() {
+    return {
+      state$: this.props.state$
+    };
+  }
   render() {
     return <Router history={createHistory()}>
-      <Route path="/" component={AppBody}>
+      <Route path="/" component={AppBodyWrapper}>
         <IndexRoute component={Home}/>
         <Route path="/deal/:dealId" component={Deal}/>
         <Route path="/createDeal" component={CreateDeal}/>
@@ -33,4 +35,13 @@ class App extends React.Component {
     </Router>;
   }
 }
+
+App.propTypes = {
+  state$: React.PropTypes.any
+};
+
+App.childContextTypes = {
+  state$: React.PropTypes.any
+};
+
 export default Radium(App);
