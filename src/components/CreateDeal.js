@@ -44,8 +44,8 @@ class CreateDeal extends React.Component {
         <div style = {{
             display: 'none',
             '@media (min-width: 950px)': { display: 'flex', justifyContent: 'center' },
-            '@media (min-width: 1450px)': { display: 'flex', justifyContent: 'space-around' }}}>
-          <div style = {{ width: '40%'}}>
+            '@media (min-width: 1450px)': { display: 'flex', justifyContent: 'flex-start' }}}>
+          <div style = {{ width: '40%', '@media (min-width: 1450px)': { width: '380px' }}}>
             <DropZone onDrop={this.onDrop}
                       style ={styles.dropZoneDetail}>
               <div>
