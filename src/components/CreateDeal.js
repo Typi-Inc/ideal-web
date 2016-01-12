@@ -5,6 +5,7 @@ import DropZone from 'react-dropzone';
 import CreateDealDetail from './CreateDealDeatail';
 import CreateDealAddTags from './CreateDealAddTags.js';
 import CreateDealOfferDescribe from './CreateDealOfferDescribe';
+import CreateDealAddConditions from './CreateDealAddConditions';
 
 const styles = {
   dropZoneDetail: {
@@ -40,7 +41,10 @@ class CreateDeal extends React.Component {
           '@media (min-width: 1450px)': { width: '1450px', margin: '0 auto' }
         }}
       >
-        <div style = {{ display: 'none', '@media (min-width: 950px)': { display: 'flex', justifyContent: 'center' } }}>
+        <div style = {{
+            display: 'none',
+            '@media (min-width: 950px)': { display: 'flex', justifyContent: 'center' },
+            '@media (min-width: 1450px)': { display: 'flex', justifyContent: 'space-around' }}}>
           <div style = {{ width: '40%'}}>
             <DropZone onDrop={this.onDrop}
                       style ={styles.dropZoneDetail}>
@@ -51,6 +55,7 @@ class CreateDeal extends React.Component {
             </DropZone>
             <CreateDealDetail/>
             <CreateDealAddTags/>
+            <CreateDealAddConditions/>
           </div>
           <CreateDealOfferDescribe/>
         </div>

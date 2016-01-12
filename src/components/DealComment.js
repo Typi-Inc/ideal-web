@@ -2,7 +2,13 @@ import React from 'react';
 import Radium from 'radium';
 
 const styles = {
-
+  title: {
+    fontFamily: 'Roboto, helvetica, arial, sans-serif',
+    fontSize: '18px',
+    color: '#666',
+    borderBottom: '1.5px solid rgba(0,0,0,0.12)',
+    marginBottom: '10px'
+  }
 };
 
 class DealComment extends React.Component {
@@ -55,7 +61,7 @@ class DealComment extends React.Component {
           }}
           >
           <div style = {styles.title}>
-            <i className="material-icons" style = {{ fontSize: '18px' }}>chat_bubble_outline</i>
+            <i className="material-icons" style = {{ fontSize: '14px' }}>chat_bubble_outline</i>
             <span style = {{ paddingLeft: '5px' }}>Comments</span>
           </div>
 

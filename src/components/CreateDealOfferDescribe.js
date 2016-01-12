@@ -6,7 +6,7 @@ const styles = {
     background: '#fff',
     textAlign: 'center',
     padding: '10px 0',
-    marginTop: '10px',
+    margin: '10px 0',
     fontWeight: '500',
     fontSize: '20px',
     color: '#777777'
@@ -18,10 +18,6 @@ class CreateDealOfferDescribe extends React.Component {
     super();
     this.state = {
       dealOptions: [
-        {
-          dealTitleValue: '',
-          newPrice: ''
-        }
       ]
     };
   }
@@ -38,7 +34,11 @@ class CreateDealOfferDescribe extends React.Component {
       this.dealTitleValue.value = '';
     }
   }
-
+  removeDeal(deal) {
+    this.setState({
+      dealOptions: this.state.dealOptions.filter(t =>!(t===deal))
+    })
+  }
   render() {
     return (
       <div style = {{ width: '50%'}}>
@@ -48,15 +48,39 @@ class CreateDealOfferDescribe extends React.Component {
         </div>
 
         {this.state.dealOptions.map(dealOption => (
-          <div style={{
-                background: '#fff',
-                margin: '10px 0'
-              }}
-            >
-            <div style = {{ color: '#a99999', fontSize: '18px' }} >{dealOption.dealTitleValue}</div>
-            <div>{}</div>
-            <div>{dealOption.newPrice}</div>
-          </div>
+            <div style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  background: '#fff',
+                  margin: '10px 0'
+                }}
+              >
+              <div>
+                <div style = {{
+                  color: '#5b5b5b',
+                  fontSize: '18px',
+                  padding: '10px' }} >{dealOption.dealTitleValue}</div>
+                <div style = {{
+                  float: 'right',
+                  fontFamily: 'Monaco, Consolas, monospace',
+                  padding: '0 0 10px 10px',
+                  fontSize: '16px'
+                }}>{dealOption.newPrice}</div>
+              </div>
+              <div style = {{marginRight: '5px'}}>
+                <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
+                        onClick = {this.removeDeal.bind(this, dealOption)}
+                        style= {{
+                          borderRadius: '3px',
+                          textTransform: 'none',
+                          minWidth: '24px',
+                          padding: '0'
+                               }}
+                  >
+                  <i className="material-icons" style = {{ color: '#777777', fontSize: '20px' }} >delete</i>
+                </button>
+              </div>
+            </div>
         ))}
 
         <div style = {{ background: '#fff', padding: '10px', marginBottom: '10px' }}>
@@ -110,3 +134,4 @@ class CreateDealOfferDescribe extends React.Component {
 }
 
 export default Radium(CreateDealOfferDescribe);
+

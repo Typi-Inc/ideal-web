@@ -175,7 +175,7 @@ class Deal extends React.Component {
         border: '1.5px solid #eee'
       },
       title: {
-        fontFamily: 'Proxima Nova, helvetica, arial, sans-serif',
+        fontFamily: 'Roboto, helvetica, arial, sans-serif',
         fontSize: '18px',
         color: '#666',
         borderBottom: '1.5px solid rgba(0,0,0,0.12)',

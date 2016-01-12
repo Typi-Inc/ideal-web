@@ -42,11 +42,11 @@ class CreateDealAddTags extends React.Component {
   render() {
 
     return (
-      <div style = {{ background: '#fff', width: '360px', marginTop: '10px', padding: '10px 0' }}>
-        <div style = {[styles.titleStyle, {textAlign: 'center', fontSize: '16px'}]}>
+      <div style = {{ background: '#fff', width: '365px', marginTop: '10px', padding: '10px 0' }}>
+        <div style = {{textAlign: 'center', fontSize: '16px'}}>
           Add tags that defines your Deal
         </div>
-        <div style = {{ display: 'flex', flexWrap: 'wrap' }}>
+        <div style = {{ display: 'flex', flexWrap: 'wrap', paddingLeft: '10px' }}>
           {this.state.tagNames.map(tagName => (
             <div style={ styles.tagBorder }>
               {tagName}
@@ -67,7 +67,7 @@ class CreateDealAddTags extends React.Component {
                          border: 'solid 1px #dcdcdc',
                          borderRadius: '3px',
                          height: '32px',
-                         width: '230px',
+                         width: '270px',
                          paddingLeft: '10px'
                          }}/>
           <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
@@ -89,8 +89,3 @@ class CreateDealAddTags extends React.Component {
 }
 
 export default Radium(CreateDealAddTags);
-
-
-
-
-

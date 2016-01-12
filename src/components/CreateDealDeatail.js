@@ -6,7 +6,7 @@ import MenuItem from 'material-ui/lib/menus/menu-item';
 const styles = {
   dealDetail: {
     background: '#fff',
-    width: '360px',
+    width: '365px',
     marginTop: '10px',
     padding: '10px 0'
   },
