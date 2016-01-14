@@ -13,7 +13,9 @@ class Home extends React.Component {
       ['featuredDeals', { from: 0, to: 9 }, ['title', 'conditions', 'id', 'image', 'discount']],
       ['featuredDeals', { from: 0, to: 9 }, 'business', ['name', 'image']],
       ['featuredDeals', { from: 0, to: 9 }, 'likes', 'sort:createdAt=desc', 'count']
-    ]);
+    ], {
+      featuredDeals: 'isLoading'
+    });
     window.componentHandler.upgradeDom();
   }
   componentDidUpdate() {
@@ -78,7 +80,6 @@ class Home extends React.Component {
         <Combinator>
           {
             this.context.state$.map(state => {
-              console.log('here');
               if (!state.featuredDeals) {
                 return <div>No deals</div>;
               }
@@ -210,4 +211,4 @@ Home.contextTypes = {
 };
 
 
-export default Radium(Home);
+export default Home;

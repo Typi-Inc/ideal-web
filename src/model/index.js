@@ -11,8 +11,13 @@ const model = ({ getQuery$ }) => {
     source: new FalcorHttpDataSource('http://localhost:8080/model.json')
   });
   getQuery$.subscribe(
-    paths => data$.onNext({ [paths[0][0]]: 'isLoading' }) || rootModel.get(...paths).
-      then(data => data && data.json && data$.onNext(data.json))
+    (paths, loadingObj) => {
+      if (loadingObj) {
+        data$.onNext(loadingObj);
+      }
+      rootModel.get(...paths).
+        then(data => data && data.json && data$.onNext(data.json));
+    }
   );
   return state$;
 };
