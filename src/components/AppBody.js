@@ -127,19 +127,19 @@ class AppBody extends React.Component {
             <div className="mdl-layout__header-row"
               style={{
                 paddingLeft: '20px',
-                '(min-width: 950px)': { width: '950px', margin: '0 auto' },
-                '(min-width: 1450px)': { width: '1450px', margin: '0 auto' }
+                '@media (min-width: 950px)': { width: '950px', margin: '0 auto' },
+                '@media (min-width: 1450px)': { width: '1450px', margin: '0 auto' }
               }}
             >
               <div className="mdl-layout-icon">
                 <Link to="/"><i className="material-icons" style = {{ color: 'white' }}>home</i></Link>
               </div>
-              <div style = {{ paddingLeft: '10px', '(min-width: 740px': { display: 'none' } }}>
+              <div style = {{ paddingLeft: '10px', '@media (min-width: 740px)': { display: 'none' } }}>
                 <button className="mdl-button mdl-js-button">
                   <i className="material-icons" style={{ color: 'white', paddingBottom: '5px' }} >search</i>
                 </button>
               </div>
-              <div style = {{ display: 'none', '(min-width: 740px': { display: 'block', paddingLeft: '20px' } }}>
+              <div style = {{ display: 'none', '@media (min-width: 740px)': { display: 'block', paddingLeft: '20px' } }}>
                 <Select multi
                   simpleValue
                   value={this.state.value}
@@ -187,7 +187,7 @@ class AppBody extends React.Component {
                 </Modal>
               </nav>
 
-              <div style = {{ '(min-width: 1025px)': { display: 'none' } }}>
+              <div style = {{ '@media (min-width: 1025px)': { display: 'none' } }}>
                 <button id="3dot"
                   className="mdl-button mdl-js-button mdl-button--icon"
                 >

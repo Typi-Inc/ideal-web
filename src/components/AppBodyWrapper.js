@@ -12,4 +12,4 @@ class AppBodyWrapper extends React.Component {
   }
 }
 
-export default Radium(AppBodyWrapper);
+export default AppBodyWrapper;
