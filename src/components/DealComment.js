@@ -1,5 +1,6 @@
 import React from 'react';
 import Radium from 'radium';
+import FontIcon from 'material-ui/lib/font-icon';
 
 const styles = {
   title: {
@@ -61,7 +62,7 @@ class DealComment extends React.Component {
           }}
           >
           <div style = {styles.title}>
-            <i className="material-icons" style = {{ fontSize: '14px' }}>chat_bubble_outline</i>
+            <FontIcon className="material-icons" style = {{ fontSize: '14px' }}>chat_bubble_outline</FontIcon>
             <span style = {{ paddingLeft: '5px' }}>Comments</span>
           </div>
 
@@ -172,7 +173,7 @@ class DealComment extends React.Component {
                   paddingRight: '30px'
                 }}
               >
-              <i className="material-icons" style = {{ color: '#a99999', paddingBottom: '10px' }}>chat_bubble_outline</i>
+              <FontIcon className="material-icons" color = '#a99999' style = {{ paddingBottom: '10px' }}>chat_bubble_outline</FontIcon>
             </button>
             Say it!
           </div>

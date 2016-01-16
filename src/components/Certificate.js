@@ -1,5 +1,8 @@
 import React from 'react';
 import Radium from 'radium';
+import FontIcon from 'material-ui/lib/font-icon';
+import IconButton from 'material-ui/lib/icon-button';
+import FlatButton from 'material-ui/lib/flat-button';
 
 const styles = {
   title: {
@@ -35,29 +38,21 @@ class Certificate extends React.Component {
             Five Fitness and Conditioning Classes at #TeamTibbs Fitness (70% Off)
           </div>
           <div>
-            <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
-                    style= {{
-                    width: '28px',
-                    height: '28px',
-                    background: '#a99999',
-                    minWidth: '28px',
-                    padding: '0px'
+            <IconButton
+              style= {{
+                    background: '#a99999'
                   }}
               >
-              <i className="material-icons" style = {{ color: 'white', paddingBottom: '8px' }}>remove</i>
-            </button>
+              <FontIcon className="material-icons" color = '#fff' >remove</FontIcon>
+            </IconButton>
             <span style={{ padding: '0 5px', fontSize: '16px' }}>15</span>
-            <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
+            <IconButton
                     style= {{
-                    width: '28px',
-                    height: '28px',
-                    background: '#54C085',
-                    minWidth: '28px',
-                    padding: '0px'
+                    background: '#54C085'
                   }}
               >
-              <i className="material-icons" style = {{ color: 'white', paddingBottom: '8px' }} >add</i>
-            </button>
+              <FontIcon className="material-icons" color = '#fff' >add</FontIcon>
+            </IconButton>
           </div>
         </div>
       </div>

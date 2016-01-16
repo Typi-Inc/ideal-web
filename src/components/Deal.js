@@ -7,6 +7,7 @@ import DealTag from './DealTag.js';
 import Certificate from './Certificate';
 import DealComment from './DealComment';
 import TabsOnSmallScreen from './TabsOnSmallScreen';
+import FontIcon from 'material-ui/lib/font-icon';
 
 class Deal extends React.Component {
   constructor() {
@@ -208,7 +209,6 @@ class Deal extends React.Component {
       >
         <div style = {{ width: '100%', '@media (min-width: 740px)': { width: '40%' } }}>
           <div style={styles.card} key = {deal.id}>
-            <Link className="mdl-navigation__link" to={'/deal/' + deal.id} >
               <div style={ styles.dealImage }>
                 <div style={ styles.mainOptionsCard }>
                   <div style={{ paddingLeft: '5px' }}>
@@ -219,7 +219,6 @@ class Deal extends React.Component {
                   </div>
                 </div>
               </div>
-            </Link>
 
             <div style={{
               display: 'flex',
@@ -238,11 +237,11 @@ class Deal extends React.Component {
             </div>
 
             <div style={{ padding: '0 10px' }}>
-              <i className="material-icons"
+              <FontIcon className="material-icons"
                 style={{ color: 'green', fontSize: '14px', padding: '0 5px' }}
-              >shopping_cart</i>
+              >shopping_cart</FontIcon>
               {deal.purchasesAmount}
-              <i className="material-icons" style={{ color: 'red', fontSize: '14px', padding: '0 5px' }}>favorite</i>
+              <FontIcon className="material-icons" style={{ color: 'red', fontSize: '14px', padding: '0 5px' }}>favorite</FontIcon>
               {deal.likesAmount}
               <img src="/src/public/assets/hand132-5.png" style={{ height: '14px', padding: '0 5px' }}/>
               {deal.likesAmount}

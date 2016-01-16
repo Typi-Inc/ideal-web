@@ -1,5 +1,6 @@
 import React from 'react';
 import Radium from 'radium';
+import FlatButton from 'material-ui/lib/flat-button';
 
 class EarnBuy extends React.Component {
 
@@ -14,26 +15,18 @@ class EarnBuy extends React.Component {
             }}
         >
         <div style={{ width: '40%' }}>
-          <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
+          <FlatButton labelStyle = {{color: '#fff'}} label = 'Earn'
                   style = {{
-                    background: '#0679A2',
-                    color: 'white',
+                    backgroundColor: '#0679A2',
                     width: '100%'
-                  }}
-            >
-            Earn
-          </button>
+                  }}/>
         </div>
         <div style={{ width: '40%' }}>
-          <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
-                  style = {{
-                    background: '#54C085',
-                    color: 'white',
+          <FlatButton labelStyle = {{color: '#fff'}} label = 'Buy'
+                      style = {{
+                    backgroundColor: '#54C085',
                     width: '100%'
-                  }}
-            >
-            Buy
-          </button>
+                  }}/>
         </div>
       </div>
     )

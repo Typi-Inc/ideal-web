@@ -2,6 +2,8 @@ import React from 'react';
 import Radium from 'radium';
 import Link from './Link';
 import '../public/hover.css';
+import FontIcon from 'material-ui/lib/font-icon';
+import FlatButton from 'material-ui/lib/flat-button';
 
 class Home extends React.Component {
   componentDidMount() {
@@ -132,9 +134,8 @@ class Home extends React.Component {
               margin: '0 5px 5px 0',
               textTransform: 'none',
               height: '32px',
-              color: '#777777',
               background: '#fff',
-              border: '1.5px solid #eee'
+              border: '2px solid #eee'
             }
           };
 
@@ -173,7 +174,7 @@ class Home extends React.Component {
                 </div>
 
                 <div style={{ width: '100%', '@media (min-width: 580px)': { width: '50%' } }}>
-                  <Link className="mdl-navigation__link" to={'/deal/' + dealItem.id} >
+                  <Link  to={'/deal/' + dealItem.id} >
                     <div style={styles.dealImage}>
                       <div style={ styles.mainOptionsCard }>
                         <div style={{ paddingLeft: '5px'}}>
@@ -205,29 +206,20 @@ class Home extends React.Component {
                   </div>
 
                   <div style={{padding: '0 10px 10px 10px'}}>
-                    <i className="material-icons"
-                       style={{color:'green', fontSize: '14px', padding: '0 5px'}}>shopping_cart</i>
+                    <FontIcon className="material-icons" color = 'green'
+                       style={{ fontSize: '14px', padding: '0 5px'}}>shopping_cart</FontIcon>
                     {dealItem.purchasesAmount}
-                    <i className="material-icons" style={{color:'red', fontSize: '14px', padding: '0 5px'}}>favorite</i>
+                    <FontIcon className="material-icons" color = 'red' style={{ fontSize: '14px', padding: '0 5px'}}>favorite</FontIcon>
                     {dealItem.likesAmount}
                     <img src='/src/public/assets/hand132-5.png' style={{height: '14px', padding: '0 5px'}}/>
                     {dealItem.likesAmount}
                   </div>
 
-
                   <div style={{width: '95%', padding: '0 10px 10px 10px', fontSize: '10px', color: '#a99999'}}>
-                    <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
-                            style={styles.tagBorder}>{dealItem.tagOne}
-                    </button>
-                    <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
-                            style={styles.tagBorder}>{dealItem.tagTwo}
-                    </button>
-                    <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
-                            style={styles.tagBorder}>{dealItem.tagThree}
-                    </button>
-                    <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
-                            style={styles.tagBorder}>{dealItem.tagFour}
-                    </button>
+                    <FlatButton color = '#777777' label = {dealItem.tagOne}
+                                style={styles.tagBorder}
+                      >
+                    </FlatButton>
                   </div>
 
                 </div>

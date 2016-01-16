@@ -1,5 +1,7 @@
 import React from 'react';
 import Radium from 'radium';
+import FlatButton from 'material-ui/lib/flat-button';
+import FontIcon from 'material-ui/lib/font-icon';
 
 const styles = {
   tagBorder: {
@@ -50,12 +52,12 @@ class CreateDealAddTags extends React.Component {
           {this.state.tagNames.map(tagName => (
             <div style={ styles.tagBorder }>
               {tagName}
-              <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
+              <FlatButton
                       onClick = {this.removeTag.bind(this, tagName)}
                       style = {{ lineHeight: '20px', height: '20px', minWidth: '20px', padding: '0' }}
                 >
-                <i className="material-icons" style = {{ fontSize: '14px' }}>remove</i>
-              </button>
+                <FontIcon className="material-icons" style = {{ fontSize: '14px' }}>remove</FontIcon>
+              </FlatButton>
             </div>
           ))}
         </div>
@@ -70,18 +72,11 @@ class CreateDealAddTags extends React.Component {
                          width: '270px',
                          paddingLeft: '10px'
                          }}/>
-          <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
-                  onClick={this.postTag.bind(this)}
-                  style= {{
-                      background: '#0679A2',
-                      minWidth: '28px',
-                      padding: '0 5px',
-                      borderRadius: '3px',
-                      textTransform: 'none'
-                               }}
-            >
-            <span style = {{ color: 'white' }} >Add</span>
-          </button>
+          <FlatButton labelStyle = {{color: '#fff'}} label = 'Add'
+                      onClick={this.postTag.bind(this)}
+                      style = {{
+                    backgroundColor: '#0679A2'
+                  }}/>
         </div>
       </div>
     )
