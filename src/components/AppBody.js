@@ -2,9 +2,7 @@ import React from 'react';
 import Link from './Link';
 import Radium from 'radium';
 import Select from 'react-select';
-import '../public/react-select.css';
 import Modal from 'react-modal';
-import '../public/modal.css';
 import FlatButton from 'material-ui/lib/flat-button';
 import FontIcon from 'material-ui/lib/font-icon';
 import FloatingActionButton from 'material-ui/lib/floating-action-button';
@@ -15,18 +13,17 @@ import ActionHome from 'material-ui/lib/svg-icons/action/home';
 import IconButton from 'material-ui/lib/icon-button';
 import Toolbar from 'material-ui/lib/toolbar/toolbar';
 import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
-import ToolbarSeparator from 'material-ui/lib/toolbar/toolbar-separator';
-import ToolbarTitle from 'material-ui/lib/toolbar/toolbar-title';
+import '../public/react-select.css';
+import '../public/modal.css';
 
-
-const FLAVOURS = [
-  { label: 'Chocolate', value: 'chocolate' },
-  { label: 'Vanilla', value: 'vanilla' },
-  { label: 'Strawberry', value: 'strawberry' },
-  { label: 'Caramel', value: 'caramel' },
-  { label: 'Cookies and Cream', value: 'cookiescream' },
-  { label: 'Peppermint', value: 'peppermint' }
-];
+//const FLAVOURS = [
+//  { label: 'Chocolate', value: 'chocolate' },
+//  { label: 'Vanilla', value: 'vanilla' },
+//  { label: 'Strawberry', value: 'strawberry' },
+//  { label: 'Caramel', value: 'caramel' },
+//  { label: 'Cookies and Cream', value: 'cookiescream' },
+//  { label: 'Peppermint', value: 'peppermint' }
+//];
 
 const modalStyles = {
   overlay: {
@@ -38,7 +35,7 @@ const modalStyles = {
     right: '0',
     bottom: '0',
     padding: '20px 15px 0 20px',
-    height: '350px',
+    height: '370px',
     margin: 'auto',
     width: '240px'
   }
@@ -54,32 +51,31 @@ class AppBody extends React.Component {
       modalIsOpen: false
     };
   }
-  componentDidMount() {
-    window.componentHandler.upgradeDom();
-  }
 
-  componentDidUpdate() {
-    window.componentHandler.upgradeDom();
-  }
   openModal() {
-    this.setState({modalIsOpen: true});
+    this.setState({ modalIsOpen: true });
   }
 
   closeModal() {
-    this.setState({modalIsOpen: false});
+    this.setState({ modalIsOpen: false });
   }
+
   handleSelectChange(value) {
     this.setState({ value });
   }
+
   loginWithFacebook() {
     window.location = '/facebook';
   }
+
   loginWithVk() {
     window.location = '/vk';
   }
+
   loginWithGoogle() {
     window.location = '/google';
   }
+
   renderFacebookButton() {
     const styles = {
       facebookButton: {
@@ -96,80 +92,95 @@ class AppBody extends React.Component {
     };
     return (
       <div >
-        <FlatButton style={styles.facebookButton} onClick={this.loginWithFacebook.bind(this)} label="Sign in"/>
+        <FlatButton
+          style={styles.facebookButton}
+          onClick={this.loginWithFacebook.bind(this)}
+          label="Sign in"
+        />
         <FlatButton
           style={Object.assign({}, styles.facebookButton, {
-              backgroundColor: '#5B7FA6',
-              backgroundImage: 'url("http://wault42.com/wp-content/uploads/2015/10/vk1.png")'
+            backgroundColor: '#5B7FA6',
+            backgroundImage: 'url("http://wault42.com/wp-content/uploads/2015/10/vk1.png")'
           })}
           onClick={this.loginWithVk.bind(this)}
-          label="Sign in"/>
+          label="Sign in"
+        />
         <FlatButton
           style={Object.assign({}, styles.facebookButton, {
-              backgroundColor: '#DC4E41',
-              marginBottom: '0',
-              backgroundImage: 'url("http://www.envisionexperience.com/~/media/images/blog/googleplus.png?la=en")'
+            backgroundColor: '#DC4E41',
+            marginBottom: '0',
+            backgroundImage: 'url("http://www.envisionexperience.com/~/media/images/blog/googleplus.png?la=en")'
           })}
           onClick={this.loginWithGoogle.bind(this)}
-          label="Sign in"/>
+          label="Sign in"
+        />
       </div>
     );
   }
+
   render() {
     return (
-        <div style={{ background: '#dedede',height: '100%' }}>
-          <Toolbar style = {{ background: '#0679A2', paddingRight: '0' }}>
-            <ToolbarGroup firstChild={true} float="left">
-              <IconButton style = {{marginTop: '4px'}}
-                          containerElement={<Link to="/" />}
-                          linkButton={true}>
-                <ActionHome color = '#fff' />
-              </IconButton>
-            </ToolbarGroup>
-            <IconButton style = {{marginTop: '4px'}}>
-              <FontIcon className="material-icons" color = '#fff' >search</FontIcon>
-            </IconButton>
-            <ToolbarGroup float="right">
-              <IconMenu iconButtonElement={
-                <IconButton touch={true} style = {{marginTop: '4px'}}>
-                  <MoreVertIcon color = '#fff' />
-                </IconButton>
-              }>
-                <MenuItem primaryText="My Profile" onTouchTap = {() => this.context.router.push('myProfile')}/>
-                <MenuItem primaryText="Settings" onTouchTap = {() => this.context.router.push('settings')}/>
-                <MenuItem primaryText="Sign in"  onTouchTap={this.openModal.bind(this)}/>
-              </IconMenu>
-            </ToolbarGroup>
-          </Toolbar>
-          <Modal
-            isOpen={this.state.modalIsOpen}
-            onRequestClose={this.closeModal.bind(this)}
-            style={modalStyles}
+      <div style={{ background: '#dedede', height: '100%' }}>
+        <Toolbar style={{ background: '#0679A2', paddingRight: '0' }}>
+          <ToolbarGroup firstChild float="left">
+            <IconButton style={{ marginTop: '4px' }}
+              containerElement={<Link to="/" />}
+              linkButton
             >
-            <h2 style = {{
-                    fontSize: '20px',
-                    fontWeight: '900',
-                    textAlign: 'center',
-                    margin: '0'
-                  }}
-              >
-              Find interesting deal, share with friends, earn money!
-            </h2>
-            {this.renderFacebookButton()}
-            <div style = {{ textAlign: 'right', marginTop: '10px' }}>
-              <FloatingActionButton
-                mini={true}
-                backgroundColor = '#54C085'
-                onClick={this.closeModal.bind(this)}
-                >
-                <FontIcon className="material-icons" style = {{ fontSize: '18px', color: 'white' }}>close</FontIcon>
-              </FloatingActionButton>
-            </div>
-          </Modal>
-          <main>
-            {this.props.children}
-          </main>
-        </div>
+              <ActionHome color="#fff"/>
+            </IconButton>
+          </ToolbarGroup>
+          <IconButton style={{ marginTop: '4px' }}>
+            <FontIcon className="material-icons" color="#fff">search</FontIcon>
+          </IconButton>
+          <ToolbarGroup float="right">
+            <IconMenu iconButtonElement={
+                <IconButton touch style = {{ marginTop: '4px' }}>
+                  <MoreVertIcon color = "#fff" />
+                </IconButton>
+            }
+            >
+              <MenuItem primaryText="My Profile"
+                onTouchTap={() => this.context.router.push('myProfile')}
+              />
+              <MenuItem primaryText="Settings"
+                onTouchTap={() => this.context.router.push('settings')}
+              />
+              <MenuItem primaryText="Sign in" onTouchTap={this.openModal.bind(this)}/>
+            </IconMenu>
+          </ToolbarGroup>
+        </Toolbar>
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          onRequestClose={this.closeModal.bind(this)}
+          style={modalStyles}
+        >
+          <h2 style={{
+            fontSize: '20px',
+            fontWeight: '900',
+            textAlign: 'center',
+            margin: '0'
+          }}
+          >
+            Find interesting deal, share with friends, earn money!
+          </h2>
+          {this.renderFacebookButton()}
+          <div style={{ textAlign: 'right', marginTop: '10px' }}>
+            <FloatingActionButton
+              mini
+              backgroundColor="#54C085"
+              onClick={this.closeModal.bind(this)}
+            >
+            <FontIcon className="material-icons" style={{ fontSize: '18px', color: 'white' }}>
+              close
+            </FontIcon>
+            </FloatingActionButton>
+          </div>
+        </Modal>
+        <main>
+          {this.props.children}
+        </main>
+      </div>
     );
   }
 }
@@ -185,7 +196,7 @@ AppBody.propTypes = {
 export default Radium(AppBody);
 
 
-//<header className="mdl-layout__header mdl-layout__header--seamed"
+//  <header className="mdl-layout__header mdl-layout__header--seamed"
 //        style={{ background: '#0679A2' }}
 //  >
 //  <div className="mdl-layout__header-row"
@@ -249,4 +260,4 @@ export default Radium(AppBody);
 //      </ul>
 //    </div>
 //  </div>
-//</header>
+//  </header>
