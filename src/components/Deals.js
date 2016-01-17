@@ -4,6 +4,7 @@ import Link from './Link';
 import FontIcon from 'material-ui/lib/font-icon';
 import FlatButton from 'material-ui/lib/flat-button';
 import '../public/hover.css';
+import ReactList from 'react-list';
 
 const styles = {
   card: {
@@ -51,7 +52,7 @@ const styles = {
   }
 };
 
-class Home extends React.Component {
+class Deals extends React.Component {
   static queries = {
     deal() {
       return [['title', 'conditions', 'id', 'image', 'discount']];
@@ -72,8 +73,9 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', maxWidth: '1500px', margin: 'auto' }}>
-        {this.props.deals.toArray().map(deal => {
+      <div
+        style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', maxWidth: '1500px', margin: 'auto' }}>
+        {this.props.deals.toArray().filter(deal => deal.get('id')).map(deal => {
           return (
             <div key={deal.get('id')}
                  style={{ width: '100%', '@media (min-width: 1020px)': { width: '480px', marginLeft: '10px' } }}>
@@ -95,7 +97,6 @@ class Home extends React.Component {
                   <span>{deal.getIn(['business', 'name'])}</span>
                 </div>
               </div>
-
               <div id="hoverCard" style={styles.card}>
                 <div style={{ width: '100%', '@media (min-width: 580px)': { display: 'none' }}}>
                   <div style={{
@@ -131,18 +132,15 @@ class Home extends React.Component {
 
                 <div style={{ width: '100%', '@media (min-width: 580px)': { width:'50%' } }}>
                   <div style={{
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                          alignItems: 'center',
-                          width: '100%'
-                        }}>
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    width: '100%'
+                  }}>
                     <div style={{padding: '10px'}}>
-                  <span>
-                    {deal.getIn(['business', 'name'])}
-                  </span>
-                  <span style={{paddingLeft: '10px'}}>
-                    {deal.getIn(['business', 'name'])}
-                  </span>
+                      <span>
+                        {deal.get('title')}
+                      </span>
                     </div>
                   </div>
 
@@ -150,23 +148,25 @@ class Home extends React.Component {
                     <FontIcon className="material-icons" color='green'
                               style={{ fontSize: '14px', padding: '0 5px'}}>shopping_cart</FontIcon>
                     {'?'}
-                    <FontIcon className="material-icons" color='red' style={{ fontSize: '14px', padding: '0 5px'}}>favorite</FontIcon>
+                    <FontIcon className="material-icons" color='red'
+                              style={{ fontSize: '14px', padding: '0 5px'}}>favorite</FontIcon>
                     {deal.getIn(['likes', 'sort:createdAt=desc', 'count'])}
-                    <img src='/src/public/assets/hand132-5.png' style={{height: '14px', padding: '0 5px'}}/>
+                    <img src='/src/public/assets/hand132-5.png'
+                         style={{height: '14px', padding: '0 5px'}}/>
                     {'?'}
                   </div>
                   {
                     deal.getIn(['tags', 'sort:createdAt=desc', 'edges']) &&
                     deal.getIn(['tags', 'sort:createdAt=desc', 'edges']).toArray().
                       filter(tag => tag.get('name')).
-                      map(tag => console.log(tag.toJS())||(
-                      <div key={`${deal.get('id')}${tag.get('id')}`}
-                        style={{width: '95%', padding: '0 10px 10px 10px', fontSize: '10px', color: '#a99999'}}>
-                        <FlatButton color='#777777' label={tag.get('text')}
-                          style={styles.tagBorder}
-                        />
-                      </div>
-                    ))
+                      map(tag => console.log(tag.toJS()) || (
+                        <div key={`${deal.get('id')}${tag.get('id')}`}
+                             style={{width: '95%', padding: '0 10px 10px 10px', fontSize: '10px', color: '#a99999'}}>
+                          <FlatButton color='#777777' label={tag.get('text')}
+                                      style={styles.tagBorder}
+                            />
+                        </div>
+                      ))
                   }
                 </div>
               </div>
@@ -178,4 +178,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+export default Radium(Deals);

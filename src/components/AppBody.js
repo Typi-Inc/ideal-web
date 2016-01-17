@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from './Link';
+import { Link as RouterLink } from 'react-router';
 import Radium from 'radium';
 import Select from 'react-select';
 import Modal from 'react-modal';
@@ -46,7 +47,7 @@ class AppBody extends React.Component {
     super();
     this.state = {
       crazy: false,
-      options: FLAVOURS,
+      // options: FLAVOURS,
       value: [],
       modalIsOpen: false
     };
@@ -124,7 +125,7 @@ class AppBody extends React.Component {
         <Toolbar style={{ background: '#0679A2', paddingRight: '0' }}>
           <ToolbarGroup firstChild float="left">
             <IconButton style={{ marginTop: '4px' }}
-              containerElement={<Link to="/" />}
+              containerElement={<RouterLink to="/" />}
               linkButton
             >
               <ActionHome color="#fff"/>

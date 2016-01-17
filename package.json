@@ -26,12 +26,14 @@
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
     "react-dropzone": "^3.3.2",
+    "react-list": "^0.7.11",
     "react-modal": "^0.6.1",
     "react-motion": "^0.3.1",
     "react-router": "^2.0.0-rc5",
     "react-select": "^1.0.0-beta8",
     "react-tap-event-plugin": "^0.2.1",
-    "rxjs": "^5.0.0-beta.1"
+    "rxjs": "^5.0.0-beta.1",
+    "spinkit": "^1.2.5"
   },
   "devDependencies": {
     "babel-core": "^6.4.0",

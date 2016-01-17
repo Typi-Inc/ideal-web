@@ -31,7 +31,7 @@ class Combinator extends React.Component {
 
   componentWillUnmount() {
     // Clean-up subscription before un-mounting
-    this.subscription.dispose();
+    this.subscription.unsubscribe();
   }
 
   render() {

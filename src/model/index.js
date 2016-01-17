@@ -8,7 +8,9 @@ import 'rxjs/add/operator/share';
 const model = ({ get$ }) => {
   const data$ = new ReplaySubject(1);
   const state$ = data$.scan((acc, newData) => {
-    return acc.mergeDeep(fromJS(newData, (key, value) => value.toOrderedMap()));
+    return acc.mergeDeep(fromJS(newData, (key, value) => {
+      return value.toOrderedMap();
+    }));
   }, Map()).share(1);
   const rootModel = new falcor.Model({
     source: new FalcorHttpDataSource('/model.json')

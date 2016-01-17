@@ -11,15 +11,6 @@ const styles = {
 };
 
 class MyProfile extends React.Component {
-
-  componentDidMount() {
-    window.componentHandler.upgradeDom();
-  }
-
-  componentDidUpdate() {
-    window.componentHandler.upgradeDom();
-  }
-
   render() {
     return (
       <div style = {{
