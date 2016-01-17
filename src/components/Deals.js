@@ -6,6 +6,8 @@ import FlatButton from 'material-ui/lib/flat-button';
 import '../public/hover.css';
 import ReactList from 'react-list';
 
+const RadiumReactList = Radium(ReactList);
+
 const styles = {
   card: {
     display: 'flex',
@@ -185,7 +187,7 @@ class Deals extends React.Component {
         style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', maxWidth: '1500px', margin: 'auto' }}
       >
         <div>
-          <ReactList
+          <RadiumReactList
             ref={el => this.list = el}
             itemRenderer={this.renderItem.bind(this)}
             length={this.props.deals.toArray().length}

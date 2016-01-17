@@ -2,7 +2,6 @@ import falcor from 'falcor';
 import FalcorHttpDataSource from 'falcor-http-datasource';
 import { OrderedMap, Map, fromJS } from 'immutable';
 import { ReplaySubject } from 'rxjs/subject/ReplaySubject';
-import _ from 'lodash';
 import 'rxjs/add/operator/scan';
 import 'rxjs/add/operator/share';
 
