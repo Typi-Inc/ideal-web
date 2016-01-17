@@ -14,7 +14,7 @@ class Home extends React.Component {
     Object.keys(Deals.queries).forEach(queryKey => {
       query.push([
         'featuredDeals',
-        { from: 0, to: 9},
+        { from: 0, to: 9 },
         ...Deals.queries[queryKey]()
       ])
     });

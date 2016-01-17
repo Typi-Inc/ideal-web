@@ -70,109 +70,128 @@ class Deals extends React.Component {
       return ['likedByUser', '{{me}}'];
     }
   };
-
-  render() {
+  renderItem(index, key) {
+    const deal = this.props.deals.get(`${index}`);
     return (
-      <div
-        style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', maxWidth: '1500px', margin: 'auto' }}>
-        {this.props.deals.toArray().filter(deal => deal.get('id')).map(deal => {
-          return (
-            <div key={deal.get('id')}
-                 style={{ width: '100%', '@media (min-width: 1020px)': { width: '480px', marginLeft: '10px' } }}>
-              <div style={{ display: 'none',
+      <div key={deal.get('id')}
+           style={{ width: '100%', '@media (min-width: 1020px)': { width: '480px', marginLeft: '10px' } }}>
+        <div style={{ display: 'none',
                 '@media (min-width: 580px)': {
                   display: 'block',
                   background: '#fff',
                   margin: '10px 10px 0 10px',
                   width: '100%' }
               }}
-                >
-                <div style={{
+          >
+          <div style={{
                   padding: '10px',
                   fontStyle: 'italic',
                   fontSize: '13px'
                 }}
-                  >
-                  <span style={{ color: '#a99999' }}>Published by </span>
-                  <span>{deal.getIn(['business', 'name'])}</span>
-                </div>
-              </div>
-              <div id="hoverCard" style={styles.card}>
-                <div style={{ width: '100%', '@media (min-width: 580px)': { display: 'none' }}}>
-                  <div style={{
+            >
+            <span style={{ color: '#a99999' }}>Published by </span>
+            <span>{deal.getIn(['business', 'name'])}</span>
+          </div>
+        </div>
+        <div id="hoverCard" style={styles.card}>
+          <div style={{ width: '100%', '@media (min-width: 580px)': { display: 'none' }}}>
+            <div style={{
                         padding: '10px',
                         fontStyle: 'italic',
                         fontSize: '13px'
                         }}>
-                    <span style={{color: '#a99999'}}>Published by </span>
-                    <span>{deal.getIn(['business', 'name'])}</span>
-                  </div>
-                </div>
+              <span style={{color: '#a99999'}}>Published by </span>
+              <span>{deal.getIn(['business', 'name'])}</span>
+            </div>
+          </div>
 
-                <div style={{ width: '100%', '@media (min-width: 580px)': { width: '50%' } }}>
-                  <Link to={'/deal/' + deal.get('id')}>
-                    <div style={[styles.dealImage, {
+          <div style={{ width: '100%', '@media (min-width: 580px)': { width: '50%' } }}>
+            <Link to={'/deal/' + deal.get('id')}>
+              <div style={[styles.dealImage, {
                       backgroundImage: `url("${deal.get('image')}")`
                     }]}>
-                      {
-                        deal.get('discount') && (
-                          <div style={ styles.mainOptionsCard }>
-                            <div style={{ paddingLeft: '5px'}}>
+                {
+                  deal.get('discount') && (
+                    <div style={ styles.mainOptionsCard }>
+                      <div style={{ paddingLeft: '5px'}}>
                               <span style={{ fontSize: '18px'}}>
                                 -{deal.get('discount')}
                               </span>
-                              <span style={{ fontSize: '14px' }}>%</span>
-                            </div>
-                          </div>
-                        )
-                      }
+                        <span style={{ fontSize: '14px' }}>%</span>
+                      </div>
                     </div>
-                  </Link>
-                </div>
+                  )
+                }
+              </div>
+            </Link>
+          </div>
 
-                <div style={{ width: '100%', '@media (min-width: 580px)': { width:'50%' } }}>
-                  <div style={{
+          <div style={{ width: '100%', '@media (min-width: 580px)': { width:'50%' } }}>
+            <div style={{
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     width: '100%'
                   }}>
-                    <div style={{padding: '10px'}}>
+              <div style={{padding: '10px'}}>
                       <span>
                         {deal.get('title')}
                       </span>
-                    </div>
-                  </div>
-
-                  <div style={{padding: '0 10px 10px 10px'}}>
-                    <FontIcon className="material-icons" color='green'
-                              style={{ fontSize: '14px', padding: '0 5px'}}>shopping_cart</FontIcon>
-                    {'?'}
-                    <FontIcon className="material-icons" color='red'
-                              style={{ fontSize: '14px', padding: '0 5px'}}>favorite</FontIcon>
-                    {deal.getIn(['likes', 'sort:createdAt=desc', 'count'])}
-                    <img src='/src/public/assets/hand132-5.png'
-                         style={{height: '14px', padding: '0 5px'}}/>
-                    {'?'}
-                  </div>
-                  {
-                    deal.getIn(['tags', 'sort:createdAt=desc', 'edges']) &&
-                    deal.getIn(['tags', 'sort:createdAt=desc', 'edges']).toArray().
-                      filter(tag => tag.get('name')).
-                      map(tag => console.log(tag.toJS()) || (
-                        <div key={`${deal.get('id')}${tag.get('id')}`}
-                             style={{width: '95%', padding: '0 10px 10px 10px', fontSize: '10px', color: '#a99999'}}>
-                          <FlatButton color='#777777' label={tag.get('text')}
-                                      style={styles.tagBorder}
-                            />
-                        </div>
-                      ))
-                  }
-                </div>
               </div>
             </div>
-          );
-        })}
+
+            <div style={{padding: '0 10px 10px 10px'}}>
+              <FontIcon className="material-icons" color='green'
+                        style={{ fontSize: '14px', padding: '0 5px'}}>shopping_cart</FontIcon>
+              {'?'}
+              <FontIcon className="material-icons" color='red'
+                        style={{ fontSize: '14px', padding: '0 5px'}}>favorite</FontIcon>
+              {deal.getIn(['likes', 'sort:createdAt=desc', 'count'])}
+              <img src='/src/public/assets/hand132-5.png'
+                   style={{height: '14px', padding: '0 5px'}}/>
+              {'?'}
+            </div>
+            {
+              deal.getIn(['tags', 'sort:createdAt=desc', 'edges']).toArray().
+                map(tag => (
+                  <div key={`${deal.get('id')}${tag.get('id')}`}
+                       style={{width: '95%', padding: '0 10px 10px 10px', fontSize: '10px', color: '#a99999'}}>
+                    <FlatButton color='#777777' label={tag.get('text')}
+                                style={styles.tagBorder}
+                    />
+                  </div>
+                ))
+            }
+          </div>
+        </div>
+      </div>
+    );
+  }
+  handleScroll(e) {
+    const [firstVisibleIndex, lastVisibleIndex] = this.list.getVisibleRange();
+    if (lastVisibleIndex > this.props.deals.toArray().length - 2) {
+
+    }
+  }
+  componentWillMount() {
+    window.addEventListener('scroll', e => this.handleScroll(e), true)
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', e => this.handleScroll(e), true)
+  }
+  render() {
+    return (
+      <div
+        style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', maxWidth: '1500px', margin: 'auto' }}
+      >
+        <div>
+          <ReactList
+            ref={el => this.list = el}
+            itemRenderer={this.renderItem.bind(this)}
+            length={this.props.deals.toArray().length}
+            type='uniform'
+          />
+        </div>
       </div>
     );
   }

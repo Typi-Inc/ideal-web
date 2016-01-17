@@ -1,15 +1,22 @@
 import falcor from 'falcor';
 import FalcorHttpDataSource from 'falcor-http-datasource';
-import { Map, fromJS } from 'immutable';
+import { OrderedMap, Map, fromJS } from 'immutable';
 import { ReplaySubject } from 'rxjs/subject/ReplaySubject';
+import _ from 'lodash';
 import 'rxjs/add/operator/scan';
 import 'rxjs/add/operator/share';
+
+const FALCOR_PATH_KEY = '$__path';
 
 const model = ({ get$ }) => {
   const data$ = new ReplaySubject(1);
   const state$ = data$.scan((acc, newData) => {
     return acc.mergeDeep(fromJS(newData, (key, value) => {
-      return value.toOrderedMap();
+      let result = value;
+      if (value.has(FALCOR_PATH_KEY)) {
+        result = value.filter((v, k) => k !== FALCOR_PATH_KEY);
+      }
+      return result.toOrderedMap();
     }));
   }, Map()).share(1);
   const rootModel = new falcor.Model({

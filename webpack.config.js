@@ -18,7 +18,10 @@ const common = {
       {
         test: /\.css$/,
         loaders: ['style', 'css'],
-        //include: SOURCE_PATH
+        include: [
+          SOURCE_PATH,
+          'spinkit/css/spinners/4-wandering-cubes.css'
+        ]
       },
       {
         test: /\.js?$/,
