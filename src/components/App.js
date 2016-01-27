@@ -4,8 +4,8 @@ import {
   Router,
   Route,
   IndexRoute
-  } from 'react-router';
-import { createHistory } from 'history';
+} from 'react-router';
+import { browserHistory } from 'react-router';
 import AppBodyWrapper from './AppBodyWrapper';
 import Home from './Home';
 import Other from './Other';
@@ -19,8 +19,13 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
 class App extends React.Component {
+  getChildContext() {
+    return {
+      state$: this.props.state$
+    };
+  }
   render() {
-    return <Router history={createHistory()}>
+    return <Router history={browserHistory}>
       <Route path="/" component={AppBodyWrapper}>
         <IndexRoute component={Home}/>
         <Route path="/deal/:dealId" component={Deal}/>
@@ -33,4 +38,13 @@ class App extends React.Component {
     </Router>;
   }
 }
+
+App.propTypes = {
+  state$: React.PropTypes.any
+};
+
+App.childContextTypes = {
+  state$: React.PropTypes.any
+};
+
 export default Radium(App);
