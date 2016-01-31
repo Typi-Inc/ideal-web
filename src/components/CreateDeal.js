@@ -10,7 +10,7 @@ import CreateDealAddConditions from './CreateDealAddConditions';
 const styles = {
   dropZoneDetail: {
     background: '#fff',
-    width: '360px',
+    width: '398px',
     height: '250px',
     color: '#777777',
     borderStyle: 'dotted',
@@ -21,13 +21,6 @@ const styles = {
 };
 
 class CreateDeal extends React.Component {
-  componentDidMount() {
-    window.componentHandler.upgradeDom();
-  }
-
-  componentDidUpdate() {
-    window.componentHandler.upgradeDom();
-  }
 
   onDrop (files) {
     console.log('Received files: ', files);
@@ -45,12 +38,12 @@ class CreateDeal extends React.Component {
             display: 'none',
             '@media (min-width: 950px)': { display: 'flex', justifyContent: 'center' },
             '@media (min-width: 1450px)': { display: 'flex', justifyContent: 'flex-start', paddingLeft: '30px' }}}>
-          <div style = {{ width: '40%', '@media (min-width: 1450px)': { width: '380px' }}}>
+          <div style = {{ width: '400px', '@media (min-width: 1450px)': { width: '400px' }}}>
             <DropZone onDrop={this.onDrop}
                       style ={styles.dropZoneDetail}>
               <div>
-                <div  style = {{fontSize: '24px', fontWeight: '600', paddingTop: '80px'}}>Add item image</div>
-                <div style = {{ fontSize: '18px', paddingTop: '20px' }}>Drop an image or browse it from your computer</div>
+                <div  style = {{fontSize: '24px', fontWeight: '600', paddingTop: '80px'}}>Добавить фото</div>
+                <div style = {{ fontSize: '18px', paddingTop: '20px' }}>Перетащите фото в рамку либо укажите путь к файлу</div>
               </div>
             </DropZone>
             <CreateDealDetail/>
@@ -60,7 +53,7 @@ class CreateDeal extends React.Component {
           <CreateDealOfferDescribe/>
         </div>
         <div style = {{ background: '#fff', padding: '10px', '@media (min-width: 950px)': { display: 'none' } }}>
-          Create deal function is disabled for small screens
+          Опция создания сделки отключена на мобильной версии сайта
         </div>
       </div>
     );

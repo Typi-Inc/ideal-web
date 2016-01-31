@@ -29,7 +29,7 @@ class DealContactInfo extends React.Component {
       <div style = {styles.contactCard}
         >
         <div style = {styles.title }>
-          Contact Info
+          Контактная информация
         </div>
         Address: c. Almaty, mkr. Mamyr 4, 197A
         <div>Tel:

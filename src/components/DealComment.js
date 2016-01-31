@@ -1,5 +1,6 @@
 import React from 'react';
 import Radium from 'radium';
+import FontIcon from 'material-ui/lib/font-icon';
 
 const styles = {
   title: {
@@ -17,18 +18,11 @@ class DealComment extends React.Component {
     this.state = {
       comments: [
         {
-          author: 'Almas',
-          text: 'Hello my bitch'
+          author: 'Алмас',
+          text: 'Дарова!'
         }
       ]
     };
-  }
-  componentDidMount() {
-    window.componentHandler.upgradeDom();
-  }
-
-  componentDidUpdate() {
-    window.componentHandler.upgradeDom();
   }
 
   onCommentKeyPress(e) {
@@ -41,7 +35,7 @@ class DealComment extends React.Component {
     const comment = this.comment.value;
     if (comment !== '') {
       this.setState({
-        comments: this.state.comments.concat([{ author: 'Isken', text: comment }])
+        comments: this.state.comments.concat([{ author: 'Еса', text: comment }])
       });
       this.comment.value = '';
     }
@@ -61,7 +55,7 @@ class DealComment extends React.Component {
           }}
           >
           <div style = {styles.title}>
-            <i className="material-icons" style = {{ fontSize: '14px' }}>chat_bubble_outline</i>
+            <FontIcon className="material-icons" style = {{ fontSize: '14px' }}>chat_bubble_outline</FontIcon>
             <span style = {{ paddingLeft: '5px' }}>Comments</span>
           </div>
 
@@ -154,7 +148,7 @@ class DealComment extends React.Component {
                           onKeyDown={this.onCommentKeyPress.bind(this)}
                   >
                 </textarea>
-              <label className="mdl-textfield__label" htmlFor="smsAd">What do you think of this ad?...</label>
+              <label className="mdl-textfield__label" htmlFor="smsAd">Что вы думаете об этой сделке?</label>
             </div>
           </form>
           <div style = {{
@@ -172,7 +166,8 @@ class DealComment extends React.Component {
                   paddingRight: '30px'
                 }}
               >
-              <i className="material-icons" style = {{ color: '#a99999', paddingBottom: '10px' }}>chat_bubble_outline</i>
+              <FontIcon className="material-icons"
+                        style = {{ color: '#a99999', paddingBottom: '10px' }}>chat_bubble_outline</FontIcon>
             </button>
             Say it!
           </div>

@@ -1,55 +1,37 @@
 import React from 'react';
 import Radium from 'radium';
+import FlatButton from 'material-ui/lib/flat-button';
 
 class EarnBuy extends React.Component {
 
-  render() {
+    render() {
 
-    return (
-      <div style = {{
+        return (
+            <div style = {{
               display: 'flex',
               justifyContent: 'space-around',
               margin: '10px',
               padding: '0 10px'
             }}
-        >
-        <div style={{ width: '40%' }}>
-          <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
-                  style = {{
-                    background: '#0679A2',
-                    color: 'white',
-                    width: '100%'
-                  }}
             >
-            Earn
-          </button>
-        </div>
-        <div style={{ width: '40%' }}>
-          <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
-                  style = {{
-                    background: '#54C085',
-                    color: 'white',
-                    width: '100%'
-                  }}
-            >
-            Buy
-          </button>
-        </div>
-      </div>
-    )
-  }
+                <div style={{ width: '40%' }}>
+                    <FlatButton labelStyle = {{color: '#fff', textTransform: 'none'}}
+                                label = 'Рекомендовать'
+                                style = {{
+                    backgroundColor: '#0679A2',
+                    width: '140px'
+                    }}/>
+                </div>
+                <div style={{ width: '40%' }}>
+                    <FlatButton labelStyle = {{color: '#fff', textTransform: 'none'}} label = 'Купить'
+                                style = {{
+                    backgroundColor: '#54C085',
+                    width: '80px'
+                    }}/>
+                </div>
+            </div>
+        )
+    }
 }
 
 export default Radium(EarnBuy);
-
-
-
-
-
-
-
-
-
-
-
-

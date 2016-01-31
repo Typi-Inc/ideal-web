@@ -1,5 +1,8 @@
 import React from 'react';
 import Radium from 'radium';
+import FlatButton from 'material-ui/lib/flat-button';
+import FontIcon from 'material-ui/lib/font-icon';
+import IconButton from 'material-ui/lib/icon-button';
 
 const styles = {
   title: {
@@ -28,36 +31,26 @@ class Certificate extends React.Component {
           }}
         >
         <div style = {styles.title}>
-          Deals info
+          Сертификаты
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', margin: '10px', alignItems: 'center' }}>
           <div style={{ width: '70%', padding: '10px' }}>
             Five Fitness and Conditioning Classes at #TeamTibbs Fitness (70% Off)
           </div>
           <div>
-            <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
-                    style= {{
-                    width: '28px',
-                    height: '28px',
-                    background: '#a99999',
-                    minWidth: '28px',
-                    padding: '0px'
-                  }}
-              >
-              <i className="material-icons" style = {{ color: 'white', paddingBottom: '8px' }}>remove</i>
-            </button>
+            <FlatButton
+                style = {{ lineHeight: '20px', height: '20px', minWidth: '20px', padding: '0' }}
+            >
+              <FontIcon className="material-icons" style = {{ fontSize: '14px' }}>remove</FontIcon>
+            </FlatButton>
             <span style={{ padding: '0 5px', fontSize: '16px' }}>15</span>
-            <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
-                    style= {{
-                    width: '28px',
-                    height: '28px',
-                    background: '#54C085',
-                    minWidth: '28px',
-                    padding: '0px'
+            <IconButton
+                style= {{
+                    backgroundColor: '#54C085'
                   }}
-              >
-              <i className="material-icons" style = {{ color: 'white', paddingBottom: '8px' }} >add</i>
-            </button>
+            >
+              <FontIcon className="material-icons" color = '#fff' >add</FontIcon>
+            </IconButton>
           </div>
         </div>
       </div>

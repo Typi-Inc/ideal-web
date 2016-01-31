@@ -2,6 +2,8 @@ import React from 'react';
 import Radium from 'radium';
 import Link from './Link';
 import CreateDealAddTags from './CreateDealAddTags';
+import FlatButton from 'material-ui/lib/flat-button';
+import FontIcon from 'material-ui/lib/font-icon';
 
 const styles = {
   card: {
@@ -51,8 +53,8 @@ class Settings extends React.Component {
 
     return (
       <div key = 'settings' style = {{
-      '@media (min-width: 950px)': { width: '950px',margin:'0 auto'},
-      '@media (min-width: 1450px)': { width: '1450px',margin:'0 auto'} }}>
+      '@media (min-width: 950px)': { width: '900px',margin:'0 auto'},
+      '@media (min-width: 1450px)': { width: '1400px',margin:'0 auto'} }}>
         <div style = {styles.card}>
           <div style = {{
                   display: 'flex',
@@ -60,16 +62,17 @@ class Settings extends React.Component {
                   alignItems: 'center',
                   paddingBottom: '10px'
                        }}>
-            <button className="mdl-button mdl-js-button mdl-js-ripple-effect" style = {{height: '50px'}}>
-              <i className="material-icons" style = {{ color: '#a99999 ', fontSize: '50px' }}>account_box</i>
-            </button>
+            <FlatButton >
+              <FontIcon className="material-icons" style = {{ fontSize: '50px', color: '#a99999' }}>account_box</FontIcon>
+            </FlatButton>
+
             <span style = {{
               fontWeight: '500',
               fontSize: '20px',
               textAlign: 'center',
               color: '#777777',
               paddingRight: '30px'
-                            }}>Your Profile</span>
+                            }}>Ваши данные</span>
           </div>
 
         </div>
@@ -81,18 +84,18 @@ class Settings extends React.Component {
                   textAlign: 'center',
                   paddingBottom: '10px'
                    }}>
-            Your tags
+            Тэги
           </div>
           <div style = {{ display: 'flex', flexWrap: 'wrap', paddingLeft: '10px' }}>
             {this.state.tagNames.map(tagName => (
               <div style={ styles.tagBorder }>
                 {tagName}
-                <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
-                        onClick = {this.removeTag.bind(this, tagName)}
-                        style = {{ lineHeight: '20px', height: '20px', minWidth: '20px', padding: '0' }}
-                  >
-                  <i className="material-icons" style = {{ fontSize: '14px' }}>remove</i>
-                </button>
+                <FlatButton
+                    onClick = {this.removeTag.bind(this, tagName)}
+                    style = {{ lineHeight: '20px', height: '20px', minWidth: '20px', padding: '0' }}
+                >
+                  <FontIcon className="material-icons" style = {{ fontSize: '14px' }}>remove</FontIcon>
+                </FlatButton>
               </div>
             ))}
           </div>
@@ -100,7 +103,7 @@ class Settings extends React.Component {
             <div style = {{ width: '90%' }}>
               <input type="text"
                      ref={el => this.tagName = el}
-                     placeholder="Autoservice, Bakery, Bar, e.g."
+                     placeholder="Автосервис, Булочная, Бар и т.д."
                      style = {{
                            border: 'solid 1px #dcdcdc',
                            borderRadius: '3px',
@@ -110,33 +113,18 @@ class Settings extends React.Component {
                            }}/>
             </div>
             <div>
-              <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
-                      onClick={this.postTag.bind(this)}
-                      style= {{
-                        background: '#0679A2',
-                        minWidth: '28px',
-                        padding: '0 5px',
-                        borderRadius: '3px',
-                        textTransform: 'none'
-                                 }}
-                >
-                <span style = {{ color: 'white' }} >Add</span>
-              </button>
+              <FlatButton labelStyle = {{color: '#fff', textTransform: 'none'}} label = 'Добавить'
+                          onClick={this.postTag.bind(this)}
+                          style = {{
+                    backgroundColor: '#0679A2'
+                  }}/>
             </div>
           </div>
         </div>
-          <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
-                  style={{
-                    background: '#fff',
-                    color: '#0679a2',
-                    marginRight: '10px',
-                    float: 'right',
-                    fontSize: '18px',
-                    textTransform: 'none',
-                    borderRadius: '3px',
-                    boxShadow: '0'}}>
-            Save
-          </button>
+        <FlatButton labelStyle = {{color: '#0679A2', textTransform: 'none'}} label = 'Сохранить'
+                    style = {{
+                    backgroundColor: '#fff', float: 'right', marginRight: '10px'
+                  }}/>
       </div>
     )
   }

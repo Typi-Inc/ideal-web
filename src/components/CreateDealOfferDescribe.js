@@ -1,5 +1,7 @@
 import React from 'react';
 import Radium from 'radium';
+import FlatButton from 'material-ui/lib/flat-button';
+import FontIcon from 'material-ui/lib/font-icon';
 
 const styles = {
   describeCard : {
@@ -41,10 +43,10 @@ class CreateDealOfferDescribe extends React.Component {
   }
   render() {
     return (
-      <div style = {{ width: '50%', '@media (min-width: 1450px)': { width: '600px' }}}>
+      <div style = {{ marginLeft: '10px', width: '50%', '@media (min-width: 1450px)': { width: '600px' }}}>
         <div
           style = {styles.describeCard}>
-          Describe Your offers
+          Опишите ваши предложения
         </div>
 
         {this.state.dealOptions.map(dealOption => (
@@ -68,30 +70,25 @@ class CreateDealOfferDescribe extends React.Component {
                 }}>{dealOption.newPrice}</div>
               </div>
               <div style = {{marginRight: '5px'}}>
-                <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
-                        onClick = {this.removeDeal.bind(this, dealOption)}
-                        style= {{
-                          borderRadius: '3px',
-                          textTransform: 'none',
-                          minWidth: '24px',
-                          padding: '0'
-                               }}
+                  <FlatButton
+                      onClick = {this.removeDeal.bind(this, dealOption)}
+                      style = {{ lineHeight: '20px', height: '20px', minWidth: '20px', padding: '0' }}
                   >
-                  <i className="material-icons" style = {{ color: '#777777', fontSize: '20px' }} >delete</i>
-                </button>
+                      <FontIcon className="material-icons" color = '#777777' style = {{ fontSize: '14px' }}>delete</FontIcon>
+                  </FlatButton>
               </div>
             </div>
         ))}
 
         <div style = {{ background: '#fff', padding: '10px', marginBottom: '10px' }}>
           <div style = {{ color: '#777777', fontSize: '16px' }}>
-            Offer Title
+            Заглавие
           </div>
           <div>
                 <textarea
                   type="text"
                   ref={el => this.dealTitleValue = el}
-                  placeholder="Be clear and descriptive" rows= "4"
+                  placeholder="Описание должно быть точным" rows= "4"
                   style = {{
                     border: 'solid 1px #dcdcdc',
                     width: '95%',
@@ -105,28 +102,19 @@ class CreateDealOfferDescribe extends React.Component {
           </div>
           <div style = {{ display: 'flex', justifyContent: 'flex-end' }}>
             <div>
-              <span style = {{ color: '#777777', fontSize: '16px', padding: '0 10px'  }}>Price</span>
+              <span style = {{ color: '#777777', fontSize: '16px', padding: '0 10px'  }}>Цена</span>
               <input type="text"
                      ref={el => this.newPrice = el}
                      style = {{ border: 'solid 1px #dcdcdc', width: '75px', height: '20px', borderRadius: '3px' }}/>
             </div>
           </div>
         </div>
-        <div>
-          <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
-                  onClick={this.postDeal.bind(this)}
-                  style={{
-                        background: '#fff',
-                        width: '100%',
-                        color: '#0679A2',
-                        borderRadius: '3px',
-                        boxShadow: '0',
-                        fontSize: '18px',
-                        textTransform: 'none',
-                        fontWeight: '500'
-                        }}>
-            Add
-          </button>
+        <div style = {{ float: 'right' }}>
+            <FlatButton labelStyle = {{color: '#0679A2', textTransform: 'none'}} label = 'Добавить'
+                        onClick={this.postDeal.bind(this)}
+                        style = {{
+                    backgroundColor: '#fff', width: '80px'
+                  }}/>
         </div>
       </div>
     )

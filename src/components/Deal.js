@@ -1,12 +1,12 @@
 import React from 'react';
 import Radium from 'radium';
-import Link from './Link';
 import DealContactInfo from './DealContactInfo';
 import EarnBuy from './EarnBuy';
 import DealTag from './DealTag.js';
 import Certificate from './Certificate';
 import DealComment from './DealComment';
 import TabsOnSmallScreen from './TabsOnSmallScreen';
+import FontIcon from 'material-ui/lib/font-icon';
 
 class Deal extends React.Component {
   constructor() {
@@ -19,13 +19,6 @@ class Deal extends React.Component {
         }
       ]
     };
-  }
-  componentDidMount() {
-    window.componentHandler.upgradeDom();
-  }
-
-  componentDidUpdate() {
-    window.componentHandler.upgradeDom();
   }
 
   onCommentKeyPress(e) {
@@ -63,69 +56,16 @@ class Deal extends React.Component {
         tagThree: 'Oil recharge',
         tagFour: 'Toyota',
         linkTo: '/car_service_1'
-      },
-      {
-        id: '2',
-        imageUrl: 'url("http://www.thestudiodc.com/images/eoin_finn_bound_half_lotus_side_plank.jpg")',
-        imageSrc: 'http://www.thestudiodc.com/images/eoin_finn_bound_half_lotus_side_plank.jpg',
-        dealType: 'Yoga Masters',
-        dealDuration: '1 week',
-        dealSales: '30',
-        dealTitle: 'Training with sensey of Yoga',
-        previousPrice: '5000',
-        price: '3500',
-        purchasesAmount: '19',
-        likesAmount: '55',
-        tagOne: 'Yoga',
-        tagTwo: 'Health',
-        tagThree: 'Fitness',
-        tagFour: 'Body',
-        linkTo: '/yoga_masters_1'
-      },
-      {
-        id: '3',
-        imageUrl: 'url("http://biltmore.s3.amazonaws.com/27968/bistro_bistro_set_850x563__large.jpg")',
-        imageSrc: 'http://biltmore.s3.amazonaws.com/27968/bistro_bistro_set_850x563__large.jpg',
-        dealType: 'Bistro',
-        dealDuration: '4 days',
-        dealSales: '50',
-        dealTitle: 'Sushi, Rolls and Pizza',
-        previousPrice: '500',
-        price: '250',
-        purchasesAmount: '232',
-        likesAmount: '189',
-        tagOne: 'Cafe',
-        tagTwo: 'Bistro',
-        tagThree: 'Relax',
-        tagFour: 'Chinese food',
-        linkTo: '/bistro_1'
-      },
-      {
-        id: '4',
-        imageUrl: 'url("http://www.doctorhollywood.ru/files/fotos/1.jpg")',
-        imageSrc: 'http://www.doctorhollywood.ru/files/fotos/1.jpg',
-        dealType: 'Dentistry',
-        dealDuration: 'Last day',
-        dealSales: '10',
-        dealTitle: 'White teeth with',
-        previousPrice: '50000',
-        price: '45000',
-        purchasesAmount: '12',
-        likesAmount: '3',
-        tagOne: 'Teeth',
-        tagTwo: 'Dentist',
-        tagThree: 'Cheap',
-        tagFour: 'Bestseller',
-        linkTo: '/dentistry_1'
       }
     ];
 
-    let deal;
-    for (let i = 0; i < dealsListItem.length; i++) {
-      if (dealsListItem[i].id === this.props.params.dealId) {
-        deal = dealsListItem[i];
-      }
-    }
+    let deal = dealsListItem[0];
+    //let deal;
+    //for (let i = 0; i < dealsListItem.length; i++) {
+    //  if (dealsListItem[i].id === this.props.params.dealId) {
+    //    deal = dealsListItem[i];
+    //  }
+    //}
 
 
     const styles = {
@@ -208,18 +148,16 @@ class Deal extends React.Component {
       >
         <div style = {{ width: '100%', '@media (min-width: 740px)': { width: '40%' } }}>
           <div style={styles.card} key = {deal.id}>
-            <Link className="mdl-navigation__link" to={'/deal/' + deal.id} >
-              <div style={ styles.dealImage }>
-                <div style={ styles.mainOptionsCard }>
-                  <div style={{ paddingLeft: '5px' }}>
-                    <span style={{ fontSize: '18px', fontWeight: '600' }}>
-                      {deal.dealSales}
-                    </span>
-                    <span style={{ fontSize: '14px', fontWeight: '600' }}>%</span>
-                  </div>
+            <div style={ styles.dealImage }>
+              <div style={ styles.mainOptionsCard }>
+                <div style={{ paddingLeft: '5px' }}>
+                  <span style={{ fontSize: '18px', fontWeight: '600' }}>
+                    {deal.dealSales}
+                  </span>
+                  <span style={{ fontSize: '14px', fontWeight: '600' }}>%</span>
                 </div>
               </div>
-            </Link>
+            </div>
 
             <div style={{
               display: 'flex',
@@ -238,11 +176,12 @@ class Deal extends React.Component {
             </div>
 
             <div style={{ padding: '0 10px' }}>
-              <i className="material-icons"
+              <FontIcon className="material-icons"
                 style={{ color: 'green', fontSize: '14px', padding: '0 5px' }}
-              >shopping_cart</i>
+              >shopping_cart</FontIcon>
               {deal.purchasesAmount}
-              <i className="material-icons" style={{ color: 'red', fontSize: '14px', padding: '0 5px' }}>favorite</i>
+              <FontIcon className="material-icons"
+                        style={{ color: 'red', fontSize: '14px', padding: '0 5px' }}>favorite</FontIcon>
               {deal.likesAmount}
               <img src="/src/public/assets/hand132-5.png" style={{ height: '14px', padding: '0 5px' }}/>
               {deal.likesAmount}
@@ -254,10 +193,8 @@ class Deal extends React.Component {
         </div>
 
         <div style = {{ width: '100%', '@media (min-width: 740px)': { width: '60%' } }}>
-
           <Certificate/>
           <TabsOnSmallScreen/>
-
           <div style = {styles.titleCardSmallScreen}>
             <div style = {[styles.title]}>
               Other deals You might like

@@ -1,16 +1,8 @@
 import React from 'react';
 import Radium from 'radium';
+import FlatButton from 'material-ui/lib/flat-button';
+import FontIcon from 'material-ui/lib/font-icon';
 
-const styles = {
-  tagBorder: {
-    fontSize: '16px',
-    margin: '10px 5px 5px 0',
-    padding: '5px',
-    textAlign: 'center',
-    color: 'black',
-    background: '#fff'
-  }
-};
 
 class CreateDealAddConditions extends React.Component {
   constructor() {
@@ -39,9 +31,9 @@ class CreateDealAddConditions extends React.Component {
   render() {
 
     return (
-      <div style = {{ background: '#fff', width: '365px', marginTop: '10px', padding: '10px 0' }}>
+      <div style = {{ background: '#fff', width: '400px', marginTop: '10px', padding: '10px 0' }}>
         <div style = {{textAlign: 'center', fontSize: '16px'}}>
-          Add Conditions
+          Условия сделки
         </div>
         <div>
           {this.state.conditions.map(condition => (
@@ -53,12 +45,12 @@ class CreateDealAddConditions extends React.Component {
                 {condition}
               </li>
               <div style = {{ width: '10%' }}>
-                <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
-                        onClick = {this.removeCondition.bind(this, condition)}
-                        style = {{ lineHeight: '20px', height: '20px', minWidth: '20px', padding: '0' }}
-                  >
-                  <i className="material-icons" style = {{ fontSize: '24px' }}>clear</i>
-                </button>
+                <FlatButton
+                    onClick = {this.removeCondition.bind(this, condition)}
+                    style = {{ lineHeight: '20px', height: '20px', minWidth: '20px', padding: '0' }}
+                >
+                  <FontIcon className="material-icons" style = {{ fontSize: '14px' }}>clear</FontIcon>
+                </FlatButton>
               </div>
             </div>
           ))}
@@ -66,27 +58,20 @@ class CreateDealAddConditions extends React.Component {
         <div style ={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', padding: '10px 10px 0 10px' }}>
           <textarea type="text"
                     ref={el => this.condition = el}
-                    placeholder="For example : no refunds, rescheduling, or rebooking allowed"
+                    placeholder="К примеру : возврату, изменению не подлежат"
                     rows= "2"
                     style = {{
                          border: 'solid 1px #dcdcdc',
                          borderRadius: '3px',
                          height: '48px',
-                         width: '270px',
+                         width: '260px',
                          paddingLeft: '10px'
                          }}/>
-          <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
-                  onClick={this.postCondition.bind(this)}
-                  style= {{
-                      background: '#0679A2',
-                      minWidth: '28px',
-                      padding: '0 5px',
-                      borderRadius: '3px',
-                      textTransform: 'none'
-                         }}
-            >
-            <span style = {{ color: 'white' }} >Add</span>
-          </button>
+          <FlatButton labelStyle = {{color: '#fff', textTransform: 'none'}} label = 'Добавить'
+                      onClick={this.postCondition.bind(this)}
+                      style = {{
+                    backgroundColor: '#0679A2', width: '80px'
+                  }}/>
         </div>
       </div>
     )

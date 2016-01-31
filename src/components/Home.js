@@ -2,8 +2,8 @@ import React from 'react';
 import Radium from 'radium';
 import Link from './Link';
 import { get } from '../intent/get';
-import Deal from './deal'
-import Combinator from './combinator';
+import Deal from './Deal'
+import Combinator from './Combinator';
 import 'rxjs/add/operator/map';
 import '../public/hover.css';
 
@@ -18,7 +18,6 @@ class Home extends React.Component {
     ]);
   }
   render() {
-    console.log('rendering Home')
     return (
       <Combinator>
         {
