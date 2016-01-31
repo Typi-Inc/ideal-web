@@ -29,7 +29,7 @@ node_modules
 # Mac trash
 .DS_Store
 
-# Mac folders
+# IDEA folders
 .idea/
 *.iml
 

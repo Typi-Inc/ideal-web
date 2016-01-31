@@ -1,23 +1,30 @@
 import falcor from 'falcor';
 import FalcorHttpDataSource from 'falcor-http-datasource';
-import { Map, fromJS } from 'immutable';
 import { ReplaySubject } from 'rxjs/subject/ReplaySubject';
 import 'rxjs/add/operator/scan';
 import 'rxjs/add/operator/share';
 
 const model = ({ get$ }) => {
-  const data$ = new ReplaySubject(1);
-  const state$ = data$.scan((acc, newData) => {
-    return acc.mergeDeep(fromJS(newData, (key, value) => value.toOrderedMap()));
-  }, Map()).share(1);
-  const rootModel = new falcor.Model({
+  const model$ = new ReplaySubject(1);
+  const remoteModel = new falcor.Model({
     source: new FalcorHttpDataSource('/model.json')
   });
+  const localModel = new falcor.Model();
+  const nextCombinedModel = data => {
+    console.log(data);
+    model$.next(new falcor.Model({
+      cache: Object.assign(
+        remoteModel.getCache(),
+        localModel.getCache()
+      )
+    }));
+  };
+
   get$.subscribe(paths => {
-    rootModel.get(...paths).
-      then(data => data && data.json && data$.next(data.json));
+    remoteModel.get(...paths).
+      subscribe(nextCombinedModel, console.log, () => console.log('completed'));
   });
-  return state$;
+  return model$;
 };
 
 export default model;

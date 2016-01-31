@@ -13,21 +13,18 @@ import AppNotFound from './AppNotFound';
 import Deal from './Deal';
 import CreateDeal from './CreateDeal';
 import MyProfile from './MyProfile';
-import injectTapEventPlugin from 'react-tap-event-plugin';
-
-injectTapEventPlugin();
 
 class App extends React.Component {
   getChildContext() {
     return {
-      state$: this.props.state$
+      model$: this.props.model$
     };
   }
   render() {
     return <Router history={browserHistory}>
       <Route path="/" component={AppBodyWrapper}>
         <IndexRoute component={Home}/>
-        <Route path="/deal" component={Deal}/>
+        <Route path="/deal/:dealId" component={Deal}/>
         <Route path="/createDeal" component={CreateDeal}/>
         <Route path="/myProfile" component={MyProfile}/>
         <Route path="settings" component={Settings}/>
@@ -36,14 +33,13 @@ class App extends React.Component {
     </Router>;
   }
 }
-        //<Route path="/deal/:dealId" component={Deal}/>
 
 App.propTypes = {
-  state$: React.PropTypes.any
+  model$: React.PropTypes.any
 };
 
 App.childContextTypes = {
-  state$: React.PropTypes.any
+  model$: React.PropTypes.any
 };
 
 export default Radium(App);
