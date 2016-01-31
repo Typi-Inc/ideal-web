@@ -1,6 +1,7 @@
 import React from 'react';
 import Radium from 'radium';
 import FontIcon from 'material-ui/lib/font-icon';
+import FlatButton from 'material-ui/lib/flat-button';
 
 const styles = {
   title: {
@@ -41,29 +42,28 @@ class DealComment extends React.Component {
     }
   }
   render() {
-
     return (
-
       <div>
         <div style = {{
-            display: 'flex',
-            flexDirection: 'column',
-            padding: '10px',
-            background: 'white',
-            margin: '10px 10px 0 10px',
-            '@media (min-width: 740px)': { margin: '10px 10px 0 0' }
-          }}
-          >
+          display: 'flex',
+          flexDirection: 'column',
+          padding: '10px',
+          background: 'white',
+          margin: '10px 10px 0 10px',
+          '@media (min-width: 740px)': { margin: '10px 10px 0 0' }
+        }}
+        >
           <div style = {styles.title}>
-            <FontIcon className="material-icons" style = {{ fontSize: '14px' }}>chat_bubble_outline</FontIcon>
-            <span style = {{ paddingLeft: '5px' }}>Comments</span>
+            <FontIcon className="material-icons" style = {{ fontSize: '14px' }}>
+              chat_bubble_outline</FontIcon>
+            <span style = {{ paddingLeft: '5px' }}>Комментарии</span>
           </div>
 
           <div style = {{ display: 'flex' }}>
             <div>
               <img src="https://newyorksightseeingtours.files.wordpress.com/2011/11/kenneth-cole.jpg"
-                   style={{ height: '50px' }}
-                />
+                style={{ height: '50px' }}
+              />
             </div>
             <div style = {{ display: 'flex', flexDirection: 'column', marginLeft: '20px' }}>
               <div style = {{ fontWeight: '600' }}>
@@ -78,15 +78,15 @@ class DealComment extends React.Component {
             </div>
           </div>
           <div style = {{
-              display: 'flex',
-              paddingTop: '10px',
-              borderTop: '1px solid rgba(0,0,0,0.12)'
-            }}
-            >
+            display: 'flex',
+            paddingTop: '10px',
+            borderTop: '1px solid rgba(0,0,0,0.12)'
+          }}
+          >
             <div>
               <img src="http://www.spacefacts.de/bios/portraits_hi/cosmonauts/kotov_oleg.jpg"
-                   style={{ height: '50px' }}
-                />
+                style={{ height: '50px' }}
+              />
             </div>
             <div style = {{ display: 'flex', flexDirection: 'column', marginLeft: '20px' }}>
               <div style = {{ fontWeight: '600' }}>
@@ -102,15 +102,15 @@ class DealComment extends React.Component {
           </div>
           {this.state.comments.map(comment => (
             <div style={{
-                display: 'flex',
-                paddingTop: '10px',
-                borderTop: '1px solid rgba(0,0,0,0.12)'
-              }}
-              >
+              display: 'flex',
+              paddingTop: '10px',
+              borderTop: '1px solid rgba(0,0,0,0.12)'
+            }}
+            >
               <div>
                 <img src="http://www.spacefacts.de/bios/portraits_hi/cosmonauts/kotov_oleg.jpg"
-                     style={{ height: '50px' }}
-                  />
+                  style={{ height: '50px' }}
+                />
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '20px' }}>
                 <div style={{ fontWeight: '600' }}>
@@ -127,54 +127,56 @@ class DealComment extends React.Component {
           ))}
         </div>
         <div style = {{
-            display: 'none',
-            '@media (min-width: 740px)': {
-              display: 'flex',
-              flexDirection: 'column',
-              color: '#a99999',
-              margin: '10px 10px 10px 0',
-              padding: '10px',
-              background: '#fff'
-            }
+          display: 'none',
+          '@media (min-width: 740px)': {
+            display: 'flex',
+            flexDirection: 'column',
+            color: '#a99999',
+            margin: '10px 10px 10px 0',
+            padding: '10px',
+            background: '#fff'
+          }
+        }}
+        >
+          <textarea
+            type="text"
+            ref={el => this.comment = el}
+            onKeyDown={this.onCommentKeyPress.bind(this)}
+            placeholder="Что вы думаете об этой сделке?" rows= "2"
+            style = {{
+              border: 'solid 1px #dcdcdc',
+              width: '95%',
+              height: '75px',
+              margin: '10px 0',
+              paddingLeft: '2%',
+              fontSize: '16px',
+              fontWeight: '500',
+              borderRadius: '3px'
+            }}
+          />
+          <div style = {{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            alignItems: 'center',
+            padding: '0 10px'
           }}
           >
-          <form action="#" style = {{ padding: '0 10px' }}>
-            <div className="mdl-textfield mdl-js-textfield" style = {{ width: '100%' }}>
-                <textarea ref={el => this.comment = el}
-                          className="mdl-textfield__input"
-                          type="text"
-                          rows= "3"
-                          id="smsAd"
-                          onKeyDown={this.onCommentKeyPress.bind(this)}
-                  >
-                </textarea>
-              <label className="mdl-textfield__label" htmlFor="smsAd">Что вы думаете об этой сделке?</label>
-            </div>
-          </form>
-          <div style = {{
-              display: 'flex',
-              justifyContent: 'flex-end',
-              alignItems: 'center',
-              padding: '0 10px'
+            Поделись!
+            <FlatButton
+              onClick = {this.postComment.bind(this)}
+              style = {{ width: '28px',
+                minWidth: '28px'
             }}
             >
-            <button onClick={this.postComment.bind(this)} className="mdl-button mdl-js-button mdl-js-ripple-effect"
-                    style= {{
-                  width: '28px',
-                  height: '28px',
-                  minWidth: '28px',
-                  paddingRight: '30px'
-                }}
-              >
               <FontIcon className="material-icons"
-                        style = {{ color: '#a99999', paddingBottom: '10px' }}>chat_bubble_outline</FontIcon>
-            </button>
-            Say it!
+                color = "#a99999"
+                style = {{ fontSize: '18px' }}
+              >chat_bubble_outline</FontIcon>
+            </FlatButton>
           </div>
         </div>
       </div>
-
-    )
+    );
   }
 }
 

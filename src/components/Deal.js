@@ -21,22 +21,6 @@ class Deal extends React.Component {
     };
   }
 
-  onCommentKeyPress(e) {
-    if (e.keyCode === 13 && this.comment.value !== '') {
-      this.postComment();
-      this.comment.value = '';
-    }
-  }
-  postComment() {
-    const comment = this.comment.value;
-    if (comment !== '') {
-      this.setState({
-        comments: this.state.comments.concat([{ author: 'Isken', text: comment }])
-      });
-      this.comment.value = '';
-    }
-  }
-
   render() {
     const dealsListItem = [
       {
@@ -177,18 +161,21 @@ class Deal extends React.Component {
 
             <div style={{ padding: '0 10px' }}>
               <FontIcon className="material-icons"
+                style={{ color: 'red', fontSize: '14px', padding: '0 5px' }}
+              >favorite</FontIcon>
+              {deal.likesAmount}
+              <img src="/src/public/assets/hand132-5.png"
+                style={{ height: '14px', padding: '0 5px' }}
+              />
+              {deal.likesAmount}
+              <FontIcon className="material-icons"
                 style={{ color: 'green', fontSize: '14px', padding: '0 5px' }}
               >shopping_cart</FontIcon>
               {deal.purchasesAmount}
-              <FontIcon className="material-icons"
-                        style={{ color: 'red', fontSize: '14px', padding: '0 5px' }}>favorite</FontIcon>
-              {deal.likesAmount}
-              <img src="/src/public/assets/hand132-5.png" style={{ height: '14px', padding: '0 5px' }}/>
-              {deal.likesAmount}
             </div>
             <DealTag>{deal.tagThree}</DealTag>
-            <EarnBuy/>
           </div>
+            <EarnBuy/>
           <DealContactInfo/>
         </div>
 
@@ -197,13 +184,13 @@ class Deal extends React.Component {
           <TabsOnSmallScreen/>
           <div style = {styles.titleCardSmallScreen}>
             <div style = {[styles.title]}>
-              Other deals You might like
+              Подобные предложения
             </div>
           </div>
 
           <div style = {styles.titleCardSmallScreen}>
             <div style = {[styles.title, { width: '100%' }]}>
-              Popular tags
+              Популярные запросы
             </div>
             <DealTag>{deal.tagThree}</DealTag>
           </div>
@@ -211,13 +198,13 @@ class Deal extends React.Component {
           <DealComment/>
           <div style = {styles.titleCardHugeScreen}>
             <div style = {[styles.title, { width: '100%' }]}>
-              Other deals You might like
+              Подобные предложения
             </div>
           </div>
 
           <div style = {styles.titleCardHugeScreen}>
             <div style = {[styles.title, { width: '100%' }]}>
-              Popular tags
+              Популярные запросы
             </div>
             <DealTag>{deal.tagOne}</DealTag>
           </div>
