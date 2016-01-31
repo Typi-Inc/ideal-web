@@ -15,6 +15,12 @@ import CreateDeal from './CreateDeal';
 import MyProfile from './MyProfile';
 
 class App extends React.Component {
+  static propTypes = {
+    model$: React.PropTypes.any
+  };
+  static childContextTypes = {
+    model$: React.PropTypes.any
+  };
   getChildContext() {
     return {
       model$: this.props.model$
@@ -33,13 +39,5 @@ class App extends React.Component {
     </Router>;
   }
 }
-
-App.propTypes = {
-  model$: React.PropTypes.any
-};
-
-App.childContextTypes = {
-  model$: React.PropTypes.any
-};
 
 export default Radium(App);

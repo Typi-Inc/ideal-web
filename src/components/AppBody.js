@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from './Link';
 import { Link as RouterLink } from 'react-router';
 import Radium from 'radium';
 import Select from 'react-select';
@@ -14,7 +13,6 @@ import ActionHome from 'material-ui/lib/svg-icons/action/home';
 import IconButton from 'material-ui/lib/icon-button';
 import Toolbar from 'material-ui/lib/toolbar/toolbar';
 import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
-import ToolbarTitle from 'material-ui/lib/toolbar/toolbar-title';
 import '../public/react-select.css';
 import '../public/modal.css';
 
@@ -45,11 +43,17 @@ const modalStyles = {
 };
 
 class AppBody extends React.Component {
+  static propTypes = {
+    children: React.PropTypes.element.isRequired
+  };
+  static contextTypes = {
+    router: React.PropTypes.object.isRequired
+  };
   constructor() {
     super();
     this.state = {
       crazy: false,
-       options: FLAVOURS,
+      options: FLAVOURS,
       value: [],
       modalIsOpen: false
     };
@@ -90,18 +94,18 @@ class AppBody extends React.Component {
           />
           <FlatButton
               style={Object.assign({}, styles.facebookButton, {
-            backgroundColor: '#5B7FA6',
-            backgroundImage: 'url("http://wault42.com/wp-content/uploads/2015/10/vk1.png")'
-          })}
+                backgroundColor: '#5B7FA6',
+                backgroundImage: 'url("http://wault42.com/wp-content/uploads/2015/10/vk1.png")'
+              })}
               onClick={() => this.context.router.push('vk')}
               label="Sign in"
           />
           <FlatButton
               style={Object.assign({}, styles.facebookButton, {
-            backgroundColor: '#DC4E41',
-            marginBottom: '0',
-            backgroundImage: 'url("http://www.envisionexperience.com/~/media/images/blog/googleplus.png?la=en")'
-          })}
+                backgroundColor: '#DC4E41',
+                marginBottom: '0',
+                backgroundImage: 'url("http://www.envisionexperience.com/~/media/images/blog/googleplus.png?la=en")'
+              })}
               onClick={() => this.context.router.push('google')}
               label="Sign in"
           />
@@ -136,22 +140,22 @@ class AppBody extends React.Component {
               />
             </ToolBarGroupRadium>
             <ToolBarGroupRadium float="right" style = {{ '@media (max-width: 950px)': { display: 'none' } }}>
-              <FlatButton labelStyle = {{color: '#fff', textTransform: 'none', fontSize: '18px'}}
+              <FlatButton labelStyle = {{ color: '#fff', textTransform: 'none', fontSize: '18px' }}
                           onClick={() => this.context.router.push('createDeal')}
                           label="Создать сделку"
                           style = {{ margin: '10px 0' }}
               />
-              <FlatButton labelStyle = {{color: '#fff', textTransform: 'none', fontSize: '18px'}}
+              <FlatButton labelStyle = {{ color: '#fff', textTransform: 'none', fontSize: '18px' }}
                           onClick={() => this.context.router.push('myProfile')}
                           label="Профиль"
                           style = {{ margin: '10px 0' }}
               />
-              <FlatButton labelStyle = {{color: '#fff', textTransform: 'none', fontSize: '18px'}}
+              <FlatButton labelStyle = {{ color: '#fff', textTransform: 'none', fontSize: '18px' }}
                           onClick={() => this.context.router.push('settings')}
                           label="Настройки"
                           style = {{ margin: '10px 0' }}
               />
-              <FlatButton labelStyle = {{color: '#fff', textTransform: 'none', fontSize: '18px'}}
+              <FlatButton labelStyle = {{ color: '#fff', textTransform: 'none', fontSize: '18px' }}
                           onClick={this.openModal.bind(this)}
                           label="Войти"
                           style = {{ margin: '10px 0' }}
@@ -180,13 +184,13 @@ class AppBody extends React.Component {
               style={modalStyles}
           >
             <h2 style={{
-            fontSize: '20px',
-            fontWeight: '900',
-            textAlign: 'center',
-            margin: '0',
-            lineHeight: '36px',
-            paddingBottom: '5px'
-          }}
+              fontSize: '20px',
+              fontWeight: '900',
+              textAlign: 'center',
+              margin: '0',
+              lineHeight: '36px',
+              paddingBottom: '5px'
+            }}
             >
               Ищите интересные предложения, рекомендуйте друзьям и получайте бонус!
             </h2>
@@ -208,13 +212,5 @@ class AppBody extends React.Component {
     );
   }
 }
-
-AppBody.contextTypes = {
-  router: React.PropTypes.object.isRequired
-};
-
-AppBody.propTypes = {
-  children: React.PropTypes.element.isRequired
-};
 
 export default Radium(AppBody);

@@ -11,12 +11,11 @@ const model = ({ get$ }) => {
   });
   const localModel = new falcor.Model();
   const nextCombinedModel = data => {
-    console.log(data);
     model$.next(new falcor.Model({
-      cache: Object.assign(
-        remoteModel.getCache(),
-        localModel.getCache()
-      )
+      cache: {
+        ...remoteModel.getCache(),
+        ...localModel.getCache()
+      }
     }));
   };
 
