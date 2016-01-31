@@ -14,7 +14,8 @@ class Home extends React.Component {
     get([
 			['featuredDeals', { from: 0, to: 9 }, ['title', 'id']],
       ['featuredDeals', { from: 0, to: 9 }, 'business', ['name', 'image']],
-			['featuredDeals', { from: 0, to: 9 }, 'tags', 'sort:createdAt=desc', 'edges', { from: 0, to: 6 }, ['id', 'text']],
+			['featuredDeals', { from: 0, to: 9 }, 'tags', 'sort:createdAt=desc', 'edges',
+        { from: 0, to: 6 }, ['id', 'text']],
 			['featuredDeals', { from: 0, to: 9 }, 'likes', 'sort:createdAt=desc', 'count'],
 			['featuredDeals', { from: 0, to: 9 }, 'likedByUser', '{{me}}']
     ]);
