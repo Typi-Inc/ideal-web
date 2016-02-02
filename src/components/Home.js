@@ -18,7 +18,7 @@ class Home extends React.Component {
   componentDidMount() {
     get([
 			['featuredDeals', { from: 0, to: 9 }, ['title', 'id', 'discount', 'image']],
-      ['featuredDeals', { from: 0, to: 9 }, 'business', ['name', 'image']],
+      ['featuredDeals', { from: 0, to: 9 }, 'business', ['id', 'name', 'image']],
 			['featuredDeals', { from: 0, to: 9 }, 'tags', 'sort:createdAt=desc', 'edges',
         { from: 0, to: 6 }, ['id', 'text']],
 			['featuredDeals', { from: 0, to: 9 }, 'likes', 'sort:createdAt=desc', 'count'],
@@ -32,7 +32,7 @@ class Home extends React.Component {
           this.context.model$.
             flatMap(model => Observable.fromPromise(model.get(
               ['featuredDeals', { from: 0, to: 119 }, ['title', 'id', 'discount', 'image']],
-              ['featuredDeals', { from: 0, to: 119 }, 'business', ['name', 'image']],
+              ['featuredDeals', { from: 0, to: 119 }, 'business', ['id', 'name', 'image']],
         			['featuredDeals', { from: 0, to: 119 }, 'tags', 'sort:createdAt=desc', 'edges',
                 { from: 0, to: 6 }, ['id', 'text']],
         			['featuredDeals', { from: 0, to: 119 }, 'likes', 'sort:createdAt=desc', 'count'],

@@ -4,6 +4,7 @@ import _ from 'lodash';
 import DealsItem from './DealsItem';
 import { get } from '../intent/get';
 import ReactList from 'react-list';
+import Spinner from 'react-spinkit';
 
 const RadiumReactList = Radium(ReactList);
 
@@ -65,8 +66,15 @@ class Deals extends React.Component {
     this.setState({ isLoading: true });
   }
   handleScroll() {
-    const [, lastVisibleIndex] = this.list.getVisibleRange();
-    if (lastVisibleIndex >= this.props.deals.length - 2) this.request(this.props.deals.length);
+    // Firefox always returns document.body[scrollKey] as 0 and Chrome/Safari
+    // always return document.documentElement[scrollKey] as 0, so take
+    // whichever has a value.
+    const totalHeight = document.body.scrollHeight || document.documentElement.scrollHeight;
+    const currentPositionFromTop = document.body.scrollTop;
+    const viewPortHeight = window.innerHeight;
+    if (currentPositionFromTop + viewPortHeight > totalHeight - 500) {
+      this.request(this.props.deals.length);
+    }
   }
   renderItems(items, ref) {
     return (
@@ -78,24 +86,28 @@ class Deals extends React.Component {
       </div>
     );
   }
-  renderItem(index, key) {
-    return (
-      <DealsItem key={key} deal={this.props.deals[index]} />
-    );
-  }
   render() {
     return (
       <div>
-        <RadiumReactList
-          ref={el => this.list = el}
-          itemRenderer={this.renderItem.bind(this)}
-          itemsRenderer={this.renderItems.bind(this)}
-          length={this.props.deals.length}
-          type="variable"
-        />
+        <div
+          style = {{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            width: '100%'
+          }}
+        >
+          {
+            this.props.deals.map(deal => (
+              <DealsItem key={deal.id} deal={deal} />
+            ))
+          }
+        </div>
         {
           this.state.isLoading && (
-            <div>Loading</div>
+            <div style={{ display: 'flex', justifyContent: 'center', height: '100px'}}>
+              <Spinner spinnerName="wandering-cubes" noFadeIn />
+            </div>
           )
         }
       </div>

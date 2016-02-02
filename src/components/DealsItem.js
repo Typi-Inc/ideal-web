@@ -1,7 +1,8 @@
 import React from 'react';
 import Radium from 'radium';
-import Link from './Link';
 import _ from 'lodash';
+import Link from './Link';
+import DealsItemBusiness from './DealsItemBusiness';
 import { values } from '../utils/helpers';
 import FontIcon from 'material-ui/lib/font-icon';
 import FlatButton from 'material-ui/lib/flat-button';
@@ -44,8 +45,6 @@ const styles = {
     borderRadius: '5px',
     lineHeight: '18px',
     minWidth: '40px',
-    padding: '6px 13px',
-    margin: '0 5px 5px 0',
     textTransform: 'none',
     height: '32px',
     background: '#fff',
@@ -74,6 +73,7 @@ class DealsItem extends React.Component {
       return ['likedByUser', '{{me}}'];
     }
   };
+
   render() {
     const deal = this.props.deal;
     return (
@@ -88,26 +88,10 @@ class DealsItem extends React.Component {
             width: '100%' }
         }}
         >
-          <div style={{
-            padding: '10px',
-            fontStyle: 'italic',
-            fontSize: '13px'
-          }}
-          >
-            <span style={{ color: '#a99999' }}>Published by </span>
-            <span>{_.get(deal, ['business', 'name'])}</span>
-          </div>
+          <DealsItemBusiness name={_.get(deal, ['business', 'name'])} />
         </div>
         <div id="hoverCard" style={styles.card}>
           <div style={{ width: '100%', '@media (min-width: 580px)': { display: 'none' } }}>
-            <div style={{
-              padding: '10px',
-              fontStyle: 'italic',
-              fontSize: '13px'
-            }}>
-              <span style={{ color: '#a99999' }}>Published by </span>
-              <span>{_.get(deal, ['business', 'name'])}</span>
-            </div>
           </div>
 
           <div style={{ width: '100%', '@media (min-width: 580px)': { width: '50%' } }}>
