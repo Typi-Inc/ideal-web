@@ -67,25 +67,15 @@ class Deals extends React.Component {
     // always return document.documentElement[scrollKey] as 0, so take
     // whichever has a value.
     const totalHeight = document.body.scrollHeight || document.documentElement.scrollHeight;
-    const currentPositionFromTop = document.body.scrollTop;
+    const currentPositionFromTop = document.body.scrollTop || document.documentElement.scrollTop;
     const viewPortHeight = window.innerHeight;
     if (currentPositionFromTop + viewPortHeight > totalHeight - 500) {
       this.request(this.props.deals.length);
     }
   }
-  renderItems(items, ref) {
-    return (
-      <div
-        ref={ref}
-        style = {{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', width: '100%' }}
-      >
-        {items}
-      </div>
-    );
-  }
   render() {
     return (
-      <div>
+      <div style = {{ paddingTop: '60px' }}>
         <div
           style = {{
             display: 'flex',
