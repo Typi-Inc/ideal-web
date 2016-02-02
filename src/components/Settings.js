@@ -1,7 +1,5 @@
 import React from 'react';
 import Radium from 'radium';
-import Link from './Link';
-import CreateDealAddTags from './CreateDealAddTags';
 import FlatButton from 'material-ui/lib/flat-button';
 import FontIcon from 'material-ui/lib/font-icon';
 
@@ -29,13 +27,13 @@ class Settings extends React.Component {
   constructor() {
     super();
     this.state = {
-      tagNames : []
+      tagNames: []
     };
   }
 
   postTag() {
     const tagName = this.tagName.value;
-    if(tagName !=='') {
+    if (tagName !== '') {
       this.setState({
         tagNames: this.state.tagNames.concat([tagName])
       });
@@ -45,25 +43,28 @@ class Settings extends React.Component {
 
   removeTag(tag) {
     this.setState({
-      tagNames: this.state.tagNames.filter(t =>!(t===tag))
-    })
+      tagNames: this.state.tagNames.filter(t => !(t === tag))
+    });
   }
 
   render() {
-
     return (
-      <div key = 'settings' style = {{
-      '@media (min-width: 950px)': { width: '900px',margin:'0 auto'},
-      '@media (min-width: 1450px)': { width: '1400px',margin:'0 auto'} }}>
+      <div key = "settings" style = {{
+        paddingTop: '60px',
+        '@media (min-width: 950px)': { width: '900px', margin: '0 auto' },
+        '@media (min-width: 1450px)': { width: '1400px', margin: '0 auto' } }}
+      >
         <div style = {styles.card}>
           <div style = {{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  paddingBottom: '10px'
-                       }}>
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            paddingBottom: '10px'
+          }}
+          >
             <FlatButton >
-              <FontIcon className="material-icons" style = {{ fontSize: '50px', color: '#a99999' }}>account_box</FontIcon>
+              <FontIcon className="material-icons" style = {{ fontSize: '50px', color: '#a99999' }}>
+                account_box</FontIcon>
             </FlatButton>
 
             <span style = {{
@@ -72,18 +73,20 @@ class Settings extends React.Component {
               textAlign: 'center',
               color: '#777777',
               paddingRight: '30px'
-                            }}>Ваши данные</span>
+            }}
+            >Ваши данные</span>
           </div>
 
         </div>
         <div style = {styles.card}>
-          <div  style = {{
-                  fontWeight: '500',
-                  fontSize: '20px',
-                  color: '#777777',
-                  textAlign: 'center',
-                  paddingBottom: '10px'
-                   }}>
+          <div style = {{
+            fontWeight: '500',
+            fontSize: '20px',
+            color: '#777777',
+            textAlign: 'center',
+            paddingBottom: '10px'
+          }}
+          >
             Тэги
           </div>
           <div style = {{ display: 'flex', flexWrap: 'wrap', paddingLeft: '10px' }}>
@@ -91,10 +94,11 @@ class Settings extends React.Component {
               <div style={ styles.tagBorder }>
                 {tagName}
                 <FlatButton
-                    onClick = {this.removeTag.bind(this, tagName)}
-                    style = {{ lineHeight: '20px', height: '20px', minWidth: '20px', padding: '0' }}
+                  onClick = {this.removeTag.bind(this, tagName)}
+                  style = {{ lineHeight: '20px', height: '20px', minWidth: '20px', padding: '0' }}
                 >
-                  <FontIcon className="material-icons" style = {{ fontSize: '14px' }}>remove</FontIcon>
+                  <FontIcon className="material-icons" style = {{ fontSize: '14px' }}>
+                    remove</FontIcon>
                 </FlatButton>
               </div>
             ))}
@@ -102,31 +106,34 @@ class Settings extends React.Component {
           <div style ={{ display: 'flex', justifyContent: 'space-between' }}>
             <div style = {{ width: '90%' }}>
               <input type="text"
-                     ref={el => this.tagName = el}
-                     placeholder="Автосервис, Булочная, Бар и т.д."
-                     style = {{
-                           border: 'solid 1px #dcdcdc',
-                           borderRadius: '3px',
-                           height: '32px',
-                           paddingLeft: '10px',
-                           width: '90%'
-                           }}/>
+                ref={el => this.tagName = el}
+                placeholder="Автосервис, Булочная, Бар и т.д."
+                style = {{
+                  border: 'solid 1px #dcdcdc',
+                  borderRadius: '3px',
+                  height: '32px',
+                  paddingLeft: '10px',
+                  width: '90%'
+                }}
+              />
             </div>
             <div>
-              <FlatButton labelStyle = {{color: '#fff', textTransform: 'none'}} label = 'Добавить'
-                          onClick={this.postTag.bind(this)}
-                          style = {{
-                    backgroundColor: '#0679A2'
-                  }}/>
+              <FlatButton labelStyle = {{ color: '#fff', textTransform: 'none' }} label = "Добавить"
+                onClick={this.postTag.bind(this)}
+                style = {{
+                  backgroundColor: '#0679A2'
+                }}
+              />
             </div>
           </div>
         </div>
-        <FlatButton labelStyle = {{color: '#0679A2', textTransform: 'none'}} label = 'Сохранить'
-                    style = {{
-                    backgroundColor: '#fff', float: 'right', marginRight: '10px'
-                  }}/>
+        <FlatButton labelStyle = {{ color: '#0679A2', textTransform: 'none' }} label = "Сохранить"
+          style = {{
+            backgroundColor: '#fff', float: 'right', marginRight: '10px'
+          }}
+        />
       </div>
-    )
+    );
   }
 }
 

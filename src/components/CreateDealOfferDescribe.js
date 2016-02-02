@@ -4,7 +4,7 @@ import FlatButton from 'material-ui/lib/flat-button';
 import FontIcon from 'material-ui/lib/font-icon';
 
 const styles = {
-  describeCard : {
+  describeCard: {
     background: '#fff',
     textAlign: 'center',
     padding: '10px 0',
@@ -39,13 +39,13 @@ class CreateDealOfferDescribe extends React.Component {
   }
   removeDeal(deal) {
     this.setState({
-      dealOptions: this.state.dealOptions.filter(t =>!(t===deal))
+      dealOptions: this.state.dealOptions.filter(t => !(t === deal))
     });
   }
   render() {
     return (
       <div style = {{ marginLeft: '10px',
-       width: '50%', '@media (min-width: 1450px)': { width: '600px' }}}
+       width: '50%', '@media (min-width: 1450px)': { width: '600px' } }}
       >
         <div
           style = {styles.describeCard}
@@ -75,13 +75,13 @@ class CreateDealOfferDescribe extends React.Component {
                 }}
                 >{dealOption.newPrice}</div>
               </div>
-              <div style = {{marginRight: '5px'}}>
+              <div>
                   <FlatButton
                     onClick = {this.removeDeal.bind(this, dealOption)}
                     style = {{ lineHeight: '20px', height: '20px', minWidth: '20px', padding: '0' }}
                   >
                       <FontIcon className="material-icons"
-                        color = '#777777'
+                        color = "#777777"
                         style = {{ fontSize: '14px' }}
                       >delete</FontIcon>
                   </FlatButton>
@@ -125,7 +125,7 @@ class CreateDealOfferDescribe extends React.Component {
           </div>
         </div>
         <div style = {{ float: 'right' }}>
-            <FlatButton labelStyle = {{ color: '#0679A2', textTransform: 'none' }}
+            <FlatButton labelStyle = {{ color: '#0679A2', padding: '0', textTransform: 'none' }}
               label = "Добавить"
               onClick={this.postDeal.bind(this)}
               style = {{
@@ -139,4 +139,3 @@ class CreateDealOfferDescribe extends React.Component {
 }
 
 export default Radium(CreateDealOfferDescribe);
-

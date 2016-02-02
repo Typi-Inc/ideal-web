@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from './Link';
 import { Link as RouterLink } from 'react-router';
 import Radium from 'radium';
 import Select from 'react-select';
@@ -14,7 +13,6 @@ import ActionHome from 'material-ui/lib/svg-icons/action/home';
 import IconButton from 'material-ui/lib/icon-button';
 import Toolbar from 'material-ui/lib/toolbar/toolbar';
 import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
-import ToolbarTitle from 'material-ui/lib/toolbar/toolbar-title';
 import '../public/react-select.css';
 import '../public/modal.css';
 
@@ -49,7 +47,7 @@ class AppBody extends React.Component {
     super();
     this.state = {
       crazy: false,
-       options: FLAVOURS,
+      options: FLAVOURS,
       value: [],
       modalIsOpen: false
     };
@@ -84,26 +82,26 @@ class AppBody extends React.Component {
     return (
         <div >
           <FlatButton
-              style={styles.facebookButton}
-              onClick={() => this.context.router.push('facebook')}
-              label="Sign in"
+            style={styles.facebookButton}
+            onClick={() => this.context.router.push('facebook')}
+            label="Sign in"
           />
           <FlatButton
-              style={Object.assign({}, styles.facebookButton, {
-            backgroundColor: '#5B7FA6',
-            backgroundImage: 'url("http://wault42.com/wp-content/uploads/2015/10/vk1.png")'
-          })}
-              onClick={() => this.context.router.push('vk')}
-              label="Sign in"
+            style={Object.assign({}, styles.facebookButton, {
+              backgroundColor: '#5B7FA6',
+              backgroundImage: 'url("http://wault42.com/wp-content/uploads/2015/10/vk1.png")'
+            })}
+            onClick={() => this.context.router.push('vk')}
+            label="Sign in"
           />
           <FlatButton
-              style={Object.assign({}, styles.facebookButton, {
-            backgroundColor: '#DC4E41',
-            marginBottom: '0',
-            backgroundImage: 'url("http://www.envisionexperience.com/~/media/images/blog/googleplus.png?la=en")'
-          })}
-              onClick={() => this.context.router.push('google')}
-              label="Sign in"
+            style={Object.assign({}, styles.facebookButton, {
+              backgroundColor: '#DC4E41',
+              marginBottom: '0',
+              backgroundImage: 'url("http://www.envisionexperience.com/~/media/images/blog/googleplus.png?la=en")'
+            })}
+            onClick={() => this.context.router.push('google')}
+            label="Sign in"
           />
         </div>
     );
@@ -112,52 +110,64 @@ class AppBody extends React.Component {
   render() {
     return (
         <div style={{ background: '#dedede', height: '100%' }}>
-          <Toolbar style={{ background: '#0679A2', paddingRight: '0' }}>
+          <Toolbar style={{
+            background: '#0679A2',
+            paddingRight: '0',
+            position: 'fixed',
+            zIndex: '1000'
+          }}
+          >
             <ToolBarGroupRadium firstChild float="left">
               <IconButton style={{ marginTop: '4px' }}
-                          containerElement={<RouterLink to="/" />}
-                          linkButton
+                containerElement={<RouterLink to="/" />}
+                linkButton
               >
                 <ActionHome color="#fff"/>
               </IconButton>
             </ToolBarGroupRadium>
-            <ToolBarGroupRadium style={{ marginTop: '4px', '@media (min-width: 740px)': { display: 'none' } }}>
+            <ToolBarGroupRadium style={{ marginTop: '4px',
+              '@media (min-width: 740px)': { display: 'none' } }}
+            >
               <IconButton >
                 <FontIcon className="material-icons" color="#fff">search</FontIcon>
               </IconButton>
             </ToolBarGroupRadium>
             <ToolBarGroupRadium style = {{
               display: 'none',
-              '@media (min-width: 740px)': { display: 'block', padding: '10px 0 0 20px' } }}>
+              '@media (min-width: 740px)': { display: 'block', padding: '10px 0 0 20px' } }}
+            >
               <Select multi
-                      value={this.state.value}
-                      options={this.state.options}
-                      onChange={this.handleSelectChange.bind(this)}
+                value={this.state.value}
+                options={this.state.options}
+                onChange={this.handleSelectChange.bind(this)}
               />
             </ToolBarGroupRadium>
-            <ToolBarGroupRadium float="right" style = {{ '@media (max-width: 950px)': { display: 'none' } }}>
-              <FlatButton labelStyle = {{color: '#fff', textTransform: 'none', fontSize: '18px'}}
-                          onClick={() => this.context.router.push('createDeal')}
-                          label="Создать сделку"
-                          style = {{ margin: '10px 0' }}
+            <ToolBarGroupRadium float="right"
+              style = {{ '@media (max-width: 950px)': { display: 'none' } }}
+            >
+              <FlatButton labelStyle = {{ color: '#fff', textTransform: 'none', fontSize: '18px' }}
+                onClick={() => this.context.router.push('createDeal')}
+                label="Создать сделку"
+                style = {{ margin: '10px 0' }}
               />
-              <FlatButton labelStyle = {{color: '#fff', textTransform: 'none', fontSize: '18px'}}
-                          onClick={() => this.context.router.push('myProfile')}
-                          label="Профиль"
-                          style = {{ margin: '10px 0' }}
+              <FlatButton labelStyle = {{ color: '#fff', textTransform: 'none', fontSize: '18px' }}
+                onClick={() => this.context.router.push('myProfile')}
+                label="Профиль"
+                style = {{ margin: '10px 0' }}
               />
-              <FlatButton labelStyle = {{color: '#fff', textTransform: 'none', fontSize: '18px'}}
-                          onClick={() => this.context.router.push('settings')}
-                          label="Настройки"
-                          style = {{ margin: '10px 0' }}
+              <FlatButton labelStyle = {{ color: '#fff', textTransform: 'none', fontSize: '18px' }}
+                onClick={() => this.context.router.push('settings')}
+                label="Настройки"
+                style = {{ margin: '10px 0' }}
               />
-              <FlatButton labelStyle = {{color: '#fff', textTransform: 'none', fontSize: '18px'}}
-                          onClick={this.openModal.bind(this)}
-                          label="Войти"
-                          style = {{ margin: '10px 0' }}
+              <FlatButton labelStyle = {{ color: '#fff', textTransform: 'none', fontSize: '18px' }}
+                onClick={this.openModal.bind(this)}
+                label="Войти"
+                style = {{ margin: '10px 0' }}
               />
             </ToolBarGroupRadium>
-            <ToolBarGroupRadium float="right" style = {{ '@media (min-width: 950px)': { display: 'none' } }}>
+            <ToolBarGroupRadium float="right"
+              style = {{ '@media (min-width: 950px)': { display: 'none' } }}>
               <IconMenu iconButtonElement={
                 <IconButton touch style = {{ marginTop: '4px' }}>
                   <MoreVertIcon color = "#fff" />
@@ -165,37 +175,37 @@ class AppBody extends React.Component {
               }
               >
                 <MenuItem primaryText="Профиль"
-                          onTouchTap={() => this.context.router.push('myProfile')}
+                  onTouchTap={() => this.context.router.push('myProfile')}
                 />
                 <MenuItem primaryText="Настройки"
-                          onTouchTap={() => this.context.router.push('settings')}
+                  onTouchTap={() => this.context.router.push('settings')}
                 />
                 <MenuItem primaryText="Войти" onTouchTap={this.openModal.bind(this)}/>
               </IconMenu>
             </ToolBarGroupRadium>
           </Toolbar>
           <Modal
-              isOpen={this.state.modalIsOpen}
-              onRequestClose={this.closeModal.bind(this)}
-              style={modalStyles}
+            isOpen={this.state.modalIsOpen}
+            onRequestClose={this.closeModal.bind(this)}
+            style={modalStyles}
           >
             <h2 style={{
-            fontSize: '20px',
-            fontWeight: '900',
-            textAlign: 'center',
-            margin: '0',
-            lineHeight: '36px',
-            paddingBottom: '5px'
-          }}
+              fontSize: '20px',
+              fontWeight: '900',
+              textAlign: 'center',
+              margin: '0',
+              lineHeight: '36px',
+              paddingBottom: '5px'
+            }}
             >
               Ищите интересные предложения, рекомендуйте друзьям и получайте бонус!
             </h2>
             {this.renderFacebookButton()}
             <div style={{ textAlign: 'right', marginTop: '10px' }}>
               <FloatingActionButton
-                  mini
-                  backgroundColor="#54C085"
-                  onClick={this.closeModal.bind(this)}
+                mini
+                backgroundColor="#54C085"
+                onClick={this.closeModal.bind(this)}
               >
                 <FontIcon className="material-icons" style={{ fontSize: '18px', color: 'white' }}>
                   close
