@@ -1,18 +1,22 @@
 import React from 'react';
 import Radium from 'radium';
 import _ from 'lodash';
-import DealsItem from './DealsItem';
-import { get } from '../intent/get';
 import Spinner from 'react-spinkit';
+import DealsItem from './DealsItem';
+import { prependToPaths, toPaths } from '../utils/helpers';
 
 class Deals extends React.Component {
   static propTypes = {
-    deals: React.PropTypes.array
+    deals: React.PropTypes.array,
+    fetch: React.PropTypes.func
   };
+  constructor(props, context) {
+    super(props, context);
+    this.handleScroll = this.handleScroll.bind(this);
+  }
   state = { isLoading: false };
-
   componentWillMount() {
-    window.addEventListener('scroll', this.handleScroll.bind(this));
+    window.addEventListener('scroll', this.handleScroll);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -22,26 +26,13 @@ class Deals extends React.Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll.bind(this));
+    window.removeEventListener('scroll', this.handleScroll);
   }
 
-  static queries = {
-    deal() {
-      return [['title', 'conditions', 'id', 'image', 'discount']];
-    },
-    business() {
-      return ['business', ['name', 'image']];
-    },
-    tags() {
-      return ['tags', 'sort:createdAt=desc', 'edges', { from: 0, to: 6 }, ['id', 'text']];
-    },
-    likes() {
-      return ['likes', 'sort:createdAt=desc', 'count'];
-    },
-    likedByUser() {
-      return ['likedByUser', '{{me}}'];
-    }
-  };
+  static paths = (from, to) => prependToPaths(
+    ['featuredDeals', { from, to }],
+    toPaths(DealsItem.queries())
+  );
   pending = [];
 
   request(from) {
@@ -52,14 +43,7 @@ class Deals extends React.Component {
   fetch() {
     if (this.isLoading || !this.pending.length) return;
     const from = _.first(this.pending);
-    get([
-      ['featuredDeals', { from: from, to: from + 9 }, ['title', 'id', 'discount', 'image']],
-      ['featuredDeals', { from: from, to: from + 9 }, 'business', ['name', 'image']],
-      ['featuredDeals', { from: from, to: from + 9 }, 'tags', 'sort:createdAt=desc', 'edges',
-        { from: 0, to: 6 }, ['id', 'text']],
-      ['featuredDeals', { from: from, to: from + 9 }, 'likes', 'sort:createdAt=desc', 'count'],
-      ['featuredDeals', { from: from, to: from + 9 }, 'likedByMe']
-    ]);
+    this.props.fetch(0, from + 9);
     this.setState({ isLoading: true });
   }
   handleScroll() {
@@ -80,19 +64,20 @@ class Deals extends React.Component {
           style = {{
             display: 'flex',
             flexWrap: 'wrap',
-            justifyContent: 'center',
-            width: '100%'
+            justifyContent: 'center'
           }}
         >
           {
             this.props.deals.map(deal => (
-              <DealsItem key={deal.id} deal={deal} />
+              <div key={deal.id}>
+                <DealsItem deal={deal} />
+              </div>
             ))
           }
         </div>
         {
           this.state.isLoading && (
-            <div style={{ display: 'flex', justifyContent: 'center', height: '100px'}}>
+            <div style={{ display: 'flex', justifyContent: 'center', height: '100px' }}>
               <Spinner spinnerName="wandering-cubes" noFadeIn />
             </div>
           )

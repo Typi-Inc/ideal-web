@@ -18,8 +18,10 @@
   },
   "homepage": "https://github.com/FourSS/ideal-web#readme",
   "dependencies": {
+    "babel-polyfill": "^6.3.14",
     "falcor": "Netflix/falcor",
     "falcor-http-datasource": "Netflix/falcor-http-datasource",
+    "falcor-path-utils": "^0.4.0",
     "material-ui": "^0.14.3",
     "radium": "^0.16.5",
     "react": "^0.14.7",

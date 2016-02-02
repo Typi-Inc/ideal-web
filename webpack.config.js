@@ -9,7 +9,10 @@ const SOURCE_PATH = path.resolve(ROOT_PATH, 'src');
 const BUILD_PATH = path.resolve(ROOT_PATH, '..', 'ideal-server', 'public');
 
 const common = {
-  entry: path.resolve(SOURCE_PATH, 'index.js'),
+  entry: [
+    'babel-polyfill',
+    path.resolve(SOURCE_PATH, 'index.js')
+  ],
   resolve: {
     extensions: ['', '.js']
   },

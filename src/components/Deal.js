@@ -2,7 +2,7 @@ import React from 'react';
 import Radium from 'radium';
 import DealContactInfo from './DealContactInfo';
 import EarnBuy from './EarnBuy';
-import DealTag from './DealTag.js';
+import Tag from './Tag.js';
 import Certificate from './Certificate';
 import DealComment from './DealComment';
 import TabsOnSmallScreen from './TabsOnSmallScreen';
@@ -125,6 +125,7 @@ class Deal extends React.Component {
     };
     return (
       <div style = {{
+        paddingTop: '60px',
         display: 'flex', flexWrap: 'wrap',
         '@media (min-width: 950px)': { width: '950px', margin: '0 auto' },
         '@media (min-width: 1450px)': { width: '1450px', margin: '0 auto' }
@@ -173,7 +174,7 @@ class Deal extends React.Component {
               >shopping_cart</FontIcon>
               {deal.purchasesAmount}
             </div>
-            <DealTag>{deal.tagThree}</DealTag>
+            <Tag>{deal.tagThree}</Tag>
           </div>
             <EarnBuy/>
           <DealContactInfo/>
@@ -192,7 +193,7 @@ class Deal extends React.Component {
             <div style = {[styles.title, { width: '100%' }]}>
               Популярные запросы
             </div>
-            <DealTag>{deal.tagThree}</DealTag>
+            <Tag>{deal.tagThree}</Tag>
           </div>
 
           <DealComment/>
@@ -206,7 +207,7 @@ class Deal extends React.Component {
             <div style = {[styles.title, { width: '100%' }]}>
               Популярные запросы
             </div>
-            <DealTag>{deal.tagOne}</DealTag>
+            <Tag>{deal.tagOne}</Tag>
           </div>
         </div>
       </div>

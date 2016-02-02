@@ -3,10 +3,10 @@ import Radium from 'radium';
 import _ from 'lodash';
 import Link from './Link';
 import DealsItemBusiness from './DealsItemBusiness';
-import { values } from '../utils/helpers';
+import { values, range } from '../utils/helpers';
 import FontIcon from 'material-ui/lib/font-icon';
-import FlatButton from 'material-ui/lib/flat-button';
 import '../public/hover.css';
+import Tag from './Tag';
 
 const styles = {
   card: {
@@ -15,7 +15,6 @@ const styles = {
     margin: '8px 10px 5px 10px',
     width: '100%',
     background: '#fff'
-
   },
   dealImage: {
     backgroundSize: '100% 100%',
@@ -52,27 +51,36 @@ const styles = {
   }
 };
 
+
 class DealsItem extends React.Component {
   static propTypes = {
     deal: React.PropTypes.object
   };
-  static queries = {
-    deal() {
-      return [['title', 'conditions', 'id', 'image', 'discount']];
+  static queries = () => ({
+    id: null,
+    title: null,
+    image: null,
+    discount: null,
+    likedByMe: null,
+    business: {
+      ...DealsItemBusiness.queries()
     },
-    business() {
-      return ['business', ['name', 'image']];
+    tags: {
+      'sort:createdAt=desc': {
+        edges: {
+          ...range(0, 6, {
+            id: null,
+            ...Tag.queries()
+          })
+        }
+      }
     },
-    tags() {
-      return ['tags', 'sort:createdAt=desc', 'edges', {from: 0, to: 6}, ['id', 'text']];
-    },
-    likes() {
-      return ['likes', 'sort:createdAt=desc', 'count'];
-    },
-    likedByUser() {
-      return ['likedByUser', '{{me}}'];
+    likes: {
+      'sort:createdAt=desc': {
+        count: null
+      }
     }
-  };
+  });
 
   render() {
     const deal = this.props.deal;
@@ -88,14 +96,14 @@ class DealsItem extends React.Component {
             width: '100%' }
         }}
         >
-          <DealsItemBusiness name={_.get(deal, ['business', 'name'])} />
+          <DealsItemBusiness {..._.pick(deal.business, Object.keys(DealsItemBusiness.queries))} />
         </div>
         <div id="hoverCard" style={styles.card}>
           <div style={{ width: '100%', '@media (min-width: 580px)': { display: 'none' } }}>
+            <DealsItemBusiness name={_.get(deal, ['business', 'name'])} />
           </div>
-
           <div style={{ width: '100%', '@media (min-width: 580px)': { width: '50%' } }}>
-            <Link to={'/deal/' + deal.id}>
+            <Link to={'/deal/' + deal.id} style = {{ textDecoration: 'none' }}>
               <div style={[styles.dealImage, {
                 backgroundImage: `url("${deal.image}")`
               }]}
@@ -125,7 +133,7 @@ class DealsItem extends React.Component {
             }}
             >
               <div style={{ padding: '10px' }}>
-                <span>
+                <span style = {{ fontSize: '18px' }}>
                   {deal.title}
                 </span>
               </div>
@@ -144,23 +152,14 @@ class DealsItem extends React.Component {
                 style={{ height: '14px', padding: '0 5px' }}/>
               {'?'}
             </div>
-            {
-              values(_.get(deal, ['tags', 'sort:createdAt=desc', 'edges'])).
+            <div style = {{ display: 'flex', flexWrap: 'wrap' }}>
+              {
+                values(_.get(deal, ['tags', 'sort:createdAt=desc', 'edges'])).
                 map(tag => (
-                  <div key={`${deal.id}${tag.id}`}
-                    style={{
-                      width: '95%',
-                      padding: '0 10px 10px 10px',
-                      fontSize: '10px',
-                      color: '#a99999'
-                    }}
-                  >
-                    <FlatButton color="#777777" label={tag.text}
-                      style={styles.tagBorder}
-                    />
-                  </div>
+                  <Tag>{tag.text}</Tag>
                 ))
-            }
+              }
+            </div>
           </div>
         </div>
       </div>

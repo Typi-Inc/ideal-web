@@ -89,7 +89,7 @@ class AppBody extends React.Component {
         <div >
           <FlatButton
             style={styles.facebookButton}
-            onClick={() => this.context.router.push('facebook')}
+            onClick={() => this.context.router.push('/facebook')}
             label="Sign in"
           />
           <FlatButton
@@ -97,7 +97,7 @@ class AppBody extends React.Component {
               backgroundColor: '#5B7FA6',
               backgroundImage: 'url("http://wault42.com/wp-content/uploads/2015/10/vk1.png")'
             })}
-            onClick={() => this.context.router.push('vk')}
+            onClick={() => this.context.router.push('/vk')}
             label="Sign in"
           />
           <FlatButton
@@ -106,7 +106,7 @@ class AppBody extends React.Component {
               marginBottom: '0',
               backgroundImage: 'url("http://www.envisionexperience.com/~/media/images/blog/googleplus.png?la=en")'
             })}
-            onClick={() => this.context.router.push('google')}
+            onClick={() => this.context.router.push('/google')}
             label="Sign in"
           />
         </div>
@@ -152,17 +152,17 @@ class AppBody extends React.Component {
               style = {{ '@media (max-width: 950px)': { display: 'none' } }}
             >
               <FlatButton labelStyle = {{ color: '#fff', textTransform: 'none', fontSize: '18px' }}
-                onClick={() => this.context.router.push('createDeal')}
+                onClick={() => this.context.router.push('/createDeal')}
                 label="Создать сделку"
                 style = {{ margin: '10px 0' }}
               />
               <FlatButton labelStyle = {{ color: '#fff', textTransform: 'none', fontSize: '18px' }}
-                onClick={() => this.context.router.push('myProfile')}
+                onClick={() => this.context.router.push('/myProfile')}
                 label="Профиль"
                 style = {{ margin: '10px 0' }}
               />
               <FlatButton labelStyle = {{ color: '#fff', textTransform: 'none', fontSize: '18px' }}
-                onClick={() => this.context.router.push('settings')}
+                onClick={() => this.context.router.push('/settings')}
                 label="Настройки"
                 style = {{ margin: '10px 0' }}
               />
@@ -181,10 +181,10 @@ class AppBody extends React.Component {
               }
               >
                 <MenuItem primaryText="Профиль"
-                  onTouchTap={() => this.context.router.push('myProfile')}
+                  onTouchTap={() => this.context.router.push('/myProfile')}
                 />
                 <MenuItem primaryText="Настройки"
-                  onTouchTap={() => this.context.router.push('settings')}
+                  onTouchTap={() => this.context.router.push('/settings')}
                 />
                 <MenuItem primaryText="Войти" onTouchTap={this.openModal.bind(this)}/>
               </IconMenu>

@@ -16,29 +16,23 @@ class Home extends React.Component {
     model$: React.PropTypes.any
   };
   componentDidMount() {
-    get([
-			['featuredDeals', { from: 0, to: 9 }, ['title', 'id', 'discount', 'image']],
-      ['featuredDeals', { from: 0, to: 9 }, 'business', ['id', 'name', 'image']],
-			['featuredDeals', { from: 0, to: 9 }, 'tags', 'sort:createdAt=desc', 'edges',
-        { from: 0, to: 6 }, ['id', 'text']],
-			['featuredDeals', { from: 0, to: 9 }, 'likes', 'sort:createdAt=desc', 'count'],
-			['featuredDeals', { from: 0, to: 9 }, 'likedByMe']
-    ]);
+    this.fetch(0, 9);
+  }
+  paths = [];
+  fetch(from, to) {
+    this.paths = Deals.paths(from, to);
+    get(this.paths);
   }
   render() {
     return (
       <Combinator>
         {
           this.context.model$.
-            flatMap(model => Observable.fromPromise(model.get(
-              ['featuredDeals', { from: 0, to: 119 }, ['title', 'id', 'discount', 'image']],
-              ['featuredDeals', { from: 0, to: 119 }, 'business', ['id', 'name', 'image']],
-        			['featuredDeals', { from: 0, to: 119 }, 'tags', 'sort:createdAt=desc', 'edges',
-                { from: 0, to: 6 }, ['id', 'text']],
-        			['featuredDeals', { from: 0, to: 119 }, 'likes', 'sort:createdAt=desc', 'count'],
-        			['featuredDeals', { from: 0, to: 119 }, 'likedByMe']
-            ))).
-            map(data => console.log(count++)||<Deals deals={values(data.json.featuredDeals)} />)
+            flatMap(model => Observable.fromPromise(model.get(...this.paths))).
+            map(data => <Deals
+              deals={values(data.json.featuredDeals)}
+              fetch={this.fetch.bind(this)}
+            />)
         }
       </Combinator>
     );
