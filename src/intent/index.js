@@ -1,7 +1,7 @@
-import { getQuery$ } from './getQuery';
+import { get$ } from './get';
 
 const intent = () => ({
-  getQuery$
+  get$
 });
 
 export default intent;

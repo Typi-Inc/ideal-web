@@ -1,121 +1,133 @@
 import React from 'react';
 import Radium from 'radium';
 import Link from './Link';
+import CreateDealAddTags from './CreateDealAddTags';
+import FlatButton from 'material-ui/lib/flat-button';
+import FontIcon from 'material-ui/lib/font-icon';
 
 const styles = {
   card: {
     margin: '10px',
     background: '#fff',
     padding: '10px'
+  },
+  tagBorder: {
+    fontSize: '14px',
+    borderRadius: '5px',
+    minWidth: '40px',
+    margin: '10px 5px 5px 0',
+    padding: '5px',
+    textAlign: 'center',
+    color: '#777777',
+    background: '#fff',
+    border: '1.5px solid #eee'
   }
 };
 
 class Settings extends React.Component {
 
+  constructor() {
+    super();
+    this.state = {
+      tagNames : []
+    };
+  }
+
+  postTag() {
+    const tagName = this.tagName.value;
+    if(tagName !=='') {
+      this.setState({
+        tagNames: this.state.tagNames.concat([tagName])
+      });
+      this.tagName.value = '';
+    }
+  }
+
+  removeTag(tag) {
+    this.setState({
+      tagNames: this.state.tagNames.filter(t =>!(t===tag))
+    })
+  }
+
   render() {
 
     return (
       <div key = 'settings' style = {{
-      '@media (min-width: 950px)': { width: '950px',margin:'0 auto'},
-      '@media (min-width: 1450px)': { width: '1450px',margin:'0 auto'} }}>
+      '@media (min-width: 950px)': { width: '900px',margin:'0 auto'},
+      '@media (min-width: 1450px)': { width: '1400px',margin:'0 auto'} }}>
         <div style = {styles.card}>
           <div style = {{
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center',
-                  borderBottom: '1px solid rgba(0,0,0,.12)',
                   paddingBottom: '10px'
                        }}>
-            <button className="mdl-button mdl-js-button mdl-js-ripple-effect" style = {{height: '50px'}}>
-              <i className="material-icons" style = {{ color: '#a99999 ', fontSize: '50px' }}>account_box</i>
-            </button>
-            <span style = {{ fontWeight: '500', fontSize: '20px', textAlign: 'center', paddingRight: '30px' }}>Your Profile</span>
+            <FlatButton >
+              <FontIcon className="material-icons" style = {{ fontSize: '50px', color: '#a99999' }}>account_box</FontIcon>
+            </FlatButton>
+
+            <span style = {{
+              fontWeight: '500',
+              fontSize: '20px',
+              textAlign: 'center',
+              color: '#777777',
+              paddingRight: '30px'
+                            }}>Ваши данные</span>
           </div>
-          <form action="#">
-            <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" >
-              <textarea className="mdl-textfield__input" type="text" rows= "2" id="email" ></textarea>
-              <label className="mdl-textfield__label" htmlFor="email">Email</label>
-            </div>
-          </form>
+
         </div>
         <div style = {styles.card}>
           <div  style = {{
                   fontWeight: '500',
                   fontSize: '20px',
+                  color: '#777777',
                   textAlign: 'center',
-                  paddingBottom: '10px',
-                  borderBottom: '1px solid rgba(0,0,0,.12)' }}>
-            Your tags
+                  paddingBottom: '10px'
+                   }}>
+            Тэги
           </div>
-          <div style = {{ display : 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <div style = {{ width: '70%'}}>
-              <form action="#">
-                <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                  <input className="mdl-textfield__input" type="text" id="tags"/>
-                  <label className="mdl-textfield__label" htmlFor="tags">Add preferable deal types</label>
-                </div>
-              </form>
+          <div style = {{ display: 'flex', flexWrap: 'wrap', paddingLeft: '10px' }}>
+            {this.state.tagNames.map(tagName => (
+              <div style={ styles.tagBorder }>
+                {tagName}
+                <FlatButton
+                    onClick = {this.removeTag.bind(this, tagName)}
+                    style = {{ lineHeight: '20px', height: '20px', minWidth: '20px', padding: '0' }}
+                >
+                  <FontIcon className="material-icons" style = {{ fontSize: '14px' }}>remove</FontIcon>
+                </FlatButton>
+              </div>
+            ))}
+          </div>
+          <div style ={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div style = {{ width: '90%' }}>
+              <input type="text"
+                     ref={el => this.tagName = el}
+                     placeholder="Автосервис, Булочная, Бар и т.д."
+                     style = {{
+                           border: 'solid 1px #dcdcdc',
+                           borderRadius: '3px',
+                           height: '32px',
+                           paddingLeft: '10px',
+                           width: '90%'
+                           }}/>
             </div>
-            <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-                    style= {{
-                        width: '28px',
-                        height: '28px',
-                        background: '#0679A2',
-                        minWidth: '28px',
-                        padding: '0px',
-                        margin: '0 5px'
-                      }}>
-              <i className="material-icons" style = {{color:'white', paddingBottom: '10px'}} >add</i>
-            </button>
+            <div>
+              <FlatButton labelStyle = {{color: '#fff', textTransform: 'none'}} label = 'Добавить'
+                          onClick={this.postTag.bind(this)}
+                          style = {{
+                    backgroundColor: '#0679A2'
+                  }}/>
+            </div>
           </div>
         </div>
-        <div style = {{
-              display: 'flex',
-              justifyContent: 'flex-end',
-              background: '#dedede',
-              paddingBottom: '10px',
-              margin : '0 10px'
-                     }}>
-          <div style = {{width: '10%'}}>
-            <button className="mdl-button mdl-js-button mdl-js-ripple-effect"
-                    style={{background: '#0679A2', width: '100%', color: 'white', borderRadius: '10px', boxShadow: '0'}}>
-              Save
-            </button>
-          </div>
-        </div>
+        <FlatButton labelStyle = {{color: '#0679A2', textTransform: 'none'}} label = 'Сохранить'
+                    style = {{
+                    backgroundColor: '#fff', float: 'right', marginRight: '10px'
+                  }}/>
       </div>
     )
   }
 }
 
 export default Radium(Settings);
-
-//<div style = {styles.card}>
-//  <div  style = {{
-//                  fontWeight: '500',
-//                  fontSize: '20px',
-//                  textAlign: 'center',
-//                  paddingBottom: '10px',
-//                  borderBottom: '1px solid rgba(0,0,0,.12)' }}>
-//    Private Info
-//  </div>
-//  <div style = {{ display : 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
-//    <div style = {{ width: '40%'}}>
-//      <form action="#">
-//        <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-//          <input className="mdl-textfield__input" type="text" id="gender0"/>
-//          <label className="mdl-textfield__label" htmlFor="gender">Gender</label>
-//        </div>
-//      </form>
-//    </div>
-//    <div style = {{ width: '40%'}}>
-//      <form action="#">
-//        <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-//          <input className="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="birthYear"/>
-//          <label className="mdl-textfield__label" htmlFor="birthYear">Year of birth</label>
-//          <span className="mdl-textfield__error">It's not a number!</span>
-//        </div>
-//      </form>
-//    </div>
-//  </div>
-//</div>

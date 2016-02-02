@@ -1,5 +1,5 @@
 import React from 'react';
-import Radium, { StyleRoot } from 'radium';
+import { StyleRoot } from 'radium';
 import AppBody from './AppBody';
 
 class AppBodyWrapper extends React.Component {
@@ -12,4 +12,4 @@ class AppBodyWrapper extends React.Component {
   }
 }
 
-export default Radium(AppBodyWrapper);
+export default AppBodyWrapper;

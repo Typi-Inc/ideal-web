@@ -1,12 +1,6 @@
 import React from 'react';
 import Radium from 'radium';
 import Link from './Link';
-import {
-  Motion,
-  spring,
-  StaggeredMotion,
-  TransitionMotion} from 'react-motion';
-
 
 const styles = {
   profileDeals : {
@@ -17,14 +11,6 @@ const styles = {
 };
 
 class MyProfile extends React.Component {
-
-  componentDidMount() {
-    window.componentHandler.upgradeDom();
-  }
-
-  componentDidUpdate() {
-    window.componentHandler.upgradeDom();
-  }
 
   render() {
     return (
@@ -89,11 +75,8 @@ class MyProfile extends React.Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
-
 export default Radium(MyProfile);
-
-//

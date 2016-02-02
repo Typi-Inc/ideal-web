@@ -1,25 +1,29 @@
 import falcor from 'falcor';
 import FalcorHttpDataSource from 'falcor-http-datasource';
-import Rx from 'rx';
-import _ from 'lodash';
+import { ReplaySubject } from 'rxjs/subject/ReplaySubject';
+import 'rxjs/add/operator/scan';
+import 'rxjs/add/operator/share';
 
-const model = ({ getQuery$ }) => {
-  const data$ = new Rx.ReplaySubject(1);
-  const state$ = data$.scan((acc, newData) => _.merge(acc, newData));
-
-  const rootModel = new falcor.Model({
-    source: new FalcorHttpDataSource('http://localhost:8080/model.json')
+const model = ({ get$ }) => {
+  const model$ = new ReplaySubject(1);
+  const remoteModel = new falcor.Model({
+    source: new FalcorHttpDataSource('/model.json')
   });
-  getQuery$.subscribe(
-    (paths, loadingObj) => {
-      if (loadingObj) {
-        data$.onNext(loadingObj);
+  const localModel = new falcor.Model();
+  const nextCombinedModel = data => {
+    model$.next(new falcor.Model({
+      cache: {
+        ...remoteModel.getCache(),
+        ...localModel.getCache()
       }
-      rootModel.get(...paths).
-        then(data => data && data.json && data$.onNext(data.json));
-    }
-  );
-  return state$;
+    }));
+  };
+
+  get$.subscribe(paths => {
+    remoteModel.get(...paths).
+      subscribe(nextCombinedModel, console.log, () => console.log('completed'));
+  });
+  return model$;
 };
 
 export default model;

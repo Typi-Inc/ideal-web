@@ -18,7 +18,10 @@ const common = {
       {
         test: /\.css$/,
         loaders: ['style', 'css'],
-        include: SOURCE_PATH
+        include: [
+          SOURCE_PATH,
+          path.resolve(ROOT_PATH, 'node_modules', 'react-spinkit')
+        ]
       },
       {
         test: /\.js?$/,

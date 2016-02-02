@@ -7,9 +7,9 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 
 const main = () => {
   injectTapEventPlugin();
-  const state$ = model(intent());
+  const model$ = model(intent());
   const rootElement = document.getElementById('root');
-  ReactDOM.render(<App state$={state$} />, rootElement);
+  ReactDOM.render(<App model$={model$}/>, rootElement);
 };
 
 main();

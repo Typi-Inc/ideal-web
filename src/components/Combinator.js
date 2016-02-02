@@ -1,6 +1,6 @@
 import React from 'react';
-import _ from 'lodash';
-import combineTemplate from 'rx.observable.combine-template';
+import combineTemplate from '../utils/combineTemplate';
+import shallowEqual from '../utils/shallowEqual';
 
 class Combinator extends React.Component {
   constructor(props, context) {
@@ -24,7 +24,7 @@ class Combinator extends React.Component {
     this.componentHasMounted = true;
   }
   shouldComponentUpdate(nextProps, nextState) {
-    return !_.isEqual(nextState, this.state);
+    return !shallowEqual(this.state, nextState);
   }
   componentWillUnmount() {
     // Clean-up subscription before un-mounting
