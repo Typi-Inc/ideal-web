@@ -3,10 +3,7 @@ import Radium from 'radium';
 import _ from 'lodash';
 import DealsItem from './DealsItem';
 import { get } from '../intent/get';
-import ReactList from 'react-list';
 import Spinner from 'react-spinkit';
-
-const RadiumReactList = Radium(ReactList);
 
 class Deals extends React.Component {
   static propTypes = {
