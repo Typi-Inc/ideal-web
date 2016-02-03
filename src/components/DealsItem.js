@@ -12,7 +12,7 @@ const styles = {
   card: {
     display: 'flex',
     flexWrap: 'wrap',
-    margin: '8px 10px 5px 10px',
+    marginTop: '10px',
     width: '100%',
     background: '#fff'
   },
@@ -86,21 +86,21 @@ class DealsItem extends React.Component {
     const deal = this.props.deal;
     return (
       <div key={deal.id}
-        style={{ width: '100%', '@media (min-width: 1020px)': { width: '480px', marginLeft: '10px' } }}
+        style={{ width: '100%', '@media (min-width: 1000px)': { width: '475px', paddingRight: '20px' } }}
       >
         <div style={{ display: 'none',
           '@media (min-width: 580px)': {
             display: 'block',
             background: '#fff',
-            margin: '10px 10px 0 10px',
+            margin: '10px 0',
             width: '100%' }
         }}
         >
-          <DealsItemBusiness {..._.pick(deal.business, Object.keys(DealsItemBusiness.queries))} />
+          <DealsItemBusiness {..._.pick(deal.business, Object.keys(DealsItemBusiness.queries()))} />
         </div>
         <div id="hoverCard" style={styles.card}>
           <div style={{ width: '100%', '@media (min-width: 580px)': { display: 'none' } }}>
-            <DealsItemBusiness name={_.get(deal, ['business', 'name'])} />
+            <DealsItemBusiness {..._.pick(deal.business, Object.keys(DealsItemBusiness.queries()))} />
           </div>
           <div style={{ width: '100%', '@media (min-width: 580px)': { width: '50%' } }}>
             <Link to={'/deal/' + deal.id} style = {{ textDecoration: 'none' }}>
@@ -133,7 +133,7 @@ class DealsItem extends React.Component {
             }}
             >
               <div style={{ padding: '10px' }}>
-                <span style = {{ fontSize: '18px' }}>
+                <span style = {{ fontSize: '16px' }}>
                   {deal.title}
                 </span>
               </div>

@@ -6,9 +6,9 @@ const styles = {
     fontSize: '18px',
     color: '#666',
     borderBottom: '1.5px solid rgba(0,0,0,0.12)',
-    marginBottom: '10px'
+    paddingBottom: '5px'
   },
-  contactCard : {
+  contactCard: {
     display: 'none',
     '@media (min-width: 740px)': {
       display: 'flex',
@@ -24,10 +24,8 @@ const styles = {
 class DealContactInfo extends React.Component {
 
   render() {
-
     return (
-      <div style = {styles.contactCard}
-        >
+      <div style = {styles.contactCard}>
         <div style = {styles.title }>
           Контактная информация
         </div>
@@ -37,7 +35,7 @@ class DealContactInfo extends React.Component {
           +7 (778) 668-88-58
         </div>
       </div>
-    )
+    );
   }
 }
 

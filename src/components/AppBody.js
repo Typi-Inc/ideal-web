@@ -36,9 +36,10 @@ const modalStyles = {
     right: '0',
     bottom: '0',
     padding: '20px 15px 0 20px',
-    height: '370px',
+    height: '390px',
     margin: 'auto',
-    width: '240px'
+    width: '240px',
+    zIndex: '9000'
   }
 };
 

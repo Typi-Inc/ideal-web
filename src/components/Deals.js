@@ -59,17 +59,23 @@ class Deals extends React.Component {
   }
   render() {
     return (
-      <div style = {{ paddingTop: '60px' }}>
+      <div style = {{ paddingTop: '56px', margin: '0 auto',
+        '@media (min-width: 1000px)': { width: '1000px' },
+        '@media (min-width: 1200px)': { width: '1170px' },
+        '@media (min-width: 1485px)': { width: '1485px' } }}>
         <div
           style = {{
             display: 'flex',
             flexWrap: 'wrap',
-            justifyContent: 'center'
+            padding: '0 5px',
+            '@media (min-width: 1000px)': { marginLeft: '15px' }
           }}
         >
           {
             this.props.deals.map(deal => (
-              <div key={deal.id}>
+              <div key={deal.id} style = {{ width: '100%', padding: '0 5px',
+                '@media (min-width: 1000px)': { width: '50%', padding: '0' },
+                '@media (min-width: 1485px)': { width: '33%', padding: '0' }}}>
                 <DealsItem deal={deal} />
               </div>
             ))

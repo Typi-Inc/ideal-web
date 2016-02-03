@@ -19,7 +19,7 @@ class DealsItemBusiness extends Component {
         fontStyle: 'italic',
         fontSize: '14px'
       }}>
-        <span style={{ color: '#a99999' }}>Published by </span>
+        <span style={{ color: '#a99999' }}>Опубликовано </span>
         <span>{this.props.name}</span>
       </div>
     );

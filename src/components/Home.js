@@ -15,7 +15,7 @@ class Home extends React.Component {
   static contextTypes = {
     model$: React.PropTypes.any
   };
-  componentDidMount() {
+  componentWillMount() {
     this.fetch(0, 9);
   }
   paths = [];

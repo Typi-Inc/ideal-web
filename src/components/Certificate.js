@@ -8,7 +8,7 @@ const styles = {
     fontSize: '18px',
     color: '#666',
     borderBottom: '1.5px solid rgba(0,0,0,0.12)',
-    marginBottom: '10px'
+    paddingBottom: '5px'
   }
 };
 
@@ -85,7 +85,6 @@ class Certificate extends React.Component {
           <div style = {{ borderBottom: '1.5px solid rgba(0,0,0,0.12)' }}>
             <div style={{ display: 'flex',
               justifyContent: 'space-between',
-              margin: '10px',
               alignItems: 'center' }}
             >
               <div style={{ width: '70%', padding: '10px' }}>

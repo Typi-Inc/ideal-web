@@ -1,33 +1,36 @@
-#hoverCard {
-    animation-name: out;
-    animation-duration:0.2s;
+@media screen and (min-width: 1000px) {
+    #hoverCard {
+        animation-name: out;
+        animation-duration:0.2s;
+    }
+
+    #hoverCard:hover {
+        animation-name: in;
+        animation-duration:0.2s;
+        animation-iteration-count:1;
+        animation-fill-mode: forwards;
+    }
+
+    @keyframes out {
+        0% {
+            box-shadow: rgba(0, 0, 0, 0.2) 0 7px 12px 0;
+            transform: translate(0, -5px);
+        }
+        100% {
+            transform: translate(0, 0);
+            box-shadow: rgba(0, 0, 0, 0.2) 0 7px 12px 0;
+        }
+    }
+
+    @keyframes in {
+        0% {
+            box-shadow: rgba(0, 0, 0, 0.2) 0 7px 12px 0;
+            transform: translate(0, 0);
+        }
+        100% {
+            box-shadow: rgba(0, 0, 0, 0.2) 0 7px 12px 0;
+            transform: translate(0, -5px);
+        }
+    }
 }
 
-#hoverCard:hover {
-    animation-name: in;
-    animation-duration:0.2s;
-    animation-iteration-count:1;
-    animation-fill-mode: forwards;
-}
-
-@keyframes out {
-    0% {
-        box-shadow: rgba(0, 0, 0, 0.2) 0 7px 12px 0;
-        transform: translate(0, -5px);
-    }
-    100% {
-        transform: translate(0, 0);
-        box-shadow: rgba(0, 0, 0, 0.2) 0 7px 12px 0;
-    }
-}
-
-@keyframes in {
-    0% {
-        box-shadow: rgba(0, 0, 0, 0.2) 0 7px 12px 0;
-        transform: translate(0, 0);
-    }
-    100% {
-        box-shadow: rgba(0, 0, 0, 0.2) 0 7px 12px 0;
-        transform: translate(0, -5px);
-    }
-}
