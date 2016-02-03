@@ -24,17 +24,14 @@ const styles = {
     justifyContent: 'flex-end',
     '@media (min-width: 850px)': {
       height: '250px'
-    },
-    '@media (min-width: 1020px)': {
-      height: '180px'
     }
   },
   mainOptionsCard: {
     display: 'flex',
-    width: '50px',
+    width: '65px',
     justifyContent: 'center',
     background: '#0679A2',
-    height: '50px',
+    height: '35px',
     color: '#fff',
     alignItems: 'center',
     fontWeight: '500'
@@ -86,7 +83,11 @@ class DealsItem extends React.Component {
     const deal = this.props.deal;
     return (
       <div key={deal.id}
-        style={{ width: '100%', '@media (min-width: 1000px)': { width: '475px', paddingRight: '20px' } }}
+        style={{ width: '100%',
+          '@media (min-width: 1000px)': { width: '475px', paddingRight: '20px' },
+          '@media (min-width: 1200px)': { width: '560px', paddingRight: '20px' },
+          '@media (min-width: 1485px)': { width: '475px', paddingRight: '20px' }
+           }}
       >
         <div style={{ display: 'none',
           '@media (min-width: 580px)': {

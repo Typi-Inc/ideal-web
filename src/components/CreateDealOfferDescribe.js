@@ -45,7 +45,7 @@ class CreateDealOfferDescribe extends React.Component {
   render() {
     return (
       <div style = {{ marginLeft: '10px',
-       width: '50%', '@media (min-width: 1450px)': { width: '600px' } }}
+       width: '50%', '@media (min-width: 1485px)': { width: '600px' } }}
       >
         <div
           style = {styles.describeCard}

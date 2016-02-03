@@ -9,18 +9,6 @@ import TabsOnSmallScreen from './TabsOnSmallScreen';
 import FontIcon from 'material-ui/lib/font-icon';
 
 class Deal extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      comments: [
-        {
-          author: 'Almas',
-          text: 'Hello my bitch'
-        }
-      ]
-    };
-  }
-
   render() {
     const dealsListItem = [
       {
@@ -99,28 +87,20 @@ class Deal extends React.Component {
         border: '1.5px solid #eee'
       },
       title: {
-        fontFamily: 'Roboto, helvetica, arial, sans-serif',
         fontSize: '18px',
         color: '#666',
         borderBottom: '1.5px solid rgba(0,0,0,0.12)',
         marginBottom: '10px'
       },
       titleCardHugeScreen: {
-        display: 'none',
-        margin: '10px 0',
+        margin: '10px',
         padding: '10px',
-        background: '#fff',
+        backgroundColor: '#fff',
         '@media (min-width: 740px)': {
           display: 'flex',
           flexDirection: 'column',
           margin: '10px 10px 10px 0'
         }
-      },
-      titleCardSmallScreen: {
-        margin: '10px',
-        padding: '10px',
-        background: '#fff',
-        '@media (min-width: 740px)': { display: 'none' }
       }
     };
     return (
@@ -176,39 +156,34 @@ class Deal extends React.Component {
             </div>
             <Tag>{deal.tagThree}</Tag>
           </div>
-            <EarnBuy/>
-          <DealContactInfo/>
+          <EarnBuy/>
+          <div style = {{ display: 'none',
+            '@media (min-width: 740px)': { display: 'block' } }}
+          >
+            <DealContactInfo/>
+          </div>
         </div>
 
         <div style = {{ width: '100%', '@media (min-width: 740px)': { width: '60%' } }}>
-          <Certificate/>
+          <div style = {{ display: 'none',
+            '@media (min-width: 740px)': { display: 'block' } }}
+          >
+            <Certificate/>
+          </div>
           <TabsOnSmallScreen/>
-          <div style = {styles.titleCardSmallScreen}>
-            <div style = {[styles.title]}>
+          <div style = {styles.titleCardHugeScreen}>
+            <div style = {styles.title}>
               Подобные предложения
             </div>
           </div>
 
-          <div style = {styles.titleCardSmallScreen}>
+          <div style = {styles.titleCardHugeScreen}>
             <div style = {[styles.title, { width: '100%' }]}>
               Популярные запросы
             </div>
             <Tag>{deal.tagThree}</Tag>
           </div>
-
           <DealComment/>
-          <div style = {styles.titleCardHugeScreen}>
-            <div style = {[styles.title, { width: '100%' }]}>
-              Подобные предложения
-            </div>
-          </div>
-
-          <div style = {styles.titleCardHugeScreen}>
-            <div style = {[styles.title, { width: '100%' }]}>
-              Популярные запросы
-            </div>
-            <Tag>{deal.tagOne}</Tag>
-          </div>
         </div>
       </div>
     );

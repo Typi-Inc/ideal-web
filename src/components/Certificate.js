@@ -5,10 +5,14 @@ import FontIcon from 'material-ui/lib/font-icon';
 
 const styles = {
   title: {
-    fontSize: '18px',
-    color: '#666',
-    borderBottom: '1.5px solid rgba(0,0,0,0.12)',
-    paddingBottom: '5px'
+    display: 'none',
+    '@media (min-width: 740px)': {
+      display: 'block',
+      fontSize: '18px',
+      color: '#666',
+      borderBottom: '1.5px solid rgba(0,0,0,0.12)',
+      paddingBottom: '5px'
+    }
   }
 };
 
@@ -67,15 +71,12 @@ class Certificate extends React.Component {
   render() {
     return (
       <div style = {{
-        display: 'none',
-        '@media (min-width: 740px)': {
-          display: 'flex',
-          flexDirection: 'column',
-          color: '#a99999',
-          padding: '10px',
-          margin: '10px 10px 10px 0',
-          background: '#fff'
-        }
+        display: 'flex',
+        flexDirection: 'column',
+        color: '#a99999',
+        padding: '10px',
+        margin: '10px 10px 10px 0',
+        background: '#fff'
       }}
       >
         <div style = {styles.title}>

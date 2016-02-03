@@ -30,25 +30,24 @@ class CreateDeal extends React.Component {
       <div key = "create deal"
         style = {{
           paddingTop: '60px',
-          '@media (min-width: 950px)': { width: '950px', margin: '0 auto' },
-          '@media (min-width: 1450px)': { width: '1450px', margin: '0 auto' }
+          '@media (min-width: 1000px)': { width: '1000px', margin: '0 auto' },
+          '@media (min-width: 1485px)': { width: '1485px', margin: '0 auto' }
         }}
       >
         <div style = {{
           display: 'none',
           width: '100%',
-          '@media (min-width: 950px)': { display: 'flex', justifyContent: 'center' },
-          '@media (min-width: 1450px)': {
-            display: 'flex', justifyContent: 'flex-start', paddingLeft: '30px' } }}
+          '@media (min-width: 1000px)': { display: 'flex', justifyContent: 'center' }
+          }}
         >
-          <div style = {{ width: '400px', '@media (min-width: 1450px)': { width: '400px' } }}>
+          <div style = {{ width: '400px' }}>
             <DropZone onDrop={this.onDrop}
               style ={styles.dropZoneDetail}
             >
               <div>
                 <div style = {{ fontSize: '24px', fontWeight: '600', paddingTop: '80px' }}>
                   Добавить фото</div>
-                <div style = {{ fontSize: '18px', paddingTop: '20px' }}>
+                <div style = {{ fontSize: '18px', padding: '20px 10px' }}>
                   Перетащите фото в рамку либо укажите путь к файлу</div>
               </div>
             </DropZone>
@@ -59,7 +58,7 @@ class CreateDeal extends React.Component {
           <CreateDealOfferDescribe/>
         </div>
         <div style = {{ background: '#fff', padding: '10px',
-          '@media (min-width: 950px)': { display: 'none' } }}
+          '@media (min-width: 1000px)': { display: 'none' } }}
         >
           Опция создания сделки отключена на мобильной версии сайта
         </div>
