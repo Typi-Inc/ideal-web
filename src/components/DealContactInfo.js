@@ -3,18 +3,21 @@ import Radium from 'radium';
 
 const styles = {
   title: {
-    fontSize: '18px',
-    color: '#666',
-    borderBottom: '1.5px solid rgba(0,0,0,0.12)',
-    paddingBottom: '5px'
+    display: 'none',
+    '@media (min-width: 740px)': {
+      display: 'block',
+      fontSize: '18px',
+      color: '#666',
+      borderBottom: '1.5px solid rgba(0,0,0,0.12)',
+      paddingBottom: '5px'
+    }
   },
   contactCard: {
-    display: 'none',
+    color: '#a99999',
+    padding: '10px',
     '@media (min-width: 740px)': {
       display: 'flex',
       flexDirection: 'column',
-      color: '#a99999',
-      padding: '10px',
       margin: '10px',
       background: '#fff'
     }

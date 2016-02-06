@@ -24,17 +24,14 @@ const styles = {
     justifyContent: 'flex-end',
     '@media (min-width: 850px)': {
       height: '250px'
-    },
-    '@media (min-width: 1020px)': {
-      height: '180px'
     }
   },
   mainOptionsCard: {
     display: 'flex',
-    width: '50px',
+    width: '65px',
     justifyContent: 'center',
     background: '#0679A2',
-    height: '50px',
+    height: '35px',
     color: '#fff',
     alignItems: 'center',
     fontWeight: '500'
@@ -86,7 +83,11 @@ class DealsItem extends React.Component {
     const deal = this.props.deal;
     return (
       <div key={deal.id}
-        style={{ width: '100%', '@media (min-width: 1000px)': { width: '475px', paddingRight: '20px' } }}
+        style={{ width: '100%',
+          '@media (min-width: 1000px)': { width: '475px', paddingRight: '20px' },
+          '@media (min-width: 1200px)': { width: '560px', paddingRight: '20px' },
+          '@media (min-width: 1485px)': { width: '475px', paddingRight: '20px' }
+           }}
       >
         <div style={{ display: 'none',
           '@media (min-width: 580px)': {
@@ -96,11 +97,11 @@ class DealsItem extends React.Component {
             width: '100%' }
         }}
         >
-          <DealsItemBusiness {..._.pick(deal.business, Object.keys(DealsItemBusiness.queries()))} />
+          <DealsItemBusiness {..._.pick(deal.business, Object.keys(DealsItemBusiness.queries()))}/>
         </div>
         <div id="hoverCard" style={styles.card}>
           <div style={{ width: '100%', '@media (min-width: 580px)': { display: 'none' } }}>
-            <DealsItemBusiness {..._.pick(deal.business, Object.keys(DealsItemBusiness.queries()))} />
+            <DealsItemBusiness {..._.pick(deal.business, Object.keys(DealsItemBusiness.queries()))}/>
           </div>
           <div style={{ width: '100%', '@media (min-width: 580px)': { width: '50%' } }}>
             <Link to={'/deal/' + deal.id} style = {{ textDecoration: 'none' }}>
@@ -133,7 +134,9 @@ class DealsItem extends React.Component {
             }}
             >
               <div style={{ padding: '10px' }}>
-                <span style = {{ fontSize: '16px' }}>
+                <span style = {{ fontSize: '14px',
+                  '@media (min-width: 580px)': { fontSize: '16px' } }}
+                >
                   {deal.title}
                 </span>
               </div>

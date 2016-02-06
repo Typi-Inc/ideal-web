@@ -68,7 +68,8 @@ class Deals extends React.Component {
             display: 'flex',
             flexWrap: 'wrap',
             padding: '0 5px',
-            '@media (min-width: 1000px)': { marginLeft: '15px' }
+            '@media (min-width: 1000px)': { marginLeft: '15px' },
+            '@media (min-width: 1485px)': { marginLeft: '20px' }
           }}
         >
           {
@@ -83,7 +84,10 @@ class Deals extends React.Component {
         </div>
         {
           this.state.isLoading && (
-            <div style={{ display: 'flex', justifyContent: 'center', height: '100px' }}>
+            <div style={{ display: 'flex',
+              justifyContent: 'center',
+              height: '100px',
+              marginTop: '20px' }}>
               <Spinner spinnerName="wandering-cubes" noFadeIn />
             </div>
           )
