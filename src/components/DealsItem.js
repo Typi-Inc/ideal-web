@@ -156,7 +156,9 @@ class DealsItem extends React.Component {
               {
                 values(_.get(deal, ['tags', 'sort:createdAt=desc', 'edges'])).
                 map(tag => (
-                  <Tag>{tag.text}</Tag>
+                  <div key={`${deal.id}${tag.id}`}>
+                    <Tag>{tag.text}</Tag>
+                  </div>
                 ))
               }
             </div>

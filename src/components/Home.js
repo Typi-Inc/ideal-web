@@ -1,15 +1,9 @@
 import React from 'react';
-import { get } from '../intent/get';
+import { get } from '../intent';
 import Deals from './Deals';
 import Combinator from './Combinator';
-import { Observable } from 'rxjs/Observable';
 import { values } from '../utils/helpers';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/observable/fromPromise';
 import '../public/hover.css';
-
-let count = 0;
 
 class Home extends React.Component {
   static contextTypes = {
@@ -27,10 +21,9 @@ class Home extends React.Component {
     return (
       <Combinator>
         {
-          this.context.model$.
-            flatMap(model => Observable.fromPromise(model.get(...this.paths))).
-            map(data => <Deals
-              deals={values(data.json.featuredDeals)}
+          this.context.model$.getData(this.paths).
+            map(deals => <Deals
+              deals={values(deals)}
               fetch={this.fetch.bind(this)}
             />)
         }

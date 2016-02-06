@@ -25,7 +25,7 @@ export function range(from, to, obj) {
 }
 
 export function fragment(queries) {
-  return toTree(toPaths(queries));
+  return toTree(falcorToPaths(queries));
 }
 
 function depthOf(obj) {

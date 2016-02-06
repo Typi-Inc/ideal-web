@@ -2,10 +2,8 @@ import React from 'react';
 import { Link as RouterLink } from 'react-router';
 import Radium from 'radium';
 import Select from 'react-select';
-import Modal from 'react-modal';
 import FlatButton from 'material-ui/lib/flat-button';
 import FontIcon from 'material-ui/lib/font-icon';
-import FloatingActionButton from 'material-ui/lib/floating-action-button';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 import IconMenu from 'material-ui/lib/menus/icon-menu';
 import MoreVertIcon from 'material-ui/lib/svg-icons/navigation/more-vert';
@@ -13,6 +11,9 @@ import ActionHome from 'material-ui/lib/svg-icons/action/home';
 import IconButton from 'material-ui/lib/icon-button';
 import Toolbar from 'material-ui/lib/toolbar/toolbar';
 import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
+
+import Combinator from './Combinator';
+import { getLocal } from '../intent';
 import '../public/react-select.css';
 import '../public/modal.css';
 
@@ -26,38 +27,27 @@ const FLAVOURS = [
   { label: 'Peppermint', value: 'peppermint' }
 ];
 
-const modalStyles = {
-  overlay: {
-    backgroundColor: 'rgba(0,0,0,0.54)'
-  },
-  content: {
-    top: '0',
-    left: '0',
-    right: '0',
-    bottom: '0',
-    padding: '20px 15px 0 20px',
-    height: '390px',
-    margin: 'auto',
-    width: '240px',
-    zIndex: '9000'
-  }
-};
-
 class AppBody extends React.Component {
   static propTypes = {
     children: React.PropTypes.element.isRequired
   };
   static contextTypes = {
-    router: React.PropTypes.object.isRequired
+    router: React.PropTypes.object.isRequired,
+    lock: React.PropTypes.object,
+    model$: React.PropTypes.any
   };
-  constructor() {
-    super();
+  constructor(props, context) {
+    super(props, context);
     this.state = {
       crazy: false,
       options: FLAVOURS,
       value: [],
       modalIsOpen: false
     };
+  }
+
+  componentWillMount() {
+    getLocal(['loggedIn']);
   }
 
   openModal() {
@@ -70,48 +60,6 @@ class AppBody extends React.Component {
 
   handleSelectChange(value) {
     this.setState({ value });
-  }
-
-  renderFacebookButton() {
-    const styles = {
-      facebookButton: {
-        width: '100%',
-        backgroundColor: '#3a5999',
-        backgroundImage: 'url("http://static1.squarespace.com/static/4f5810d9e4b0ebbf0a1507a6/t/55a6e39be4b0e13bc07f93a1/1437000604121/")',
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'contain',
-        color: 'white',
-        fontWeight: '300',
-        letterSpacing: '1',
-        marginBottom: '20px'
-      }
-    };
-    return (
-        <div >
-          <FlatButton
-            style={styles.facebookButton}
-            onClick={() => this.context.router.push('/facebook')}
-            label="Sign in"
-          />
-          <FlatButton
-            style={Object.assign({}, styles.facebookButton, {
-              backgroundColor: '#5B7FA6',
-              backgroundImage: 'url("http://wault42.com/wp-content/uploads/2015/10/vk1.png")'
-            })}
-            onClick={() => this.context.router.push('/vk')}
-            label="Sign in"
-          />
-          <FlatButton
-            style={Object.assign({}, styles.facebookButton, {
-              backgroundColor: '#DC4E41',
-              marginBottom: '0',
-              backgroundImage: 'url("http://www.envisionexperience.com/~/media/images/blog/googleplus.png?la=en")'
-            })}
-            onClick={() => this.context.router.push('/google')}
-            label="Sign in"
-          />
-        </div>
-    );
   }
 
   render() {
@@ -167,11 +115,18 @@ class AppBody extends React.Component {
                 label="Настройки"
                 style = {{ margin: '10px 0' }}
               />
-              <FlatButton labelStyle = {{ color: '#fff', textTransform: 'none', fontSize: '18px' }}
-                onClick={this.openModal.bind(this)}
-                label="Войти"
-                style = {{ margin: '10px 0' }}
-              />
+              <Combinator>
+                {
+                  this.context.model$.getData(['loggedIn'], false).
+                    map(loggedIn => !loggedIn ? (
+                      <FlatButton labelStyle = {{ color: '#fff', textTransform: 'none', fontSize: '18px' }}
+                        onClick={() => this.context.lock.show()}
+                        label="Войти"
+                        style = {{ margin: '10px 0' }}
+                      />
+                    ) : <div></div>)
+                }
+              </Combinator>
             </ToolBarGroupRadium>
             <ToolBarGroupRadium float="right"
               style = {{ '@media (min-width: 950px)': { display: 'none' } }}>
@@ -191,39 +146,10 @@ class AppBody extends React.Component {
               </IconMenu>
             </ToolBarGroupRadium>
           </Toolbar>
-          <Modal
-            isOpen={this.state.modalIsOpen}
-            onRequestClose={this.closeModal.bind(this)}
-            style={modalStyles}
-          >
-            <h2 style={{
-              fontSize: '20px',
-              fontWeight: '900',
-              textAlign: 'center',
-              margin: '0',
-              lineHeight: '36px',
-              paddingBottom: '5px'
-            }}
-            >
-              Ищите интересные предложения, рекомендуйте друзьям и получайте бонус!
-            </h2>
-            {this.renderFacebookButton()}
-            <div style={{ textAlign: 'right', marginTop: '10px' }}>
-              <FloatingActionButton
-                mini
-                backgroundColor="#54C085"
-                onClick={this.closeModal.bind(this)}
-              >
-                <FontIcon className="material-icons" style={{ fontSize: '18px', color: 'white' }}>
-                  close
-                </FontIcon>
-              </FloatingActionButton>
-            </div>
-          </Modal>
             {this.props.children}
         </div>
     );
   }
 }
 
-export default Radium(AppBody);
+export default AppBody;

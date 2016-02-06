@@ -2,6 +2,7 @@ import React from 'react';
 import Radium from 'radium';
 import FlatButton from 'material-ui/lib/flat-button';
 import FontIcon from 'material-ui/lib/font-icon';
+import { logout } from '../intent';
 
 const styles = {
   card: {
@@ -23,6 +24,9 @@ const styles = {
 };
 
 class Settings extends React.Component {
+  static contextTypes = {
+    router: React.PropTypes.object.isRequired
+  };
 
   constructor() {
     super();
@@ -39,6 +43,11 @@ class Settings extends React.Component {
       });
       this.tagName.value = '';
     }
+  }
+
+  logout() {
+    logout();
+    this.context.router.push('/');
   }
 
   removeTag(tag) {
@@ -63,8 +72,13 @@ class Settings extends React.Component {
           }}
           >
             <FlatButton >
-              <FontIcon className="material-icons" style = {{ fontSize: '50px', color: '#a99999' }}>
-                account_box</FontIcon>
+              <FontIcon
+                onClick={this.logout.bind(this)}
+                className="material-icons"
+                style = {{ fontSize: '50px', color: '#a99999' }}
+              >
+                account_box
+              </FontIcon>
             </FlatButton>
 
             <span style = {{
