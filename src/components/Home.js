@@ -1,4 +1,6 @@
 import React from 'react';
+import { Observable } from 'rxjs/Observable';
+import _ from 'lodash';
 import { get } from '../intent';
 import Deals from './Deals';
 import Combinator from './Combinator';
@@ -12,16 +14,19 @@ class Home extends React.Component {
   componentWillMount() {
     this.fetch(0, 9);
   }
-  paths = [];
+  getPaths() {
+    return this.paths;
+  }
   fetch(from, to) {
     this.paths = Deals.paths(from, to);
     get(this.paths);
   }
+  paths = [];
   render() {
     return (
       <Combinator>
         {
-          this.context.model$.getData(this.paths).
+          this.context.model$.getData(this.getPaths.bind(this)).
             map(deals => <Deals
               deals={values(deals)}
               fetch={this.fetch.bind(this)}

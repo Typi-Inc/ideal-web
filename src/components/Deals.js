@@ -76,7 +76,8 @@ class Deals extends React.Component {
             this.props.deals.map(deal => (
               <div key={deal.id} style = {{ width: '100%', padding: '0 5px',
                 '@media (min-width: 1000px)': { width: '50%', padding: '0' },
-                '@media (min-width: 1485px)': { width: '33%', padding: '0' }}}>
+                '@media (min-width: 1485px)': { width: '33%', padding: '0' } }}
+              >
                 <DealsItem deal={deal} />
               </div>
             ))

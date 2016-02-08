@@ -1,6 +1,7 @@
 import React from 'react';
 import Radium from 'radium';
 import FlatButton from 'material-ui/lib/flat-button';
+import shallowEqual from '../utils/shallowEqual';
 
 const styles = {
   tagBorder: {
@@ -16,6 +17,9 @@ class Tag extends React.Component {
   static propTypes = {
     children: React.PropTypes.string
   };
+  shouldComponentUpdate(nextProps) {
+    return !shallowEqual(this.props, nextProps);
+  }
   static queries = () => ({
     text: null
   });

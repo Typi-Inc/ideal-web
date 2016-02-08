@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Radium from 'radium';
 import shallowEqual from '../utils/shallowEqual';
 
-class DealsItemBusiness extends Component {
+class Business extends Component {
   static propTypes = {
     name: PropTypes.string
   };
@@ -26,4 +26,4 @@ class DealsItemBusiness extends Component {
   }
 }
 
-export default Radium(DealsItemBusiness);
+export default Radium(Business);

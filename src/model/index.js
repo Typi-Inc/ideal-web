@@ -66,17 +66,26 @@ const model = ({ get$, getLocal$, login$, logout$ }) => {
     if (!paths) {
       return new Error('paths must not be falsy');
     }
-    if (paths.constructor !== Array) {
-      return new Error('paths must be of type Array');
+    if (_.isArray(paths) && _.isFunction(paths)) {
+      return new Error('paths must be of type Array or Function');
     }
     let json$;
     let entryPath;
-    if (paths[0].constructor === Array) {
-      json$ = model$.mergeMap(m => Observable.fromPromise(m.get(...paths)));
-      entryPath = paths[0][0];
+    if (_.isFunction(paths)) {
+      json$ = model$.mergeMap(m => Observable.fromPromise(m.get(...paths())));
+      if (_.isArray(paths()[0])) {
+        entryPath = paths()[0][0];
+      } else {
+        entryPath = paths()[0];
+      }
     } else {
-      json$ = model$.mergeMap(m => Observable.fromPromise(m.get(paths)));
-      entryPath = paths[0];
+      if (paths[0].constructor === Array) {
+        json$ = model$.mergeMap(m => Observable.fromPromise(m.get(...paths)));
+        entryPath = paths[0][0];
+      } else {
+        json$ = model$.mergeMap(m => Observable.fromPromise(m.get(paths)));
+        entryPath = paths[0];
+      }
     }
     const unfiltered$ = json$.
       map(json => _.get(json, ['json', entryPath]));
