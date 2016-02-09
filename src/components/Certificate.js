@@ -39,24 +39,28 @@ class Certificate extends React.Component {
   });
   render() {
     return (
-      <div style = {{ borderBottom: '1.5px solid rgba(0,0,0,0.12)' }}>
+      <div style = {{ borderBottom: '1.5px solid rgba(0,0,0,0.12)',
+        display: 'flex',
+        flexDirection: 'column'
+        }}
+      >
         <div style={{ display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center' }}
         >
-          <div style={{ width: '70%', padding: '5px', fontSize: '12px',
-            '@media (min-width: 740px)': { fontSize: '16px', padding: '10px' } }}
+          <div style={{ width: '65%', padding: '5px', fontSize: '12px',
+            '@media (min-width: 740px)': { width: '75%', fontSize: '16px', padding: '10px' } }}
           >
             {this.props.title}
           </div>
-          <div>
+          <div style = {{ paddingRight: '5px', '@media (min-width: 740px)': { paddingRight: '0px' } }}>
             <span style = {{ fontSize: '10px',
               textDecoration: 'line-through',
               marginRight: '5px',
-              '@media (min-width: 740px)': { fontSize: '16px' }
+              '@media (min-width: 740px)': { fontSize: '16px', paddingRight: '5px' }
             }}
             >
-              {this.props.oldPrice} тг</span>
+              {this.props.oldPrice}</span>
             <span style = {{ color: '#777777', fontSize: '12px',
              '@media (min-width: 740px)': { fontSize: '18px' } }}
             >
@@ -64,8 +68,7 @@ class Certificate extends React.Component {
           </div>
         </div>
         <div style = {{ display: 'flex', justifyContent: 'center', paddingBottom: '10px',
-          '@media (min-width: 740px)': { display: 'block',
-            margin: '0', float: 'right', paddingBottom: '0' } }}
+          '@media (min-width: 740px)': { margin: '0', alignSelf: 'flex-end', paddingBottom: '0' } }}
         >
           <FlatButton
             style = {styles.flatButtonStyleLeft}

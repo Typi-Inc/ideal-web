@@ -36,25 +36,20 @@ class EarnBuy extends React.Component {
     return (
       <div style={{
         display: 'flex',
-        justifyContent: 'space-between',
-        padding: '0 10px'
+        justifyContent: 'space-around',
+        backgroundColor: '#fff',
+        margin: '0 10px'
       }}
       >
         <div>
           <FlatButton labelStyle={{ color: 'red', fontSize: '16px', textTransform: 'none' }}
             label="Like"
-            style={{
-              backgroundColor: '#fff'
-            }}
           />
         </div>
         <div>
           <FlatButton labelStyle={{ color: '#0679A2', fontSize: '16px', textTransform: 'none' }}
             label="Рекомендовать"
             onTouchTap={this.handleOpen.bind(this)}
-            style={{
-              backgroundColor: '#fff'
-            }}
           />
         </div>
         <Dialog
@@ -72,14 +67,6 @@ class EarnBuy extends React.Component {
           >link</FontIcon>
           https://poblatu.kz/1232545434
         </Dialog>
-        <div>
-          <FlatButton labelStyle={{ color: '#54c085', fontSize: '16px', textTransform: 'none' }}
-            label="Купить"
-            style={{
-              backgroundColor: '#fff'
-            }}
-          />
-        </div>
       </div>
     );
   }

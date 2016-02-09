@@ -132,11 +132,9 @@ class Deal extends React.Component {
             '@media (min-width: 740px)': { display: 'block' } }}
           >
             <div style = {{
-              display: 'flex',
-              flexDirection: 'column',
               color: '#a99999',
               padding: '5px',
-              background: '#fff',
+              backgroundColor: '#fff',
               '@media (min-width: 740px)': { padding: '10px', margin: '10px 10px 10px 0' }
             }}
             >

@@ -10,11 +10,14 @@ import { call } from '../intent';
 
 const styles = {
   title: {
-    fontFamily: 'Roboto, helvetica, arial, sans-serif',
-    fontSize: '18px',
-    color: '#666',
-    borderBottom: '1.5px solid rgba(0,0,0,0.12)',
-    marginBottom: '10px'
+    display: 'none',
+    '@media (min-width: 740px)': {
+      display: 'block',
+      fontSize: '18px',
+      color: '#666',
+      borderBottom: '1.5px solid rgba(0,0,0,0.12)',
+      paddingBottom: '5px'
+    }
   }
 };
 

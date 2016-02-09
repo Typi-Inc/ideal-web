@@ -64,9 +64,9 @@ class AppBody extends React.Component {
 
   render() {
     return (
-        <div style={{ background: '#dedede', height: '100%' }}>
+        <div style={{ backgroundColor: '#dedede', height: '100%' }}>
           <Toolbar style={{
-            background: '#0679A2',
+            backgroundColor: '#0679A2',
             paddingRight: '0',
             position: 'fixed',
             zIndex: '1000'

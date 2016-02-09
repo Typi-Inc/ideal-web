@@ -25,7 +25,7 @@ class DealComment extends React.Component {
       <div style={{
         display: 'flex',
         paddingTop: '10px',
-        borderTop: '1px solid rgba(0,0,0,0.12)'
+        borderBottom: '1px solid rgba(0,0,0,0.12)'
       }}
       >
         <div>
