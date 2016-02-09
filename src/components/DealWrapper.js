@@ -12,6 +12,9 @@ class DealWrapper extends React.Component {
     model$: React.PropTypes.any
   };
   componentWillMount() {
+    this.fetch();
+  }
+  fetch() {
     get(this.paths());
   }
   paths() {
@@ -29,7 +32,7 @@ class DealWrapper extends React.Component {
         {
           this.context.model$.getData(this.paths.bind(this), this.entryPath()).
             map(deal => (
-              <Deal deal={deal} />
+              <Deal deal={deal} fetch={this.fetch.bind(this)} />
             ))
         }
       </Combinator>

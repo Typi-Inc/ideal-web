@@ -82,9 +82,12 @@ const model = ({ get$, getLocal$, call$, login$, logout$ }) => {
     nextCombinedModel();
   });
 
-  call$.subscribe(args => {
-    remoteModel.call(...args).
-      subscribe(nextCombinedModel, console.log, () => console.log('completed'));
+  call$.subscribe(([callPath, args, refPaths, thisPaths, cb]) => {
+    remoteModel.call(callPath, args, refPaths, thisPaths).
+      subscribe(() => {
+        nextCombinedModel();
+        cb();
+      }, console.log, () => console.log('completed'));
   });
 
   login$.subscribe(({ profile, token }) => {

@@ -124,7 +124,7 @@ class AppBody extends React.Component {
                         label="Войти"
                         style = {{ margin: '10px 0' }}
                       />
-                    ) : <div>Yopta</div>)
+                    ) : <div></div>)
                 }
               </Combinator>
             </ToolBarGroupRadium>

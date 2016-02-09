@@ -50,7 +50,8 @@ const styles = {
 
 class Deal extends React.Component {
   static propTypes = {
-    deal: React.PropTypes.object
+    deal: React.PropTypes.object,
+    fetch: React.PropTypes.func
   };
   static queries = () => ({
     id: null,
@@ -178,7 +179,7 @@ class Deal extends React.Component {
           <div style = {{ display: 'none',
             '@media (min-width: 740px)': { display: 'block' } }}
           >
-            <DealComments {..._.pick(deal, Object.keys(DealComments.queries()))} />
+            <DealComments {..._.pick(deal, Object.keys(DealComments.queries()))} fetch={this.props.fetch} />
           </div>
         </div>
       </div>

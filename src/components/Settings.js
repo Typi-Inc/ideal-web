@@ -71,9 +71,8 @@ class Settings extends React.Component {
             paddingBottom: '10px'
           }}
           >
-            <FlatButton >
+            <FlatButton onClick={this.logout.bind(this)}>
               <FontIcon
-                onClick={this.logout.bind(this)}
                 className="material-icons"
                 style = {{ fontSize: '50px', color: '#a99999' }}
               >

@@ -6,7 +6,7 @@ import FlatButton from 'material-ui/lib/flat-button';
 import shallowEqual from '../utils/shallowEqual';
 import DealComment from './DealComment';
 import { values, range } from '../utils/helpers';
-import { call } from '../intent';
+import { call, get } from '../intent';
 
 const styles = {
   title: {
@@ -24,7 +24,8 @@ const styles = {
 class DealComments extends React.Component {
   static propTypes = {
     id: React.PropTypes.string,
-    comments: React.PropTypes.object
+    comments: React.PropTypes.object,
+    fetch: React.PropTypes.func
   };
   constructor() {
     super();
@@ -58,7 +59,7 @@ class DealComments extends React.Component {
       call(['comments', 'create'], [{
         text: comment,
         idDeal: this.props.id
-      }], ['text']);
+      }], ['text'], undefined, this.props.fetch);
       this.comment.value = '';
     }
   }

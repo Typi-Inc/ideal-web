@@ -30,7 +30,7 @@ class App extends React.Component {
     };
   }
   componentWillMount() {
-    this.subscription = this.props.model$.getData(['loggedIn']).
+    this.subscription = this.props.model$.getData(['loggedIn'], ['loggedIn']).
       subscribe(loggedIn => {
         this.loggedIn = loggedIn;
       });
