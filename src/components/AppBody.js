@@ -117,14 +117,14 @@ class AppBody extends React.Component {
               />
               <Combinator>
                 {
-                  this.context.model$.getData(['loggedIn'], false).
+                  this.context.model$.getData(['loggedIn'], ['loggedIn'], false).
                     map(loggedIn => !loggedIn ? (
                       <FlatButton labelStyle = {{ color: '#fff', textTransform: 'none', fontSize: '18px' }}
                         onClick={() => this.context.lock.show()}
                         label="Войти"
                         style = {{ margin: '10px 0' }}
                       />
-                    ) : <div></div>)
+                    ) : <div>Yopta</div>)
                 }
               </Combinator>
             </ToolBarGroupRadium>
