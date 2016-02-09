@@ -22,7 +22,7 @@ const getLock = () => {
         }
         return;
       }
-      login(token);
+      login(profile, token);
       if (cb) {
         cb(err, profile, token);
       }

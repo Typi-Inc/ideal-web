@@ -10,14 +10,17 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/scan';
 import 'rxjs/add/operator/share';
 
-const model = ({ get$, getLocal$, call$, login$, logout$ }) => {
-  const model$ = new ReplaySubject(1);
+const initializeModels = () => {
   const remoteModel = new falcor.Model({
     source: new FalcorHttpDataSource('/model.json')
   });
-  const localModel = new falcor.Model();
+  const localModel = new falcor.Model({
+    cache: {
+      loggedIn: false
+    }
+  });
   if (localStorage.getItem('token')) {
-    remoteModel.source = new FalcorHttpDataSource('/model.json', {
+    remoteModel._source = new FalcorHttpDataSource('/model.json', {
       headers: {
         'Authorization': 'Bearer ' + localStorage.getItem('token')
       }
@@ -26,47 +29,10 @@ const model = ({ get$, getLocal$, call$, login$, logout$ }) => {
       loggedIn: true
     });
   }
-  const nextCombinedModel = () => {
-    model$.next(new falcor.Model({
-      cache: {
-        ...remoteModel.getCache(),
-        ...localModel.getCache()
-      }
-    }));
-  };
+  return { remoteModel, localModel };
+};
 
-  get$.subscribe(paths => {
-    remoteModel.get(...paths).
-      subscribe(nextCombinedModel, console.log, () => console.log('completed'));
-  });
-
-  getLocal$.subscribe(() => {
-    nextCombinedModel();
-  });
-
-  call$.subscribe(args => {
-    remoteModel.call(...args).
-      subscribe(nextCombinedModel, console.log, () => console.log('completed'));
-  });
-
-  login$.subscribe(token => {
-    localStorage.setItem('token', token);
-    localModel.setCache(Object.assign(localModel.getCache(), { loggedIn: true }));
-    remoteModel.source = new FalcorHttpDataSource('/model.json', {
-      headers: {
-        'Authorization': 'Bearer ' + token
-      }
-    });
-    nextCombinedModel();
-  });
-
-  logout$.subscribe(() => {
-    localStorage.removeItem('token');
-    localModel.setCache(Object.assign(localModel.getCache(), { loggedIn: false }));
-    remoteModel.source = new FalcorHttpDataSource('/model.json');
-    nextCombinedModel();
-  });
-
+const patchModel$ = (model$) => {
   model$.getData = (paths, entryPath, filter = true) => {
     if (!paths) {
       return new Error('paths must not be falsy');
@@ -93,6 +59,56 @@ const model = ({ get$, getLocal$, call$, login$, logout$ }) => {
     if (!filter) return unfiltered$;
     return unfiltered$.filter(data => data);
   };
+};
+
+const model = ({ get$, getLocal$, call$, login$, logout$ }) => {
+  const model$ = new ReplaySubject(1);
+  const { remoteModel, localModel } = initializeModels();
+  const nextCombinedModel = () => {
+    model$.next(new falcor.Model({
+      cache: {
+        ...remoteModel.getCache(),
+        ...localModel.getCache()
+      }
+    }));
+  };
+
+  get$.subscribe(paths => {
+    remoteModel.get(...paths).
+      subscribe(nextCombinedModel, console.log, () => console.log('completed'));
+  });
+
+  getLocal$.subscribe(() => {
+    nextCombinedModel();
+  });
+
+  call$.subscribe(args => {
+    remoteModel.call(...args).
+      subscribe(nextCombinedModel, console.log, () => console.log('completed'));
+  });
+
+  login$.subscribe(({ profile, token }) => {
+    localStorage.setItem('token', token);
+    localModel.setCache(Object.assign(localModel.getCache(), { loggedIn: true }));
+    remoteModel.call(['users', 'create'], [profile]).then(data => {
+      console.log(data, 'after successfull login');
+      remoteModel._source = new FalcorHttpDataSource('/model.json', {
+        headers: {
+          'Authorization': 'Bearer ' + token
+        }
+      });
+      nextCombinedModel();
+    });
+  });
+
+  logout$.subscribe(() => {
+    localStorage.removeItem('token');
+    localModel.setCache(Object.assign(localModel.getCache(), { loggedIn: false }));
+    remoteModel._source = new FalcorHttpDataSource('/model.json');
+    nextCombinedModel();
+  });
+
+  patchModel$(model$);
   return model$;
 };
 
