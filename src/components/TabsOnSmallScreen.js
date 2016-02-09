@@ -1,14 +1,20 @@
 import React from 'react';
 import Radium from 'radium';
+import _ from 'lodash';
 import FontIcon from 'material-ui/lib/font-icon';
 import Tabs from 'material-ui/lib/tabs/tabs';
 import Tab from 'material-ui/lib/tabs/tab';
 import DealContactInfo from './DealContactInfo';
 import Certificate from './Certificate';
-import DealComment from './DealComment';
+import DealComments from './DealComments';
+import { values } from '../utils/helpers';
 
 class TabsOnSmallScreen extends React.Component {
+  static propTypes = {
+    deal: React.PropTypes.object
+  };
   render() {
+    const deal = this.props.deal;
     return (
       <div style = {{
         background: 'white',
@@ -20,15 +26,22 @@ class TabsOnSmallScreen extends React.Component {
           tabItemContainerStyle = {{ backgroundColor: '#fff' }}
         >
           <Tab icon ={<FontIcon color="#0679a2" className="material-icons">description</FontIcon>}>
-            <Certificate/>
+          {
+            values(_.get(deal, ['certificates', 'sort:createdAt=desc', 'edges'])).
+            map(certificate => (
+              <div key={`${deal.id}${certificate.id}`}>
+                <Certificate {..._.pick(certificate, Object.keys(Certificate.queries()))} />
+              </div>
+            ))
+          }
           </Tab>
           <Tab icon ={
             <FontIcon color="#0679a2" className="material-icons">contact_phone</FontIcon>}
           >
-            <DealContactInfo/>
+            <DealContactInfo {..._.pick(deal.business, Object.keys(DealContactInfo.queries()))}/>
           </Tab>
           <Tab icon ={<FontIcon color="#0679a2" className="material-icons">chat</FontIcon>}>
-            <DealComment/>
+            <DealComments {..._.pick(deal, Object.keys(DealComments.queries()))} />
           </Tab>
         </Tabs>
       </div>

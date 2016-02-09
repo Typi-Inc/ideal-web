@@ -10,7 +10,7 @@ import AppBodyWrapper from './AppBodyWrapper';
 import Home from './Home';
 import Settings from './Settings';
 import AppNotFound from './AppNotFound';
-import Deal from './Deal';
+import DealWrapper from './DealWrapper';
 import CreateDeal from './CreateDeal';
 import MyProfile from './MyProfile';
 
@@ -51,7 +51,7 @@ class App extends React.Component {
     return <Router history={browserHistory}>
       <Route path="/" component={AppBodyWrapper}>
         <IndexRoute component={Home}/>
-        <Route path="/deal/:dealId" component={Deal}/>
+        <Route path="/deal/:dealId" component={DealWrapper}/>
         <Route path="/createDeal" component={CreateDeal} onEnter={this.requireAuth.bind(this)} />
         <Route path="/myProfile" component={MyProfile} onEnter={this.requireAuth.bind(this)} />
         <Route path="settings" component={Settings} onEnter={this.requireAuth.bind(this)} />

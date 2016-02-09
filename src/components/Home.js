@@ -1,6 +1,4 @@
 import React from 'react';
-import { Observable } from 'rxjs/Observable';
-import _ from 'lodash';
 import { get } from '../intent';
 import Deals from './Deals';
 import Combinator from './Combinator';
@@ -26,7 +24,7 @@ class Home extends React.Component {
     return (
       <Combinator>
         {
-          this.context.model$.getData(this.getPaths.bind(this)).
+          this.context.model$.getData(this.getPaths.bind(this), ['featuredDeals']).
             map(deals => <Deals
               deals={values(deals)}
               fetch={this.fetch.bind(this)}

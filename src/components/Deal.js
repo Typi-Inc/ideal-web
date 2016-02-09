@@ -1,108 +1,94 @@
 import React from 'react';
 import Radium from 'radium';
+import _ from 'lodash';
+import { values, range } from '../utils/helpers';
 import DealContactInfo from './DealContactInfo';
 import EarnBuy from './EarnBuy';
 import Tag from './Tag.js';
 import Certificate from './Certificate';
-import DealComment from './DealComment';
+import Title from './Title';
+import Stats from './Stats';
+import DealComments from './DealComments';
 import TabsOnSmallScreen from './TabsOnSmallScreen';
-import FontIcon from 'material-ui/lib/font-icon';
+import Discount from './Discount';
+import Image from './Image';
+
+const styles = {
+  card: {
+    display: 'flex',
+    flexDirection: 'column',
+    margin: '10px',
+    background: '#fff'
+  },
+  title: {
+    fontSize: '18px',
+    color: '#666',
+    borderBottom: '1.5px solid rgba(0,0,0,0.12)',
+    marginBottom: '10px'
+  },
+  titleCertificate: {
+    display: 'none',
+    '@media (min-width: 740px)': {
+      display: 'block',
+      fontSize: '18px',
+      color: '#666',
+      borderBottom: '1.5px solid rgba(0,0,0,0.12)',
+      paddingBottom: '5px'
+    }
+  },
+  titleCard: {
+    margin: '10px',
+    padding: '10px',
+    backgroundColor: '#fff',
+    '@media (min-width: 740px)': {
+      display: 'flex',
+      flexDirection: 'column',
+      margin: '10px 10px 10px 0'
+    }
+  }
+};
 
 class Deal extends React.Component {
+  static propTypes = {
+    deal: React.PropTypes.object
+  };
+  static queries = () => ({
+    id: null,
+    ...Title.queries(),
+    ...Image.queries(),
+    ...Discount.queries(),
+    business: {
+      ...DealContactInfo.queries()
+    },
+    tags: {
+      'sort:createdAt=desc': {
+        edges: {
+          ...range(0, 20, {
+            id: null,
+            ...Tag.queries()
+          })
+        }
+      }
+    },
+    certificates: {
+      'sort:createdAt=desc': {
+        edges: {
+          ...range(0, 100, {
+            id: null,
+            ...Certificate.queries()
+          })
+        }
+      }
+    },
+    ...DealComments.queries(),
+    likes: {
+      'sort:createdAt=desc': {
+        ...Stats.queries()
+      }
+    }
+  });
   render() {
-    const dealsListItem = [
-      {
-        id: '1',
-        imageUrl: 'url("http://europeanautomotiveservicetx.com/files/2011/09/EuropeanAutomotiveServiceWhitehouseTexas.jpg")',
-        imageSrc: 'http://europeanautomotiveservicetx.com/files/2011/09/EuropeanAutomotiveServiceWhitehouseTexas.jpg',
-        dealType: 'Car Service',
-        dealDuration: '3 days',
-        dealSales: '30',
-        dealTitle: 'Auto Detail',
-        previousPrice: '1000',
-        price: '700',
-        purchasesAmount: '129',
-        likesAmount: '487',
-        tagOne: 'Car',
-        tagTwo: 'Diagnostic',
-        tagThree: 'Oil recharge',
-        tagFour: 'Toyota',
-        linkTo: '/car_service_1'
-      }
-    ];
-
-    let deal = dealsListItem[0];
-    //let deal;
-    //for (let i = 0; i < dealsListItem.length; i++) {
-    //  if (dealsListItem[i].id === this.props.params.dealId) {
-    //    deal = dealsListItem[i];
-    //  }
-    //}
-
-
-    const styles = {
-      card: {
-        display: 'flex',
-        flexDirection: 'column',
-        margin: '10px',
-        background: '#fff'
-      },
-      dealImage: {
-        backgroundSize: '100% 100%',
-        height: '200px',
-        backgroundImage: deal.imageUrl,
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'flex-end',
-        '@media (min-width: 420px)': {
-          height: '250px'
-        },
-        '@media (min-width: 740px)': {
-          height: '200px'
-        },
-        '@media (min-width: 900px)': {
-          height: '250px'
-        }
-      },
-      mainOptionsCard: {
-        display: 'flex',
-        width: '50px',
-        justifyContent: 'center',
-        background: '#0679A2',
-        height: '50px',
-        color: '#fff',
-        alignItems: 'center'
-      },
-      tagBorder: {
-        fontSize: '12px',
-        borderRadius: '5px',
-        lineHeight: '18px',
-        minWidth: '40px',
-        padding: '6px 13px',
-        margin: '0 5px 5px 0',
-        textTransform: 'none',
-        height: '32px',
-        color: '#777777',
-        background: '#fff',
-        border: '1.5px solid #eee'
-      },
-      title: {
-        fontSize: '18px',
-        color: '#666',
-        borderBottom: '1.5px solid rgba(0,0,0,0.12)',
-        marginBottom: '10px'
-      },
-      titleCard: {
-        margin: '10px',
-        padding: '10px',
-        backgroundColor: '#fff',
-        '@media (min-width: 740px)': {
-          display: 'flex',
-          flexDirection: 'column',
-          margin: '10px 10px 10px 0'
-        }
-      }
-    };
+    const deal = this.props.deal;
     return (
       <div style = {{
         paddingTop: '60px',
@@ -113,54 +99,31 @@ class Deal extends React.Component {
       >
         <div style = {{ width: '100%', '@media (min-width: 740px)': { width: '40%' } }}>
           <div style={styles.card} key = {deal.id}>
-            <div style={ styles.dealImage }>
-              <div style={ styles.mainOptionsCard }>
-                <div style={{ paddingLeft: '5px' }}>
-                  <span style={{ fontSize: '18px', fontWeight: '600' }}>
-                    {deal.dealSales}
-                  </span>
-                  <span style={{ fontSize: '14px', fontWeight: '600' }}>%</span>
-                </div>
-              </div>
+            <Image {..._.pick(deal, Object.keys(Image.queries()))}>
+              {
+                deal.discount && (
+                  <Discount {..._.pick(deal, Object.keys(Discount.queries()))} />
+                )
+              }
+            </Image>
+            <Title {..._.pick(deal, Object.keys(Title.queries()))} />
+            <Stats {..._.pick(_.get(deal, ['likes', 'sort:createdAt=desc']), Object.keys(Stats.queries()))} />
+            <div style = {{ display: 'flex', flexWrap: 'wrap' }}>
+              {
+                values(_.get(deal, ['tags', 'sort:createdAt=desc', 'edges'])).
+                map(tag => (
+                  <div key={`${deal.id}${tag.id}`}>
+                    <Tag>{tag.text}</Tag>
+                  </div>
+                ))
+              }
             </div>
-
-            <div style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center'
-            }}
-            >
-              <div style={{ padding: '10px' }}>
-              <span>
-                {deal.dealTitle}
-              </span>
-              <span style={{ paddingLeft: '10px' }}>
-                {deal.dealType}
-              </span>
-              </div>
-            </div>
-
-            <div style={{ padding: '0 10px' }}>
-              <FontIcon className="material-icons"
-                style={{ color: 'red', fontSize: '14px', padding: '0 5px' }}
-              >favorite</FontIcon>
-              {deal.likesAmount}
-              <img src="/src/public/assets/hand132-5.png"
-                style={{ height: '14px', padding: '0 5px' }}
-              />
-              {deal.likesAmount}
-              <FontIcon className="material-icons"
-                style={{ color: 'green', fontSize: '14px', padding: '0 5px' }}
-              >shopping_cart</FontIcon>
-              {deal.purchasesAmount}
-            </div>
-            <Tag>{deal.tagThree}</Tag>
           </div>
           <EarnBuy/>
           <div style = {{ display: 'none',
             '@media (min-width: 740px)': { display: 'block' } }}
           >
-            <DealContactInfo/>
+            <DealContactInfo {..._.pick(deal.business, Object.keys(DealContactInfo.queries()))} />
           </div>
         </div>
 
@@ -168,12 +131,34 @@ class Deal extends React.Component {
           <div style = {{ display: 'none',
             '@media (min-width: 740px)': { display: 'block' } }}
           >
-            <Certificate/>
+            <div style = {{
+              display: 'flex',
+              flexDirection: 'column',
+              color: '#a99999',
+              padding: '5px',
+              background: '#fff',
+              '@media (min-width: 740px)': { padding: '10px', margin: '10px 10px 10px 0' }
+            }}
+            >
+              <div style = {styles.titleCertificate}>
+                Сертификаты
+              </div>
+              <div>
+                {
+                  values(_.get(deal, ['certificates', 'sort:createdAt=desc', 'edges'])).
+                  map(certificate => (
+                    <div key={`${deal.id}${certificate.id}`}>
+                    <Certificate {..._.pick(certificate, Object.keys(Certificate.queries()))} />
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
           </div>
-          <TabsOnSmallScreen/>
+          <TabsOnSmallScreen deal={deal}/>
           <div style = {styles.titleCard}>
             <div style = {styles.title}>
-              Подобные предложения
+              Похожие предложения
             </div>
           </div>
 
@@ -181,21 +166,26 @@ class Deal extends React.Component {
             <div style = {[styles.title, { width: '100%' }]}>
               Популярные запросы
             </div>
-            <Tag>{deal.tagThree}</Tag>
+            <div style = {{ display: 'flex', flexWrap: 'wrap' }}>
+              {
+                values(_.get(deal, ['tags', 'sort:createdAt=desc', 'edges'])).
+                map(tag => (
+                  <div key={`${deal.id}${tag.id}`}>
+                    <Tag>{tag.text}</Tag>
+                  </div>
+                ))
+              }
+            </div>
           </div>
           <div style = {{ display: 'none',
             '@media (min-width: 740px)': { display: 'block' } }}
           >
-            <DealComment/>
+            <DealComments {..._.pick(deal, Object.keys(DealComments.queries()))} />
           </div>
         </div>
       </div>
     );
   }
 }
-
-Deal.propTypes = {
-  params: React.PropTypes.any
-};
 
 export default Radium(Deal);

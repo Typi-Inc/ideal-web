@@ -10,7 +10,7 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/scan';
 import 'rxjs/add/operator/share';
 
-const model = ({ get$, getLocal$, login$, logout$ }) => {
+const model = ({ get$, getLocal$, call$, login$, logout$ }) => {
   const model$ = new ReplaySubject(1);
   const remoteModel = new falcor.Model({
     source: new FalcorHttpDataSource('/model.json')
@@ -44,6 +44,11 @@ const model = ({ get$, getLocal$, login$, logout$ }) => {
     nextCombinedModel();
   });
 
+  call$.subscribe(args => {
+    remoteModel.call(...args).
+      subscribe(nextCombinedModel, console.log, () => console.log('completed'));
+  });
+
   login$.subscribe(token => {
     localStorage.setItem('token', token);
     localModel.setCache(Object.assign(localModel.getCache(), { loggedIn: true }));
@@ -62,7 +67,7 @@ const model = ({ get$, getLocal$, login$, logout$ }) => {
     nextCombinedModel();
   });
 
-  model$.getData = (paths, filter = true) => {
+  model$.getData = (paths, entryPath, filter = true) => {
     if (!paths) {
       return new Error('paths must not be falsy');
     }
@@ -70,25 +75,21 @@ const model = ({ get$, getLocal$, login$, logout$ }) => {
       return new Error('paths must be of type Array or Function');
     }
     let json$;
-    let entryPath;
     if (_.isFunction(paths)) {
-      json$ = model$.mergeMap(m => Observable.fromPromise(m.get(...paths())));
       if (_.isArray(paths()[0])) {
-        entryPath = paths()[0][0];
+        json$ = model$.mergeMap(m => Observable.fromPromise(m.get(...paths())));
       } else {
-        entryPath = paths()[0];
+        json$ = model$.mergeMap(m => Observable.fromPromise(m.get(paths())));
       }
     } else {
       if (paths[0].constructor === Array) {
         json$ = model$.mergeMap(m => Observable.fromPromise(m.get(...paths)));
-        entryPath = paths[0][0];
       } else {
         json$ = model$.mergeMap(m => Observable.fromPromise(m.get(paths)));
-        entryPath = paths[0];
       }
     }
     const unfiltered$ = json$.
-      map(json => _.get(json, ['json', entryPath]));
+      map(json => _.get(json, entryPath ? ['json', ...entryPath] : ['json']));
     if (!filter) return unfiltered$;
     return unfiltered$.filter(data => data);
   };
