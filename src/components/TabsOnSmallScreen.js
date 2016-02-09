@@ -11,7 +11,8 @@ import { values } from '../utils/helpers';
 
 class TabsOnSmallScreen extends React.Component {
   static propTypes = {
-    deal: React.PropTypes.object
+    deal: React.PropTypes.object,
+    fetch: React.PropTypes.func
   };
   render() {
     const deal = this.props.deal;
@@ -41,7 +42,7 @@ class TabsOnSmallScreen extends React.Component {
             <DealContactInfo {..._.pick(deal.business, Object.keys(DealContactInfo.queries()))}/>
           </Tab>
           <Tab icon ={<FontIcon color="#0679a2" className="material-icons">chat</FontIcon>}>
-            <DealComments {..._.pick(deal, Object.keys(DealComments.queries()))} />
+            <DealComments {..._.pick(deal, Object.keys(DealComments.queries()))} fetch={this.props.fetch} />
           </Tab>
         </Tabs>
       </div>

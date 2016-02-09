@@ -86,7 +86,9 @@ const model = ({ get$, getLocal$, call$, login$, logout$ }) => {
     remoteModel.call(callPath, args, refPaths, thisPaths).
       subscribe(() => {
         nextCombinedModel();
-        cb();
+        if (cb) {
+          cb();
+        }
       }, console.log, () => console.log('completed'));
   });
 

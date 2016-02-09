@@ -1,12 +1,12 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Radium from 'radium';
 import _ from 'lodash';
 import FontIcon from 'material-ui/lib/font-icon';
 import FlatButton from 'material-ui/lib/flat-button';
-import shallowEqual from '../utils/shallowEqual';
 import DealComment from './DealComment';
 import { values, range } from '../utils/helpers';
-import { call, get } from '../intent';
+import { call } from '../intent';
 
 const styles = {
   title: {
@@ -56,15 +56,15 @@ class DealComments extends React.Component {
   postComment() {
     const comment = this.comment.value;
     if (comment !== '') {
+      this.commentsHeight = ReactDOM.findDOMNode(this.comments).offsetHeight;
       call(['comments', 'create'], [{
         text: comment,
         idDeal: this.props.id
-      }], ['text'], undefined, this.props.fetch);
+      }], ['text'], [], this.props.fetch);
       this.comment.value = '';
     }
   }
   render() {
-    console.log(this.props.comments);
     return (
       <div>
         <div style = {{
@@ -81,25 +81,27 @@ class DealComments extends React.Component {
               chat_bubble_outline</FontIcon>
             <span style = {{ paddingLeft: '5px' }}>Комментарии</span>
           </div>
-          {
-            values(_.get(this.props.comments, ['sort:createdAt=desc', 'edges'])).
-            map(comment => (
-              <div key={`${comment.id}`}>
-                <DealComment {..._.pick(comment, Object.keys(DealComment.queries()))} />
-              </div>
-            ))
-          }
+          <div ref={el => this.comments = el}>
+            {
+              this.props.comments ?
+              Array.reverse(values(_.get(this.props.comments, ['sort:createdAt=desc', 'edges']))).
+                map(comment => (
+                  <div key={`${comment.id}`}>
+                    <DealComment {..._.pick(comment, Object.keys(DealComment.queries()))} />
+                  </div>
+                ))
+              :
+              <div style={{ height: this.commentsHeight + 'px' }}></div>
+            }
+          </div>
         </div>
         <div style = {{
-          display: 'none',
-          '@media (min-width: 740px)': {
-            display: 'flex',
-            flexDirection: 'column',
-            color: '#a99999',
-            margin: '10px 10px 10px 0',
-            padding: '10px',
-            background: '#fff'
-          }
+          display: 'flex',
+          flexDirection: 'column',
+          color: '#a99999',
+          margin: '10px 10px 10px 0',
+          padding: '10px',
+          background: '#fff'
         }}
         >
           <textarea

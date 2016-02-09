@@ -154,7 +154,6 @@ class Deal extends React.Component {
               </div>
             </div>
           </div>
-          <TabsOnSmallScreen deal={deal}/>
           <div style = {styles.titleCard}>
             <div style = {styles.title}>
               Похожие предложения
@@ -181,6 +180,7 @@ class Deal extends React.Component {
           >
             <DealComments {..._.pick(deal, Object.keys(DealComments.queries()))} fetch={this.props.fetch} />
           </div>
+          <TabsOnSmallScreen deal={deal} fetch={this.props.fetch} />
         </div>
       </div>
     );
