@@ -15,6 +15,8 @@ import 'rxjs/add/operator/share';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/takeUntil';
 
+const $atom = falcor.Model.atom;
+
 const initializeModels = () => {
   const remoteModel = new falcor.Model({
     source: new FalcorHttpDataSource('/model.json')
@@ -162,7 +164,7 @@ const model = ({ get$, getLocal$, call$, login$, logout$, tagSearchText$, toggle
     });
 
   toggleTag$.subscribe(tags => {
-    localModel.update({ chosenTags: tags });
+    localModel.update({ chosenTags: $atom(tags) });
     nextCombinedModel();
   });
 
