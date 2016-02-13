@@ -1,4 +1,5 @@
 import React from 'react';
+import Spinner from 'react-spinkit';
 import { get } from '../intent';
 import Deals from './Deals';
 import Combinator from './Combinator';
@@ -16,8 +17,7 @@ class Search extends React.Component {
   componentWillMount() {
     this.fetch(0, 9);
   }
-  componentWillUpdate() {
-    console.log('updating');
+  componentDidUpdate() {
     this.fetch(0, 9);
   }
   getPaths() {
@@ -36,16 +36,32 @@ class Search extends React.Component {
   }
   paths = [];
   render() {
+    console.log('rendering');
     return (
-      <Combinator>
+      <div>
+        <Combinator>
+        {
+          this.context.model$.getData(['dealsByTags', 'isLoading'], ['dealsByTags', 'isLoading'], false).
+            map(isLoading => isLoading
+              ? (
+                <Spinner spinnerName="wandering-cubes" noFadeIn />
+              )
+              : (
+                <div></div>
+              )
+            )
+        }
+        </Combinator>
+        <Combinator>
         {
           this.context.model$.getData(this.getPaths.bind(this), this.getEntryPath.bind(this)).
-            map(deals => <Deals
-              deals={values(deals)}
-              fetch={this.fetch.bind(this)}
+          map(deals => <Deals
+            deals={values(deals)}
+            fetch={this.fetch.bind(this)}
             />)
-        }
-      </Combinator>
+          }
+          </Combinator>
+      </div>
     );
   }
 }

@@ -27,6 +27,9 @@ const initializeModels = () => {
   localModel.update = obj => {
     localModel.setCache(Object.assign(localModel.getCache(), obj));
   };
+  localModel.delete = key => {
+    localModel.setCache(_.omit(localModel.getCache(), key));
+  };
   if (localStorage.getItem('token')) {
     remoteModel._source = new FalcorHttpDataSource('/model.json', {
       headers: {
@@ -88,8 +91,13 @@ const model = ({ get$, getLocal$, call$, login$, logout$, tagSearchText$, toggle
   };
 
   get$.subscribe(paths => {
+    localModel.update({ [paths[0][0]]: { isLoading: true } });
+    nextCombinedModel();
     remoteModel.get(...paths).
-      subscribe(nextCombinedModel, console.log, () => console.log('completed'));
+      subscribe(() => {
+        localModel.delete(paths[0][0]);
+        nextCombinedModel();
+      }, console.log, () => console.log('completed'));
   });
 
   getLocal$.subscribe(() => {
