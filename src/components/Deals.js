@@ -3,7 +3,6 @@ import Radium from 'radium';
 import _ from 'lodash';
 import Spinner from 'react-spinkit';
 import DealsItem from './DealsItem';
-import { prependToPaths, toPaths } from '../utils/helpers';
 
 class Deals extends React.Component {
   static propTypes = {
@@ -28,11 +27,7 @@ class Deals extends React.Component {
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
   }
-
-  static paths = (from, to) => prependToPaths(
-    ['featuredDeals', { from, to }],
-    toPaths(DealsItem.queries())
-  );
+  static queries = DealsItem.queries;
   pending = [];
 
   request(from) {

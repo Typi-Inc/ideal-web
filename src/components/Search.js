@@ -6,22 +6,32 @@ import { values } from '../utils/helpers';
 import { prependToPaths, toPaths } from '../utils/helpers';
 import '../public/hover.css';
 
-class Home extends React.Component {
+class Search extends React.Component {
+  static propTypes = {
+    params: React.PropTypes.object.isRequired
+  };
   static contextTypes = {
     model$: React.PropTypes.any
   };
   componentWillMount() {
     this.fetch(0, 9);
   }
+  componentWillUpdate() {
+    console.log('updating');
+    this.fetch(0, 9);
+  }
   getPaths() {
     return this.paths;
+  }
+  getEntryPath() {
+    return ['dealsByTags', this.props.params.tagIdString];
   }
   static paths = (from, to, toPrepend) => prependToPaths(
     toPrepend,
     toPaths(Deals.queries())
   );
   fetch(from, to) {
-    this.paths = Home.paths(from, to, ['featuredDeals', { from, to }]);
+    this.paths = Search.paths(from, to, ['dealsByTags', this.props.params.tagIdString, { from, to }]);
     get(this.paths);
   }
   paths = [];
@@ -29,7 +39,7 @@ class Home extends React.Component {
     return (
       <Combinator>
         {
-          this.context.model$.getData(this.getPaths.bind(this), ['featuredDeals']).
+          this.context.model$.getData(this.getPaths.bind(this), this.getEntryPath.bind(this)).
             map(deals => <Deals
               deals={values(deals)}
               fetch={this.fetch.bind(this)}
@@ -40,4 +50,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+export default Search;

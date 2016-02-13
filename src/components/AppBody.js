@@ -14,18 +14,11 @@ import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
 
 import Combinator from './Combinator';
 import { getLocal } from '../intent';
+import { tagSearchText, toggleTag } from '../intent';
+import { values, range, toPaths } from '../utils/helpers';
 import '../public/react-select.css';
-import '../public/modal.css';
 
 const ToolBarGroupRadium = Radium(ToolbarGroup);
-const FLAVOURS = [
-  { label: 'Chocolate', value: 'chocolate' },
-  { label: 'Vanilla', value: 'vanilla' },
-  { label: 'Strawberry', value: 'strawberry' },
-  { label: 'Caramel', value: 'caramel' },
-  { label: 'Cookies and Cream', value: 'cookiescream' },
-  { label: 'Peppermint', value: 'peppermint' }
-];
 
 class AppBody extends React.Component {
   static propTypes = {
@@ -36,31 +29,27 @@ class AppBody extends React.Component {
     lock: React.PropTypes.object,
     model$: React.PropTypes.any
   };
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      crazy: false,
-      options: FLAVOURS,
-      value: [],
-      modalIsOpen: false
-    };
-  }
 
   componentWillMount() {
     getLocal(['loggedIn']);
   }
 
-  openModal() {
-    this.setState({ modalIsOpen: true });
+  onSelectChange(value) {
+    toggleTag(value);
+    const tagIdString = value.map(tag => tag.value).join(',');
+    this.context.router.push(`/explore/${tagIdString}`);
   }
 
-  closeModal() {
-    this.setState({ modalIsOpen: false });
-  }
-
-  handleSelectChange(value) {
-    this.setState({ value });
-  }
+  static queries = searchText => ({
+    tagsByText: {
+      [searchText]: {
+        ...range(0, 40, {
+          id: null,
+          text: null
+        })
+      }
+    }
+  });
 
   render() {
     return (
@@ -91,11 +80,36 @@ class AppBody extends React.Component {
               display: 'none',
               '@media (min-width: 740px)': { display: 'block', padding: '10px 0 0 20px' } }}
             >
-              <Select multi
-                value={this.state.value}
-                options={this.state.options}
-                onChange={this.handleSelectChange.bind(this)}
-              />
+              <Combinator>
+                {
+                  this.context.model$.getData([['tagSearchText'], ['chosenTags']], null, false).
+                    map(data => ({
+                      text: data && data.tagSearchText ? data.tagSearchText : '',
+                      chosenTags: data && data.chosenTags ? data.chosenTags : []
+                    })).
+                    flatMap(({ text, chosenTags }) => this.context.model$.
+                      getData(toPaths(AppBody.queries(text)), ['tagsByText'], false).
+                      map(tagsByText => ({
+                        tagsByText: tagsByText ? tagsByText : [],
+                        text: text ? text : '',
+                        chosenTags
+                      }))
+                    ).
+                    map(({ tagsByText, text, chosenTags }) => (
+                      <Select multi
+                        value={chosenTags}
+                        options={values(tagsByText[text ? text : '']).map(tag => ({
+                          label: tag.text,
+                          value: tag.id
+                        }))}
+                        isLoading={tagsByText === 'isLoading'}
+                        onFocus={() => tagSearchText(text ? text : '')}
+                        onInputChange={value => tagSearchText(value)}
+                        onChange={this.onSelectChange.bind(this)}
+                      />
+                    ))
+                }
+              </Combinator>
             </ToolBarGroupRadium>
             <ToolBarGroupRadium float="right"
               style = {{ '@media (max-width: 950px)': { display: 'none' } }}
@@ -142,7 +156,14 @@ class AppBody extends React.Component {
                 <MenuItem primaryText="Настройки"
                   onTouchTap={() => this.context.router.push('/settings')}
                 />
-                <MenuItem primaryText="Войти" onTouchTap={this.openModal.bind(this)}/>
+                <Combinator>
+                  {
+                    this.context.model$.getData(['loggedIn'], ['loggedIn'], false).
+                      map(loggedIn => !loggedIn ? (
+                        <MenuItem primaryText="Войти" onTouchTap={() => this.context.lock.show()}/>
+                      ) : <div></div>)
+                  }
+                </Combinator>
               </IconMenu>
             </ToolBarGroupRadium>
           </Toolbar>
