@@ -4,11 +4,16 @@ import { ReplaySubject } from 'rxjs/subject/ReplaySubject';
 import { Observable } from 'rxjs/Observable';
 import _ from 'lodash';
 import 'rxjs/add/observable/fromPromise';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/scan';
 import 'rxjs/add/operator/share';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/takeUntil';
 
 const initializeModels = () => {
   const remoteModel = new falcor.Model({
@@ -19,13 +24,16 @@ const initializeModels = () => {
       loggedIn: false
     }
   });
+  localModel.update = obj => {
+    localModel.setCache(Object.assign(localModel.getCache(), obj));
+  };
   if (localStorage.getItem('token')) {
     remoteModel._source = new FalcorHttpDataSource('/model.json', {
       headers: {
         'Authorization': 'Bearer ' + localStorage.getItem('token')
       }
     });
-    localModel.setCache({
+    localModel.update({
       loggedIn: true
     });
   }
@@ -54,14 +62,20 @@ const patchModel$ = (model$) => {
         json$ = model$.mergeMap(m => Observable.fromPromise(m.get(paths)));
       }
     }
-    const unfiltered$ = json$.
-      map(json => _.get(json, entryPath ? ['json', ...entryPath] : ['json']));
+    let unfiltered$;
+    if (_.isFunction(entryPath)) {
+      unfiltered$ = json$.
+        map(json => _.get(json, ['json', ...entryPath()]));
+    } else {
+      unfiltered$ = json$.
+        map(json => _.get(json, entryPath ? ['json', ...entryPath] : ['json']));
+    }
     if (!filter) return unfiltered$;
     return unfiltered$.filter(data => data);
   };
 };
 
-const model = ({ get$, getLocal$, call$, login$, logout$ }) => {
+const model = ({ get$, getLocal$, call$, login$, logout$, tagSearchText$, toggleTag$ }) => {
   const model$ = new ReplaySubject(1);
   const { remoteModel, localModel } = initializeModels();
   const nextCombinedModel = () => {
@@ -94,9 +108,8 @@ const model = ({ get$, getLocal$, call$, login$, logout$ }) => {
 
   login$.subscribe(({ profile, token }) => {
     localStorage.setItem('token', token);
-    localModel.setCache(Object.assign(localModel.getCache(), { loggedIn: true }));
-    remoteModel.call(['users', 'create'], [profile]).then(data => {
-      console.log(data, 'after successfull login');
+    localModel.update({ loggedIn: true });
+    remoteModel.call(['users', 'create'], [profile]).then(() => {
       remoteModel._source = new FalcorHttpDataSource('/model.json', {
         headers: {
           'Authorization': 'Bearer ' + token
@@ -108,8 +121,40 @@ const model = ({ get$, getLocal$, call$, login$, logout$ }) => {
 
   logout$.subscribe(() => {
     localStorage.removeItem('token');
-    localModel.setCache(Object.assign(localModel.getCache(), { loggedIn: false }));
+    localModel.update({ loggedIn: false });
     remoteModel._source = new FalcorHttpDataSource('/model.json');
+    nextCombinedModel();
+  });
+
+  tagSearchText$.subscribe(text => {
+    localModel.update({ tagSearchText: text });
+    nextCombinedModel();
+  });
+
+  tagSearchText$.debounceTime(250).
+    map(key => {
+      const result$ = Observable.fromPromise(
+        remoteModel.get(
+          ['tagsByText', key, { from: 0, to: 40 }, ['text', 'id']]
+        )
+      );
+      Observable.of(1).
+        delay(200).
+        takeUntil(result$).subscribe(() => {
+          localModel.update({ tagsByText: 'isLoading' });
+          nextCombinedModel();
+        });
+      return result$;
+    }).switchMap(data => data).
+    subscribe(data => {
+      if (!data) {
+        localModel.update({ tagsByText: 'not found' });
+      }
+      nextCombinedModel();
+    });
+
+  toggleTag$.subscribe(tags => {
+    localModel.update({ chosenTags: tags });
     nextCombinedModel();
   });
 

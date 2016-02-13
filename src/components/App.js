@@ -13,6 +13,7 @@ import AppNotFound from './AppNotFound';
 import DealWrapper from './DealWrapper';
 import CreateDeal from './CreateDeal';
 import MyProfile from './MyProfile';
+import Search from './Search';
 
 class App extends React.Component {
   static propTypes = {
@@ -51,6 +52,7 @@ class App extends React.Component {
     return <Router history={browserHistory}>
       <Route path="/" component={AppBodyWrapper}>
         <IndexRoute component={Home}/>
+        <Route path="/explore/:tagIdString" component={Search}/>
         <Route path="/deal/:dealId" component={DealWrapper}/>
         <Route path="/createDeal" component={CreateDeal} onEnter={this.requireAuth.bind(this)} />
         <Route path="/myProfile" component={MyProfile} onEnter={this.requireAuth.bind(this)} />
