@@ -82,7 +82,7 @@ class CreateDealOfferDescribe extends React.Component {
                   >
                       <FontIcon className="material-icons"
                         color = "#777777"
-                        style = {{ fontSize: '14px' }}
+                        style = {{ fontSize: '24px' }}
                       >delete</FontIcon>
                   </FlatButton>
               </div>

@@ -12,6 +12,7 @@ import DealComments from './DealComments';
 import TabsOnSmallScreen from './TabsOnSmallScreen';
 import Discount from './Discount';
 import Image from './Image';
+import Conditions from './Conditions';
 
 const styles = {
   card: {
@@ -58,6 +59,7 @@ class Deal extends React.Component {
     ...Title.queries(),
     ...Image.queries(),
     ...Discount.queries(),
+    ...Conditions.queries(),
     business: {
       ...DealContactInfo.queries()
     },
@@ -125,6 +127,7 @@ class Deal extends React.Component {
             '@media (min-width: 740px)': { display: 'block' } }}
           >
             <DealContactInfo {..._.pick(deal.business, Object.keys(DealContactInfo.queries()))} />
+            <Conditions {..._.pick(deal, Object.keys(Conditions.queries()))} />
           </div>
         </div>
 

@@ -38,7 +38,7 @@ class CreateDealAddConditions extends React.Component {
           {this.state.conditions.map(condition => (
             <div style = {{
               display: 'flex',
-              padding: '10px 0 10px 10px',
+              padding: '10px 0 5px 25px',
               borderBottom: '1.5px solid rgba(0,0,0,0.12)' }}
             >
               <li style={{ width: '90%', color: '#5b5b5b' }}>

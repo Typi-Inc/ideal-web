@@ -41,15 +41,17 @@ class Certificate extends React.Component {
     return (
       <div style = {{ borderBottom: '1.5px solid rgba(0,0,0,0.12)',
         display: 'flex',
-        flexDirection: 'column'
-        }}
+        flexDirection: 'column',
+        '@media (min-width: 740px)': { paddingBottom: '10px' }
+      }}
       >
         <div style={{ display: 'flex',
           justifyContent: 'space-between',
-          alignItems: 'center' }}
+          alignItems: 'center',
+          '@media (min-width: 740px)': { padding: '10px 0' }}}
         >
           <div style={{ width: '65%', padding: '5px', fontSize: '12px',
-            '@media (min-width: 740px)': { width: '75%', fontSize: '16px', padding: '10px' } }}
+            '@media (min-width: 740px)': { width: '70%', fontSize: '16px', padding: '0' } }}
           >
             {this.props.title}
           </div>
@@ -57,18 +59,18 @@ class Certificate extends React.Component {
             <span style = {{ fontSize: '10px',
               textDecoration: 'line-through',
               marginRight: '5px',
-              '@media (min-width: 740px)': { fontSize: '16px', paddingRight: '5px' }
+              '@media (min-width: 740px)': { fontSize: '14px', paddingRight: '5px' }
             }}
             >
               {this.props.oldPrice}</span>
             <span style = {{ color: '#777777', fontSize: '12px',
-             '@media (min-width: 740px)': { fontSize: '18px' } }}
+             '@media (min-width: 740px)': { fontSize: '16px' } }}
             >
                {this.props.newPrice} тг</span>
           </div>
         </div>
         <div style = {{ display: 'flex', justifyContent: 'center', paddingBottom: '10px',
-          '@media (min-width: 740px)': { margin: '0', alignSelf: 'flex-end', paddingBottom: '0' } }}
+          '@media (min-width: 740px)': { margin: '0', paddingBottom: '0' } }}
         >
           <FlatButton
             style = {styles.flatButtonStyleLeft}
@@ -85,8 +87,7 @@ class Certificate extends React.Component {
             borderTop: '1px solid',
             borderBottom: '1px solid',
             lineHeight: '36px',
-            textAlign: 'center',
-            '@media (min-width: 740px)': { fontSize: '22px' } }}
+            textAlign: 'center' }}
           >0</span>
           <FlatButton
             style = {styles.flatButtonStyleRight}

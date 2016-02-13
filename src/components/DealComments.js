@@ -6,7 +6,8 @@ import FontIcon from 'material-ui/lib/font-icon';
 import FlatButton from 'material-ui/lib/flat-button';
 import DealComment from './DealComment';
 import { values, range } from '../utils/helpers';
-import { call } from '../intent';
+import { call, getLocal } from '../intent';
+import Combinator from './Combinator';
 
 const styles = {
   title: {
@@ -26,6 +27,10 @@ class DealComments extends React.Component {
     id: React.PropTypes.string,
     comments: React.PropTypes.object,
     fetch: React.PropTypes.func
+  };
+  static contextTypes = {
+    model$: React.PropTypes.any,
+    lock: React.PropTypes.object
   };
   constructor() {
     super();
@@ -128,17 +133,24 @@ class DealComments extends React.Component {
           }}
           >
             Поделись!
-            <FlatButton
-              onClick = {this.postComment.bind(this)}
-              style = {{ width: '28px',
-                minWidth: '28px'
-            }}
-            >
-              <FontIcon className="material-icons"
-                color = "#a99999"
-                style = {{ fontSize: '18px' }}
-              >chat_bubble_outline</FontIcon>
-            </FlatButton>
+            <Combinator>
+              {
+                this.context.model$.getData(['loggedIn'], ['loggedIn'], false).
+                map(loggedIn => console.log(loggedIn) || (
+                  <FlatButton
+                    onClick = {loggedIn ? this.postComment.bind(this) : () => this.context.lock.show()}
+                    style = {{ width: '28px',
+                      minWidth: '28px'
+                    }}
+                  >
+                    <FontIcon className="material-icons"
+                              color = "#a99999"
+                              style = {{ fontSize: '18px' }}
+                    >chat_bubble_outline</FontIcon>
+                  </FlatButton>
+                ))
+              }
+            </Combinator>
           </div>
         </div>
       </div>

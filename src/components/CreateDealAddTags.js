@@ -11,9 +11,8 @@ const styles = {
     margin: '10px 5px 5px 0',
     padding: '5px',
     textAlign: 'center',
-    color: '#777777',
-    background: '#fff',
-    border: '1.5px solid #eee'
+    backgroundColor: '#fff',
+    border: '1.5px solid #777777'
   }
 };
 
@@ -56,7 +55,7 @@ class CreateDealAddTags extends React.Component {
                 style = {{ lineHeight: '20px', height: '20px', minWidth: '20px', padding: '0' }}
               >
                 <FontIcon className="material-icons" style = {{ fontSize: '14px' }}>
-                  remove</FontIcon>
+                  clear</FontIcon>
               </FlatButton>
             </div>
           ))}

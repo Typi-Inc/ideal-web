@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import Radium from 'radium';
 import shallowEqual from '../utils/shallowEqual';
 import { values } from '../utils/helpers';
+import FontIcon from 'material-ui/lib/font-icon';
 
 const styles = {
   title: {
@@ -31,7 +32,8 @@ class DealContactInfo extends React.Component {
     city: PropTypes.string,
     street: PropTypes.string,
     phones: PropTypes.array,
-    schedule: PropTypes.array
+    schedule: PropTypes.array,
+    conditions: PropTypes.string
   };
   shouldComponentUpdate(nextProps) {
     console.log(!shallowEqual(this.props, nextProps));
@@ -41,7 +43,8 @@ class DealContactInfo extends React.Component {
     city: null,
     street: null,
     phones: null,
-    schedule: null
+    schedule: null,
+    conditions: null
   });
   render() {
     return (
@@ -49,14 +52,32 @@ class DealContactInfo extends React.Component {
         <div style = {styles.title }>
           Контактная информация
         </div>
-        <span>
-          Адрес: {this.props.city}, {this.props.street}
-        </span>
-        <div>
-          Tel: {values(this.props.phones).map(phone => <span key={phone}>{phone}<br/></span>)}
+        <div style = {{ display: 'flex', paddingTop: '10px' }}>
+          <div style = {{ width: '10%', alignSelf: 'center' }}>
+            <FontIcon className="material-icons"
+                      color = "#0679a2"
+                      style = {{ fontSize: '24px' }}
+            >location_on</FontIcon>
+          </div>
+          <div>
+            Адрес: {this.props.city}, {this.props.street}
+          </div>
         </div>
-        <div>
-          Работаем: {values(this.props.schedule).map(item => <span key={item}>{item}<br/></span>)}
+        <div style = {{ display: 'flex' }}>
+          <div style = {{ width: '10%', alignSelf: 'center' }}>
+            <FontIcon className="material-icons"
+                      color = "#0679a2"
+                      style = {{ fontSize: '24px' }}
+            >schedule</FontIcon>
+          </div>
+          <div>
+            <div>
+              Tel: {values(this.props.phones).map(phone => <span key={phone}>{phone}<br/></span>)}
+            </div>
+            <div>
+              Работаем: {values(this.props.schedule).map(item => <span key={item}>{item}<br/></span>)}
+            </div>
+          </div>
         </div>
       </div>
     );

@@ -4,6 +4,9 @@ import FlatButton from 'material-ui/lib/flat-button';
 import Dialog from 'material-ui/lib/dialog';
 import FontIcon from 'material-ui/lib/font-icon';
 import IconButton from 'material-ui/lib/icon-button';
+import Checkbox from 'material-ui/lib/checkbox';
+import ActionFavorite from 'material-ui/lib/svg-icons/action/favorite';
+import ActionFavoriteBorder from 'material-ui/lib/svg-icons/action/favorite-border';
 
 class EarnBuy extends React.Component {
   constructor(props) {
@@ -41,12 +44,18 @@ class EarnBuy extends React.Component {
         margin: '0 10px'
       }}
       >
-        <div>
-          <FlatButton labelStyle={{ color: 'red', fontSize: '16px', textTransform: 'none' }}
+        <div style = {{ paddingTop: '5px' }}>
+          <Checkbox
+            checkedIcon={<ActionFavorite />}
+            unCheckedIcon={<ActionFavoriteBorder />}
             label="Like"
+            labelStyle = {{ color: 'red' }}
+            iconStyle = {{ fill: 'red' }}
           />
         </div>
         <div>
+          <img src="/src/public/assets/hand132-5.png" height = "22px" style = {{
+          verticalAlign: 'middle' }}/>
           <FlatButton labelStyle={{ color: '#0679A2', fontSize: '16px', textTransform: 'none' }}
             label="Рекомендовать"
             onTouchTap={this.handleOpen.bind(this)}
